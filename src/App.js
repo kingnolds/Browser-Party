@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Play from "./pages/Play";
 import Login from "./pages/Login";
+import Scoreboard from "./components/Scoreboard"
 
 import Navbar from "./components/Navbar";
 const socket = io("http://localhost:4000");
