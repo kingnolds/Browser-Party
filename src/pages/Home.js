@@ -15,6 +15,17 @@ export default function Home(props) {
   }
 
   const styles = {
+    card:
+    {
+      background: 'black',
+      width: 300,
+      height: 200,
+    },
+    h1:
+    {
+      color: 'white',
+      
+    },
     button:
     {
 
@@ -49,17 +60,20 @@ export default function Home(props) {
 
           </form>
         )} */}
+
           <div style={styles.container} div className="container">
-            <div className="row">
-              <div className="col text-center">
-              <h1>Home</h1>
+            <div style={styles.card} className='card text-center'>
+              <div className="row">
+                <div className="col">
+                <div style={styles.h1}>Home</div>
+                <div>
+                <button type="submit" className="btn btn-primary btn-block" onClick={loginChange}>Login</button>
+              </div>
+              <br></br>
               <div>
-              <button type="submit" className="btn btn-primary btn-block" onClick={loginChange}>Login</button>
-            </div>
-            <br></br>
-            <div>
-              <button type="submit" className="btn btn-primary btn-block" onClick={registerChange}>Create Account</button>
-            </div>
+                <button type="submit" className="btn btn-primary btn-block" onClick={registerChange}>Create Account</button>
+              </div>
+                </div>
               </div>
             </div>
           </div>
