@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {useParams} from "react-router-dom"
 import API from "../utils/api"
-const socket = io("http://localhost:4000");
+// const socket = io("http://localhost:4000");
 
 export default function Login(props) {
-  const [username, setUsername] = useState('')
+  const [username, setUserEmail] = useState('')
   const [password, setPassword] = useState('')
   const [userId, setUserId] = useState(0)
   const [token, setToken] = useState('')
@@ -26,7 +26,7 @@ export default function Login(props) {
   useEffect(()=>{
       const token = localStorage.getItem("token")
       if(token){
-          fetch("http://localhost:4000/gettokendata",{
+          fetch("http://localhost:3000/gettokendata",{
         headers:{
             "authorization":`Bearer ${token}`
         }
@@ -41,12 +41,13 @@ export default function Login(props) {
       }
   },[])
 
-  const logMeIn = ()=>{
-      fetch("http://localhost:4000/login", {
+  const logMeIn = (e)=>{
+      e.preventDefault()
+      fetch("http://localhost:3000/login", {
           method:"POST",
           body:JSON.stringify({
-              email:"joe@joe.joe",
-              password:"password"
+              email:loginInfo.email,
+              password:loginInfo.password,
           }),
           headers:{
               "Content-Type":"application/json"
@@ -59,6 +60,8 @@ export default function Login(props) {
           setUserEmail(data.user.email);
           setToken(data.token);
           localStorage.setItem("token", data.token);
+      }).catch(err=>{
+          console.log(err);
       })
   }
 
@@ -76,7 +79,7 @@ export default function Login(props) {
       })
   }
 
-  const params = useParams();
+//   const params = useParams();
     return (
       <div>
           <div className='container'>
