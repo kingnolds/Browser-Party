@@ -1,58 +1,97 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {useParams} from "react-router-dom"
 import Lobby from "./Lobby"
 import Game from "./Game"
-import CreateJoin from '../components/CreateJoin';
+import Scoreboard from "../components/Scoreboard"
 import io from "socket.io-client";
-const socket = io("http://localhost:4000");
+const socket = io("http://localhost:4000", {
+  withCredentials: true
+});
 
 
 function Play() {
     const [room, setRoom] = useState('');
+    const [inGame, seInGame] = useState(false);
     const [username, setUsername] = useState('');
     const [isHost, setIsHost] = useState(false);
-    const [pregame, setPregame] = useState(true);
+    const [showScoreboard, setShowScoreboard] = useState(false);
+    const [round, setRound] = useState(0);
+    const [players, setPlayers] = useState([])
 
-    const info = {
-      room: room,
-      isHost: isHost,
-    }
-
+    const id = socket.id
     const joinRoom = () => {
       if (username !== "" && room !== "") {
         socket.emit("join-room", room, username)
-        setPregame(false)
+        console.log(`${socket.username} is joining room ${room}`)
+        seInGame(true)
       }
     }
-    
+      
     const createRoom = () => {
       if (username !== "" && room !== "") {
         socket.emit("create-room", room, username)
-        console.log(pregame)
-        setPregame(false)
-        console.log(pregame)
+        console.log(socket.isHost)
+        seInGame(true)
       }
     }
 
     const leaveRoom = () => {
+      seInGame(false);
+      setRoom('');
       socket.emit("leave-room", room, username)
-      setPregame(true)
     }
    
+    // socket.on(`new-player${room}`, (sockets) => {
+    //   setPlayers(sockets)
+    // })
+  
+    // socket.on(`player-left${room}`, (sockets) => {
+    //   setPlayers(sockets)
+    // })
+  
+    // useEffect(() => {
+    //   let isMounted = true;               // note mutable flag
+    //   socket.on(`player-left${room}`, (sockets) => {
+    //     if (isMounted) setPlayers(sockets)
+    //   })
+    //   return () => { isMounted = false }; // cleanup toggles value, if unmounted
+    // }, [players]);                               // adjust dependencies to your needs
   
     return (
       <div className="Play">
-        <h1>Play</h1>
-        {pregame ? (
+        <h4>Play- socketId: {socket.id}</h4>
+        {inGame ? (
+          <Game room={room} leaveRoom={leaveRoom} id={socket.id} socket={socket} isHost={isHost}/>
+        ) : (
           <div>
-            <CreateJoin createRoom={createRoom} joinRoom={joinRoom}/>
+            <div className="CreateJoin">
+              <button onClick={(event) => {setIsHost(true)}}>Host</button>
+              <button onClick={(event) => {setIsHost(false)}}>Join</button>
+              {isHost ? (
+                <div>
+                  <br/>
+                  <label>Username:</label>
+                  <input type="text" onChange={(event) => {setUsername(event.target.value)}}></input>
+                  <br/>
+                  <label>Choose Room Code:</label>
+                  <input type="text" onChange={(event) => {setRoom(event.target.value)}}></input>
+                  <button onClick={createRoom}>Create Room</button>
+                </div>
+              ) : (
+                <div>
+                  <br/>
+                  <label>Username:</label>
+                  <input type="text" onChange={(event) => {setUsername(event.target.value)}}></input>
+                  <br/>
+                  <label>Existing Room Code:</label>
+                  <input type="text" onChange={(event) => {setRoom(event.target.value)}}></input>
+                  
+                  <button onClick={joinRoom}>Join Room</button>
+                </div>
+              )}
+            </div>
           </div>
-          ) : (
-          <div>
-            <Game/>
-            <button onClick={leaveRoom}>Leave Room</button>
-          </div>
-            
+
         )}
         
       </div>

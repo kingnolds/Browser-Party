@@ -1,27 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import {useParams} from "react-router-dom"
 import API from '../utils/api';
 import io from "socket.io-client";
-const socket = io("http://localhost:4000", {
-  withCredentials: true
-});
-
-// const styles = {
-//   li: {
-
-//   }
-// }
+import Scoreboard from "../components/Scoreboard"
+// const socket = io("http://localhost:4000", {
+//   withCredentials: true
+// });
 
 
-function Game() {
-  const params = useParams();
+
+function Game({room, leaveRoom, id, socket, isHost}) {
   const [players, setPlayers] = useState([])
+  const [round, setRound] = useState(0)
+  const [scoreboard, setScoreboard] = useState(false)
 
-  const room = params.roomId
-
-  console.log(socket.id)
-  const id = socket.id
+  console.log(id)
+  console.log(socket)
   console.log(room)
+
+  const startGame = () => {
+    socket.emit('increment-round', room)
+  }
 
   socket.on(`new-player${room}`, (sockets) => {
     setPlayers(sockets)
@@ -31,9 +29,9 @@ function Game() {
     setPlayers(sockets)
   })
 
-  const leaveRoom = () => {
-      console.log("leaveroom")
-  }
+  socket.on(`increment-round`, () => {
+      setRound(round+1)
+  })
 
   useEffect(() => {
     let isMounted = true;               // note mutable flag
@@ -47,19 +45,56 @@ function Game() {
 
     return (
       <div className="Game">
-        <h1>Game: {room}</h1>
-        <h3>Players:</h3>
-        <ul className="list-group">
-          {/* Here we map over each grocery item and return a new array of `li` elements that contains the grocery name */}
-          {/* When using map you must provide a unique key attribute to each item. Ours is `item.id` */}
-          {players.map(item => (
-        <li className="list-group-item" key={item.id} style={(item.id == id) ? {color:"blue"}:{}}>
-          {item.username} (id: {item.id})
-        </li>
-      ))}
-      </ul>
+        {scoreboard ? (
+            <Scoreboard/>
+        ) : (
+            <div>
+                {round == 0 ? (
+                    <div>
+                        <h1>Game: {room}</h1>
+                        <h3>Players:</h3>
+                        <ul className="list-group">
+                            {players.map(item => (
+                                <li className="list-group-item" key={item.id} style={(item.id == id) ? {color:"blue"}:{}}>
+                                    {item.username} (id: {item.id})
+                                </li>
+                            ))}
+                        </ul>
+                        
+                        {isHost ? (
+                            <button onClick={startGame}>Start Game!</button>
+                        ):null}
+                    </div>
+                ):null}
+                {round == 1 ? (
+                    <div>
+                        Game 1
+                    </div>
+                ) :null}
+                {round == 2 ? (
+                    <div>
+                        {/* Some game */}
+                    </div>
+                ) :null}
+                {round == 3 ? (
+                    <div>
+                        {/* Some game */}
+                    </div>
+                ) :null}
+                {round == 4 ? (
+                    <div>
+                        {/* Some game */}
+                    </div>
+                ) :null}
+                {round == 5 ? (
+                    <div>
+                        {/* Some game */}
+                    </div>
+                ) :null}
+
+            </div>
+        )}
         <button onClick={leaveRoom}>Leave Room</button>
-        
       </div>
     );
   };
