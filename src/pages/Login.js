@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {useParams} from "react-router-dom"
 import API from "../utils/api"
+// const socket = io("http://localhost:4000");
 
 export default function Login(props) {
-  const [username, setUsername] = useState('')
+  const [username, setUserEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [userId, setUserId] = useState(0)
+  const [token, setToken] = useState('')
 
-  // const styles = {
-    
-  // }
+  const [loginInfo, setLoginInfo] = useState({
+      email:"",
+      password:""
+  })
 
   const login = (e) => {
     e.preventDefault();
@@ -19,7 +23,63 @@ export default function Login(props) {
   })
   }
 
-  const params = useParams();
+  useEffect(()=>{
+      const token = localStorage.getItem("token")
+      if(token){
+          fetch("http://localhost:3000/gettokendata",{
+        headers:{
+            "authorization":`Bearer ${token}`
+        }
+          }).then(res=>res.json()).then(data=>{
+              console.log(data);
+              setUserId(data.id);
+              setUserEmail(data.email);
+              setToken(token);
+          }).catch(err=>{
+              console.log(err);
+          })
+      }
+  },[])
+
+  const logMeIn = (e)=>{
+      e.preventDefault()
+      fetch("http://localhost:3000/login", {
+          method:"POST",
+          body:JSON.stringify({
+              email:loginInfo.email,
+              password:loginInfo.password,
+          }),
+          headers:{
+              "Content-Type":"application/json"
+          }
+      }).then(res=>{
+          return res.json()
+      }).then(data=>{
+          console.log(data);
+          setUserId(data.user.id);
+          setUserEmail(data.user.email);
+          setToken(data.token);
+          localStorage.setItem("token", data.token);
+      }).catch(err=>{
+          console.log(err);
+      })
+  }
+
+  const logMeOut = () => {
+      localStorage.removeItem("token");
+      setUserId(0);
+      setUserEmail("");
+      setToken("");
+  }
+
+  const handleInputChange = e => {
+      setLoginInfo({
+          ...loginInfo,
+          [e.target.name]:e.target.value
+      })
+  }
+
+//   const params = useParams();
     return (
       <div>
           <div className='container'>
@@ -28,13 +88,14 @@ export default function Login(props) {
                     <h1>Login</h1>
                     <div className="form-group">
                         <label>Username</label>
-                        <input type="text" className="form-control" placeholder="Enter Username" />
+                        <input type="text" value= {loginInfo.email} onChange={handleInputChange} name="email" className="form-control" placeholder="Enter Email" />
                     </div>
                     <div className="form-group">
                         <label>Password</label>
-                        <input type="password" className="form-control" placeholder="Enter Password" />
+                        <input type="password" value= {loginInfo.password} onChange={handleInputChange} name="password" className="form-control" placeholder="Enter Password" />
                     </div>
-                    <button type="submit" className="btn btn-primary btn-block" onSubmit={login}>Submit</button>
+                    <button type="submit" className="btn btn-primary btn-block" onSubmit={logMeIn}>Login</button>
+                    <button type="submit" className="btn btn-primary btn-block" onSubmit={logMeOut}>Logout</button>
                 </form>
               </div>
           </div>
