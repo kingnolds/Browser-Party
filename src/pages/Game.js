@@ -13,16 +13,17 @@ const socket = io("http://localhost:4000", {
 // }
 
 
-function Lobby() {
+function Game() {
   const params = useParams();
   const [players, setPlayers] = useState([])
 
   const room = params.roomId
-  const isHost = params.isHost
-  const id = params.socketId
+
+  console.log(socket.id)
+  const id = socket.id
+  console.log(room)
 
   socket.on(`new-player${room}`, (sockets) => {
-    console.log("newplayer")
     setPlayers(sockets)
   })
 
@@ -31,11 +32,7 @@ function Lobby() {
   })
 
   const leaveRoom = () => {
-    console.log("leaveroom-lobby")
-  }
-
-  const startGame = () => {
-    console.log("startgame")
+      console.log("leaveroom")
   }
 
   useEffect(() => {
@@ -49,8 +46,8 @@ function Lobby() {
   
 
     return (
-      <div className="Lobby">
-        <h1>Lobby: {room}</h1>
+      <div className="Game">
+        <h1>Game: {room}</h1>
         <h3>Players:</h3>
         <ul className="list-group">
           {/* Here we map over each grocery item and return a new array of `li` elements that contains the grocery name */}
@@ -62,17 +59,9 @@ function Lobby() {
       ))}
       </ul>
         <button onClick={leaveRoom}>Leave Room</button>
-        {isHost ? (
-          <div>
-            <button onClick={startGame}>Start Game!</button>
-          </div>
-        ) : (
-          <div>
-
-          </div>
-        )}
+        
       </div>
     );
   };
   
-  export default Lobby;
+  export default Game;

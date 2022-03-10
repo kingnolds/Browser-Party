@@ -26,9 +26,7 @@ const API = {
         return fetch(`${BASEURL}/api/users`)
         .then(res => res.json())
     },
-    getSingleTank:id=>{
-        return  fetch(`${BASEURL}/api/tanks/${id}`).then(res=>res.json())
-    }
+    
 }
 
 export default API;

@@ -6,6 +6,8 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Play from "./pages/Play";
 import Login from "./pages/Login";
+import Game from "./pages/Game";
+import Lobby from "./pages/Lobby";
 
 import Navbar from "./components/Navbar";
 const socket = io("http://localhost:4000");
@@ -75,6 +77,8 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/play" element={<Play/>}/>
+        <Route path="/lobby/:roomId/:socketId/:isHost" element={<Lobby/>}/>
+        <Route path="/game/:roomId/:socketId" element={<Game/>}/>
         </Routes>
         </Router>
     </>
