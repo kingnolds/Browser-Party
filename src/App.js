@@ -6,8 +6,10 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Play from "./pages/Play";
 import Login from "./pages/Login";
+import Whack from './pages/WhackAMole';
 
 import Navbar from "./components/Navbar";
+import Register from './pages/Register';
 const socket = io("http://localhost:4000");
 
 function App() {
@@ -75,6 +77,8 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/play" element={<Play/>}/>
+        <Route path="/register" element={<Register/>}/>
+        <Route path="/game/:roomId" element={<Whack/>}/>
         </Routes>
         </Router>
     </>
