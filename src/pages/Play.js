@@ -41,21 +41,6 @@ function Play() {
       socket.emit("leave-room", room, username)
     }
    
-    // socket.on(`new-player${room}`, (sockets) => {
-    //   setPlayers(sockets)
-    // })
-  
-    // socket.on(`player-left${room}`, (sockets) => {
-    //   setPlayers(sockets)
-    // })
-  
-    // useEffect(() => {
-    //   let isMounted = true;               // note mutable flag
-    //   socket.on(`player-left${room}`, (sockets) => {
-    //     if (isMounted) setPlayers(sockets)
-    //   })
-    //   return () => { isMounted = false }; // cleanup toggles value, if unmounted
-    // }, [players]);                               // adjust dependencies to your needs
   
     return (
       <div className="Play">

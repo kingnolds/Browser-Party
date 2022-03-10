@@ -6,9 +6,8 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Play from "./pages/Play";
 import Login from "./pages/Login";
-import Game from "./pages/Game";
-import Lobby from "./pages/Lobby";
-import Whack from './components/games/WhackAMole';
+import Scoreboard from "./components/Scoreboard"
+import Whack from './pages/WhackAMole';
 
 import Navbar from "./components/Navbar";
 import Register from './pages/Register';
