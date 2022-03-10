@@ -9,11 +9,11 @@ const API = {
           })
             .then(res => res.json())
     },
-    login: (email,password)=>{
+    login: (username,password)=>{
        return fetch(`${BASEURL}/api/users/login`, {
       method: "POST",
       body: JSON.stringify({
-        email: email,
+        username: username,
         password:password
       }),
       headers: {

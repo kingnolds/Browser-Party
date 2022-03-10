@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Timer from "../components/Timer"
+import Whack from "../components/games/WhackAMole"
 import API from '../utils/api';
 import io from "socket.io-client";
 import Scoreboard from "../components/Scoreboard"
@@ -10,16 +12,19 @@ import Scoreboard from "../components/Scoreboard"
 
 function Game({room, leaveRoom, id, socket, isHost}) {
   const [players, setPlayers] = useState([])
+  const [scores, setScores] = useState([{}])
   const [round, setRound] = useState(0)
   const [scoreboard, setScoreboard] = useState(false)
+
 
   console.log(id)
   console.log(socket)
   console.log(room)
 
-  const startGame = () => {
-    socket.emit('increment-round', room)
-  }
+
+  socket.on(`scoreboard${room}`, (show) => {
+    setScoreboard(show);
+  })
 
   socket.on(`new-player${room}`, (sockets) => {
     setPlayers(sockets)
@@ -31,7 +36,12 @@ function Game({room, leaveRoom, id, socket, isHost}) {
 
   socket.on(`increment-round`, () => {
       setRound(round+1)
+
   })
+
+  const startGame = () => {
+      socket.emit("start-game", room)
+  }
 
   useEffect(() => {
     let isMounted = true;               // note mutable flag
@@ -46,7 +56,7 @@ function Game({room, leaveRoom, id, socket, isHost}) {
     return (
       <div className="Game">
         {scoreboard ? (
-            <Scoreboard/>
+            <Scoreboard room={room} id={id} players={players}/>
         ) : (
             <div>
                 {round == 0 ? (
@@ -54,21 +64,21 @@ function Game({room, leaveRoom, id, socket, isHost}) {
                         <h1>Game: {room}</h1>
                         <h3>Players:</h3>
                         <ul className="list-group">
-                            {players.map(item => (
-                                <li className="list-group-item" key={item.id} style={(item.id == id) ? {color:"blue"}:{}}>
-                                    {item.username} (id: {item.id})
+                            {players.map(player => (
+                                <li className="list-group-player" key={player.id} style={(player.id == id) ? {color:"blue"}:{}}>
+                                    {player.username} (id: {player.id}, score: {player.score})
                                 </li>
                             ))}
                         </ul>
                         
                         {isHost ? (
-                            <button onClick={startGame}>Start Game!</button>
+                            <button onClick={()=>startGame()}>Start Game!</button>
                         ):null}
                     </div>
                 ):null}
                 {round == 1 ? (
                     <div>
-                        Game 1
+                        <Whack socket={socket} room={room}/>
                     </div>
                 ) :null}
                 {round == 2 ? (
