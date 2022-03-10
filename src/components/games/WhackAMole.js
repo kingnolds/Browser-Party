@@ -42,8 +42,8 @@ const Whack = function ({socket, room}) {
     };
     const endGame = () => {
         clearInterval(refresh);
+        console.log("endgame", score)
         socket.emit("send-score", score)
-        console.log("send scores", score)
         setScore(0);
         setIndex(0);
     };
