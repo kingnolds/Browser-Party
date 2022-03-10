@@ -10,7 +10,7 @@ const API = {
             .then(res => res.json())
     },
     login: (username,password)=>{
-       return fetch(`${BASEURL}/api/users/login`, {
+       return fetch(`${BASEURL}/login`, {
       method: "POST",
       body: JSON.stringify({
         username: username,

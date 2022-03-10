@@ -7,7 +7,7 @@ import Profile from "./pages/Profile";
 import Play from "./pages/Play";
 import Login from "./pages/Login";
 import Scoreboard from "./components/Scoreboard"
-import Whack from './pages/WhackAMole';
+import Whack from './components/games/WhackAMole';
 
 import Navbar from "./components/Navbar";
 import Register from './pages/Register';
