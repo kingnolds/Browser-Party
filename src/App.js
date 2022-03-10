@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Play from "./pages/Play";
 import Login from "./pages/Login";
+import Scoreboard from "./components/Scoreboard"
 import Whack from './pages/WhackAMole';
 
 import Navbar from "./components/Navbar";
