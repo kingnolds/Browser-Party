@@ -14,16 +14,16 @@ export default function Navbar(props) {
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <a className="nav-link"><Link to="/">Home</Link></a>
+              <Link to="/">Home</Link>
             </li>
             <li className="nav-item">
-            <a className="nav-link"><Link to="/play">Play</Link></a>
+            <Link to="/play">Play</Link>
             </li>
             <li className="nav-item">
-            <a className="nav-link"><Link to="/profile">Profile</Link></a>
+            <Link to="/profile">Profile</Link>
             </li>
             <li className="nav-item">
-            <a className="nav-link"><Link to="/register">Register</Link></a>
+            <Link to="/register">Register</Link>
             </li>
           </ul>
         {/* {props.userEmail ? (

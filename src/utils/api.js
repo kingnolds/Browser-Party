@@ -9,11 +9,11 @@ const API = {
           })
             .then(res => res.json())
     },
-    login: (email,password)=>{
+    login: (username,password)=>{
        return fetch(`${BASEURL}/api/users/login`, {
       method: "POST",
       body: JSON.stringify({
-        email: email,
+        username: username,
         password:password
       }),
       headers: {
@@ -26,9 +26,7 @@ const API = {
         return fetch(`${BASEURL}/api/users`)
         .then(res => res.json())
     },
-    getSingleTank:id=>{
-        return  fetch(`${BASEURL}/api/tanks/${id}`).then(res=>res.json())
-    }
+    
 }
 
 export default API;
