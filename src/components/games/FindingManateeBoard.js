@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Card from './FindingManateeCard';
+import Card from './FindingManeteeCard';
 
-function Board() {
+function Board({socket, room}) {
     const [cards, setCards] = useState([
         { id: 1, img: '/images/manatee.png', status: ""},
         { id: 1, img: '/images/manatee.png', status: ""},
@@ -22,6 +22,7 @@ function Board() {
     ].sort(() => Math.random() - 0.5))
 
     const [previous, setPrevious] = useState(-1);
+    const [inGame, setInGame] = useState(false);
 
     const checkCard = (current) => {
         if(cards[current].id == cards[previous].id) {
@@ -52,11 +53,25 @@ function Board() {
         }
     }
 
+    socket.on(`start-memory${room}`, () => {
+        setInGame(true)
+    })
+
     return (
         <div className="board">
-            { cards.map((card, index) => (
-                <Card key={index} card={card} id={index} handleClick={handleClick}/>
-            ))}
+            {inGame ? (
+                <div>
+                { cards.map((card, index) => (
+                    <Card key={index} card={card} id={index} handleClick={handleClick}/>
+                ))}
+
+                </div>
+
+        ) : (
+            <div>
+                <h3>Get Ready!</h3>
+            </div>
+        )}
         </div>
     );
 }
