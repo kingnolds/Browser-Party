@@ -4,6 +4,7 @@ import Whack from "../components/games/WhackAMole"
 import API from '../utils/api';
 import io from "socket.io-client";
 import Scoreboard from "../components/Scoreboard"
+import Memory from "../components/games/FindingManateeBoard"
 // const socket = io("http://localhost:4000", {
 //   withCredentials: true
 // });
@@ -30,7 +31,7 @@ function Game({room, leaveRoom, id, socket, isHost}) {
     setPlayers(sockets)
   })
 
-  socket.on(`player-left${room}`, (sockets) => {
+  socket.on(`update-players${room}`, (sockets) => {
     setPlayers(sockets)
   })
 
@@ -83,7 +84,7 @@ function Game({room, leaveRoom, id, socket, isHost}) {
                 ) :null}
                 {round == 2 ? (
                     <div>
-                        {/* Some game */}
+                        <Memory socket={socket} room={room}/>
                     </div>
                 ) :null}
                 {round == 3 ? (
