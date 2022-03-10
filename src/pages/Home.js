@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {useParams} from "react-router-dom"
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar"
 
 export default function Home(props) {
 
@@ -25,10 +26,9 @@ export default function Home(props) {
     },
   }
 
-  const params = useParams();
     return (
       <div>
-
+        <Navbar/>
           {/* {props.userEmail ? (
           <div>
             <h2>Welcome to the club, {props.userEmail}</h2>

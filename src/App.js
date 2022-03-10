@@ -79,7 +79,6 @@ function App() {
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/play" element={<Play/>}/>
         <Route path="/register" element={<Register/>}/>
-        <Route path="/game/:roomId" element={<Whack/>}/>
         </Routes>
         </Router>
     </>

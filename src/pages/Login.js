@@ -1,10 +1,22 @@
 import React, { useState } from 'react';
 import {useParams} from "react-router-dom"
+import API from "../utils/api"
 
 export default function Login(props) {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
-  const styles = {
+  // const styles = {
     
+  // }
+
+  const login = (e) => {
+    e.preventDefault();
+    API.login(username, password).then((data)=> {
+      console.log(data)
+  }).catch((err)=>{
+      console.log(err)
+  })
   }
 
   const params = useParams();
@@ -12,17 +24,17 @@ export default function Login(props) {
       <div>
           <div className='container'>
               <div className='card'>
-              <form>
+              <form className="login-form">
                     <h1>Login</h1>
                     <div className="form-group">
-                        <label>Email Address</label>
-                        <input type="email" className="form-control" placeholder="Enter email" />
+                        <label>Username</label>
+                        <input type="text" className="form-control" placeholder="Enter Username" />
                     </div>
                     <div className="form-group">
                         <label>Password</label>
                         <input type="password" className="form-control" placeholder="Enter Password" />
                     </div>
-                    <button type="submit" className="btn btn-primary btn-block">Submit</button>
+                    <button type="submit" className="btn btn-primary btn-block" onSubmit={login}>Submit</button>
                 </form>
               </div>
           </div>

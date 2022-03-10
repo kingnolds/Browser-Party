@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
-import {useParams} from "react-router-dom"
+import { Socket } from 'socket.io-client';
+// import Timer from '../Timer'
 
 const MOLE_NUMBER = 6
 const TIME_LIMIT = 30000
@@ -24,11 +25,10 @@ const Timer = ({ time, interval = 1000, onEnd }) => {
     return <div>{`Time: ${internalTime / 1000}s`}</div>
 }
 
-const Game = function () {
+const Whack = function ({socket, room}) {
     const [index, setIndex] = useState([]);
     const [score, setScore] = useState(0);
     const [refresh, setTimer] = useState();
-    const { roomId } = useParams()
 
     const generateIndex = () => {
         // let molesUp = Math.floor(Math.random() * 6)
@@ -40,16 +40,12 @@ const Game = function () {
         const refresh = setInterval(generateIndex, 5000);
         setTimer(refresh);
     };
-    const sendScore = function() {
-        console.log(score)
-        console.log(roomId)
-    }
-
     const endGame = () => {
         clearInterval(refresh);
+        socket.emit("send-score", score)
+        console.log("send scores", score)
         setScore(0);
         setIndex(0);
-        sendScore()
     };
     const onClick = (n) => {
         if (index.includes(n)) {
@@ -57,6 +53,11 @@ const Game = function () {
             setIndex(index.filter(e => e !== n))
         } else { setScore((score) => score - 1) }
     };
+
+    socket.on(`start-whack${room}`, () => {
+        startGame()
+    })
+
     return (
         <div>
             <style>
@@ -87,8 +88,6 @@ const Game = function () {
         }
       `}
             </style>
-            <button onClick={startGame}>start game</button>
-            <button onClick={endGame}>end game</button>
             <p>score: {score}</p>
             <Timer
                 time={TIME_LIMIT}
@@ -121,4 +120,4 @@ const Game = function () {
     );
 }
 
-export default Game;
+export default Whack;
