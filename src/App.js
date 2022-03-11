@@ -25,12 +25,8 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      fetch("http://localhost:3000/gettokendata",{
-        headers:{
-            "authorization":`Bearer ${token}`
-        }
-      // API.getTokenData(token)
-      }).then(data => {
+      API.getTokenData(token)
+      .then(data => {
           console.log(data);
           setUserId(data.id);
           setUsername(data.username);

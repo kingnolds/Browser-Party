@@ -9,7 +9,7 @@ export default function Login(props) {
       <div>
           <div className='container'>
               <div className='card'>
-              {props.loginInfo.username ? (
+              {props.userName ? (
                 <div>
                     <h2>You are now logged in, {props.loginInfo.username}</h2>
                     <Link to="/">Home</Link>
