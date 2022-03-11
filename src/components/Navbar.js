@@ -1,9 +1,4 @@
 import React, { useState } from "react";
-import Home from "../pages/Home";
-import Play from "../pages/Play";
-import Profile from "../pages/Profile";
-// import Login from "../pages/Login";
-import Register from "../pages/Register";
 import { Link } from "react-router-dom";
 
 export default function Navbar(props) {
@@ -31,6 +26,7 @@ export default function Navbar(props) {
         {props.username ? (
           <div>
             Hi there, {props.username}
+            <button onClick={props.logMeOut}>Logout</button>
           </div>
         ) : (
           <Link to="/login">Login</Link>

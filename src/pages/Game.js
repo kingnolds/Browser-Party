@@ -11,7 +11,6 @@ import Memory from "../components/games/MemoryBoard"
 
 function Game({room, leaveRoom, id, socket, isHost}) {
   const [players, setPlayers] = useState([])
-  const [scores, setScores] = useState([{}])
   const [round, setRound] = useState(0)
   const [scoreboard, setScoreboard] = useState(false)
   const [endGame, setEndGame] = useState(false)
@@ -58,7 +57,7 @@ function Game({room, leaveRoom, id, socket, isHost}) {
     return (
       <div className="Game">
         {scoreboard ? (
-            <Scoreboard room={room} id={id} players={players} endGame={endGame}/>
+            <Scoreboard room={room} id={id} players={players} endGame={endGame} round={round}/>
         ) : (
             <div>
                 {round == 0 ? (

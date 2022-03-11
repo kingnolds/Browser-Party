@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom"
-import Lobby from "./Lobby"
 import Game from "./Game"
 import Scoreboard from "../components/Scoreboard"
 import io from "socket.io-client";
@@ -52,16 +51,12 @@ const styles = {
   }
 }
 
-function Play() {
+function Play(props) {
   const [room, setRoom] = useState('');
   const [inGame, seInGame] = useState(false);
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState(props.username);
   const [isHost, setIsHost] = useState(false);
-  const [showScoreboard, setShowScoreboard] = useState(false);
-  const [round, setRound] = useState(0);
-  const [players, setPlayers] = useState([])
 
-  const id = socket.id
   const joinRoom = () => {
     if (username !== "" && room !== "") {
       socket.emit("join-room", room, username)
@@ -73,7 +68,6 @@ function Play() {
   const createRoom = () => {
     if (username !== "" && room !== "") {
       socket.emit("create-room", room, username)
-      console.log(socket.isHost)
       seInGame(true)
     }
   }
@@ -101,9 +95,6 @@ function Play() {
             </div>
             {isHost ? (
               <div style={styles.innerMiddle}>
-                <label>Username:</label>
-                <br></br>
-                <input style={styles.input} type="text" onChange={(event) => { setUsername(event.target.value) }}></input>
                 <br></br>
                 <label>Choose Room Code:</label>
                 <br></br>
@@ -113,9 +104,6 @@ function Play() {
               </div>
             ) : (
               <div style={styles.innerMiddle}>
-                <label>Username:</label>
-                <br></br>
-                <input style={styles.input} type="text" onChange={(event) => { setUsername(event.target.value) }}></input>
                 <br></br>
                 <label>Existing Room Code:</label>
                 <br></br>
@@ -123,14 +111,6 @@ function Play() {
                 <br></br>
                 <button style={styles.roomButton} onClick={joinRoom}>Join Room</button>
               </div>
-              // <div>
-              //   <label>Username:</label>
-              //   <input type="text" onChange={(event) => {setUsername(event.target.value)}}></input>
-              //   <label>Existing Room Code:</label>
-              //   <input type="text" onChange={(event) => {setRoom(event.target.value)}}></input>
-
-              //   <button onClick={joinRoom}>Join Room</button>
-              // </div>
             )}
           </div>
         </div>

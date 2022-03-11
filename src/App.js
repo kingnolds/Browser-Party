@@ -40,7 +40,6 @@ function App() {
     if (token) {
       API.getTokenData(token)
       .then(data => {
-          console.log(data);
           setUserId(data.id);
           setUsername(data.username);
           setToken(token);
@@ -49,40 +48,41 @@ function App() {
           console.log(err);
         });
     }
-  }, []);
+  }, );
 
-  const registerSubmit = (e) => {
+  const wait = (timeToDelay) => new Promise((resolve) => setTimeout(resolve, timeToDelay));
+
+  const registerSubmit = async (e) => {
     e.preventDefault()
     console.log("Register Submit Activated")
     API.createUser(registerInfo.username, registerInfo.password)
     .then((data)=> {
-        console.log(data)
-        // console.log(data.PromiseResult.username)
-        // console.log(data.PromiseResult.password)
-        // await delay(5000)
-        window.location.replace('/login');
+        console.log(registerInfo.username, registerInfo.password)
+        setLoginInfo({
+          username: `${registerInfo.username}`,
+          password: registerInfo.password
+        })
+        logMeIn(e, registerInfo.username, registerInfo.password)
     }).catch((err)=>{
         console.log(err)
     })
 };
 
-  const logMeIn = (e) => {
+  const logMeIn = (e, username, password) => {
     console.log("LOGGING IN!")
+    
     e.preventDefault()
     loggedIn = true;
-    console.log(loggedIn);
-    API.login(loginInfo.username,loginInfo.password)
+    API.login(username, password)
       .then(data => {
-        console.log(data);
         setUserId(data.user.id);
         setUsername(data.user.username);
         setToken(data.token);
         localStorage.setItem("token", data.token);
-        // window.location.replace('/');
-        // console.log("change window")
       }).catch(err=>{
         console.log(err);
       });
+
   };
   const logMeOut = ()=>{
     console.log("Logging out")
@@ -94,7 +94,6 @@ function App() {
     window.location.replace('/');
   }
   const handleInputChange = e=>{
-    console.log(e.target.name,e.target.value)
     setLoginInfo({
       ...loginInfo,
       [e.target.name]:e.target.value
@@ -102,7 +101,6 @@ function App() {
   }
 
   const handleInputChangeRegister = e=>{
-    console.log(e.target.name,e.target.value)
     setRegisterInfo({
       ...registerInfo,
       [e.target.name]:e.target.value
@@ -113,12 +111,12 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar username={username}/>
+        <Navbar username={username} logMeOut={logMeOut}/>
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login loggedIn={loggedIn} logMeOut={logMeOut} logMeIn={logMeIn} username={username} loginInfo={loginInfo}  handleInputChange={handleInputChange}/>}/>
         <Route path="/profile" element={<Profile/>}/>
-        <Route path="/play" element={<Play/>}/>
+        <Route path="/play" element={<Play username={username}/>}/>
         <Route path="/register" element={<Register username={username} password={password} registerInfo={registerInfo}  handleInputChangeRegister={handleInputChangeRegister} registerSubmit={registerSubmit}/>}/>
         </Routes>
         </Router>
