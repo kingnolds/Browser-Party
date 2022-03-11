@@ -13,10 +13,13 @@ import Navbar from "./components/Navbar";
 import Register from './pages/Register';
 const socket = io("http://localhost:4000");
 function App() {
-  const [userName, setUsername] = useState("");
+
+  const [username, setUsername] = useState("");
   const [userId, setUserId] = useState(0);
   const [token, setToken] = useState("");
+
   var loggedIn = false;
+
   const [loginInfo, setLoginInfo] = useState({
     username:"",
     password:""
@@ -49,6 +52,8 @@ function App() {
         setUsername(data.user.username);
         setToken(data.token);
         localStorage.setItem("token", data.token);
+        // window.location.replace('/');
+        // console.log("change window")
       }).catch(err=>{
         console.log(err);
       });
@@ -69,13 +74,15 @@ function App() {
       [e.target.name]:e.target.value
     })
   }
+
+
   return (
     <>
       <Router>
-        <Navbar logMeOut={logMeOut} logMeIn={logMeIn} userName={userName} loginInfo={loginInfo} handleInputChange={handleInputChange}/>
+        <Navbar logMeOut={logMeOut} logMeIn={logMeIn} username={username} loginInfo={loginInfo} handleInputChange={handleInputChange}/>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/login" element={<Login loggedIn={loggedIn} logMeOut={logMeOut} logMeIn={logMeIn} userName={userName} loginInfo={loginInfo}  handleInputChange={handleInputChange}/>}/>
+        <Route path="/login" element={<Login loggedIn={loggedIn} logMeOut={logMeOut} logMeIn={logMeIn} username={username} loginInfo={loginInfo}  handleInputChange={handleInputChange}/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/play" element={<Play/>}/>
         <Route path="/register" element={<Register/>}/>

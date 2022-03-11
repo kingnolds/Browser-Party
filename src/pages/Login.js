@@ -5,7 +5,7 @@ import loggedIn from "../App"
 // const socket = io("http://localhost:4000");
 export default function Login(props) {
     return (
-        <body>
+
       <div>
           <div className='container'>
               <div className='card'>
@@ -38,6 +38,6 @@ export default function Login(props) {
               </div>
           </div>
       </div>
-      </body>
+      
     );
   }
