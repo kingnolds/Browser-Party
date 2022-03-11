@@ -1,3 +1,11 @@
-.App {
-    text-align: center;
-  }
+.navbar-brand {
+  margin-left: 5px;
+}
+
+.nav-item {
+  margin: 0 10px;
+}
+
+.nav-item a {
+  text-decoration: none;
+}

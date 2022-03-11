@@ -9,19 +9,21 @@ import Memory from "../components/games/MemoryBoard"
 //   withCredentials: true
 // });
 
-
-
 function Game({room, leaveRoom, id, socket, isHost}) {
   const [players, setPlayers] = useState([])
   const [scores, setScores] = useState([{}])
   const [round, setRound] = useState(0)
   const [scoreboard, setScoreboard] = useState(false)
 
-
   console.log(id)
   console.log(socket)
   console.log(room)
 
+  const styles = {
+    button: {
+        margin: '20px'
+    }
+  }
 
   socket.on(`scoreboard${room}`, (show) => {
     setScoreboard(show);
@@ -52,8 +54,6 @@ function Game({room, leaveRoom, id, socket, isHost}) {
     return () => { isMounted = false }; // cleanup toggles value, if unmounted
   }, [players]);                               // adjust dependencies to your needs
 
-  
-
     return (
       <div className="Game">
         {scoreboard ? (
@@ -73,7 +73,7 @@ function Game({room, leaveRoom, id, socket, isHost}) {
                         </ul>
                         
                         {isHost ? (
-                            <button onClick={()=>startGame()}>Start Game!</button>
+                            <button style={styles.button} onClick={()=>startGame()}>Start Game!</button>
                         ):null}
                     </div>
                 ):null}
@@ -105,7 +105,7 @@ function Game({room, leaveRoom, id, socket, isHost}) {
 
             </div>
         )}
-        <button onClick={leaveRoom}>Leave Room</button>
+        <button style={styles.button} onClick={leaveRoom}>Leave Room</button>
       </div>
     );
   };

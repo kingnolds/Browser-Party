@@ -7,6 +7,23 @@ export default function Register(props) {
     const [password, setPassword] = useState('')
     const params = useParams();
 
+    const styles = {
+        card:
+        {
+          borderStyle: 'none',
+          borderRadius: '10px',
+          background: '#EEEEEE',
+          width: '300px',
+          margin: '20vh auto',
+          padding: '28px'
+        },
+        button:
+        {
+          marginTop: '25px',
+          fontSize: '20px'
+        }
+      }
+
     const submitForm = (e) => {
         e.preventDefault()
         API.newUser(username, password).then((data)=> {
@@ -18,8 +35,8 @@ export default function Register(props) {
 
     return (
       <div>
-          <div className='container'>
-              <div className='card'>
+          <div style={styles.card} className='container'>
+              <div>
                 <form>
                     <h1>Register</h1>
                     <div className="form-group">

@@ -9,8 +9,8 @@ import { Link } from "react-router-dom";
 export default function Navbar(props) {
   return (
     <div>
-      <div className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand"><h4>Navbar</h4></a>
+      <div className="navbar navbar-expand navbar-light bg-light">
+        <a className="navbar-brand"><h4>Browser Party</h4></a>
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav">
             <li className="nav-item active">

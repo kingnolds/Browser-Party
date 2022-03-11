@@ -1,35 +1,42 @@
 import React, { useState } from 'react';
-import {useParams} from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar"
 
 export default function Home(props) {
 
-  let navigate = useNavigate(); 
-  const loginChange = () =>{ 
-    let path = `/login`; 
+  let navigate = useNavigate();
+  const loginChange = () => {
+    let path = `/login`;
     navigate(path);
   }
-  const registerChange = () =>{ 
-    let path = `/register`; 
+  const registerChange = () => {
+    let path = `/register`;
     navigate(path);
   }
 
   const styles = {
     card:
     {
-      background: 'black',
-      width: 300,
-      height: 200,
+      borderStyle: 'none',
+      borderRadius: '10px',
+      background: '#EEEEEE',
+      width: '300px',
+      margin: '25vh auto',
+      padding: '28px'
     },
     h1:
     {
-      color: 'white',
-      
+      color: 'black',
+      fontSize: '25px',
+      fontWeight: '600',
+      lineHeight: '0.8'
+      // marginTop: '20px'
     },
     button:
     {
-
+      marginTop: '25px',
+      fontSize: '20px'
     },
     container:
     {
@@ -37,10 +44,9 @@ export default function Home(props) {
     },
   }
 
-    return (
-      <div>
-        {/* <Navbar/> */}
-          {/* {props.userEmail ? (
+  return (
+    <div>
+      {/* {props.userEmail ? (
           <div>
             <h2>Welcome to the club, {props.userEmail}</h2>
             <button onClick={props.logMeOut}>LogOut</button>
@@ -61,22 +67,22 @@ export default function Home(props) {
           </form>
         )} */}
 
-          <div style={styles.container} div className="container">
-            <div style={styles.card} className='card text-center'>
-              <div className="row">
-                <div className="col">
-                <div style={styles.h1}>Home</div>
-                <div>
-                <button type="submit" className="btn btn-primary btn-block" onClick={loginChange}>Login</button>
-              </div>
-              <br></br>
+      <div style={styles.card}className="card">
+        <div className='text-center'>
+          <div className="row">
+            <div className="col">
+              <div style={styles.h1}>Home</div>
               <div>
-                <button type="submit" className="btn btn-primary btn-block" onClick={registerChange}>Create Account</button>
+                <button style={styles.button} type="submit" className="btn btn-primary btn-block" onClick={loginChange}>Login</button>
               </div>
-                </div>
+              {/* <br></br> */}
+              <div>
+                <button style={styles.button} type="submit" className="btn btn-primary btn-block" onClick={registerChange}>Create Account</button>
               </div>
             </div>
           </div>
         </div>
-    );
-  }
+      </div>
+    </div>
+  );
+}
