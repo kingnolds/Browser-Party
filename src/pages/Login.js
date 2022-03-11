@@ -26,7 +26,6 @@ export default function Login(props) {
                     <h1>Login</h1>
                     <div className="form-group">
                         <label>Username</label>
-<<<<<<< HEAD
                         <input type="text" value={props.loginInfo.username} onChange={props.handleInputChange} name="username" className="form-control" placeholder="Enter Username" />
                     </div>
                     <div className="form-group">
@@ -36,17 +35,6 @@ export default function Login(props) {
                     <button type="submit" className="btn btn-primary btn-block" onSubmit={props.logMeIn}>Login</button>
                     <button type="submit" className="btn btn-primary btn-block" onSubmit={props.logMeOut}>Logout</button>
                 </form> */}
-=======
-                        <input type="text" value= {loginInfo.email} onChange={handleInputChange} name="email" className="form-control" placeholder="Enter Email" />
-                    </div>
-                    <div className="form-group">
-                        <label>Password</label>
-                        <input type="password" value= {loginInfo.password} onChange={handleInputChange} name="password" className="form-control" placeholder="Enter Password" />
-                    </div>
-                    <button type="submit" className="btn btn-primary btn-block" onSubmit={logMeIn}>Login</button>
-                    <button type="submit" className="btn btn-primary btn-block" onSubmit={logMeOut}>Logout</button>
-                </form>
->>>>>>> dev
               </div>
           </div>
       </div>
