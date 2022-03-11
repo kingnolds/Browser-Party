@@ -24,6 +24,11 @@ const styles = {
 
 export default function Login(props) {
 
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
   return (
     // <body>
       <div>
@@ -37,6 +42,7 @@ export default function Login(props) {
               </div>
             ) : (
               <form>
+                  <h1>Login</h1>
                 <input type="text" value={props.loginInfo.username} onChange={props.handleInputChange} name="username" placeholder="Username" />
                 <input type="password" value={props.loginInfo.password} onChange={props.handleInputChange} name="password" placeholder="Password" />
                 <button onClick={props.logMeIn}>Login</button>

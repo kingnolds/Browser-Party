@@ -22,6 +22,23 @@ const API = {
     })
       .then(res => res.json())
     },
+
+    createUser: (username,password)=>{
+      return fetch(`${BASEURL}/api/users`, {
+     method: "POST",
+     body: JSON.stringify({
+       username: username,
+       password:password
+     }),
+     headers: {
+       "Content-Type": "application/json"
+     }
+   })
+     .then(res => {
+      console.log(res.json())
+     }
+     )},
+     
     getUsers:()=>{
         return fetch(`${BASEURL}/api/users`)
         .then(res => res.json())
