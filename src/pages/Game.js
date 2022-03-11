@@ -22,6 +22,11 @@ function Game({room, leaveRoom, id, socket, isHost}) {
   console.log(socket)
   console.log(room)
 
+  const styles = {
+    button: {
+        margin: '20px'
+    }
+  }
 
   socket.on(`scoreboard${room}`, (show) => {
     setScoreboard(show);
@@ -73,7 +78,7 @@ function Game({room, leaveRoom, id, socket, isHost}) {
                         </ul>
                         
                         {isHost ? (
-                            <button onClick={()=>startGame()}>Start Game!</button>
+                            <button style={styles.button} onClick={()=>startGame()}>Start Game!</button>
                         ):null}
                     </div>
                 ):null}
@@ -105,7 +110,7 @@ function Game({room, leaveRoom, id, socket, isHost}) {
 
             </div>
         )}
-        <button onClick={leaveRoom}>Leave Room</button>
+        <button style={styles.button} onClick={leaveRoom}>Leave Room</button>
       </div>
     );
   };
