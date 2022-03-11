@@ -1,9 +1,4 @@
 import React, { useState } from "react";
-import Home from "../pages/Home";
-import Play from "../pages/Play";
-import Profile from "../pages/Profile";
-// import Login from "../pages/Login";
-import Register from "../pages/Register";
 import { Link } from "react-router-dom";
 
 export default function Navbar(props) {
@@ -26,29 +21,16 @@ export default function Navbar(props) {
             <Link to="/register">Register</Link>
             </li>
           </ul>
-        {/* {props.userEmail ? (
+        
+        </div>
+        {props.username ? (
           <div>
-            <h2>Welcome to the club, {props.userEmail}</h2>
-            <button onClick={props.logMeOut}>LogOut</button>
+            Hi there, {props.username}
+            <button onClick={props.logMeOut}>Logout</button>
           </div>
         ) : (
-          <form onSubmit={props.logMeIn}>
-            <input
-              value={props.loginInfo.email}
-              onChange={props.handleInputChange}
-              name="email"
-            />
-            <input
-              value={props.loginInfo.password}
-              onChange={props.handleInputChange}
-              name="password"
-            />
-            <button>Login</button>
-            <button> Create Account</button>
-          </form>
-        )} */}
-        </div>
-
+          <Link to="/login">Login</Link>
+        )}
       </div>
     </div>
   );

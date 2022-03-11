@@ -9,11 +9,9 @@ import Login from "./pages/Login";
 import Scoreboard from "./components/Scoreboard"
 import Whack from './components/games/WhackAMole';
 import Manatee from './components/games/MemoryBoard';
-
 import Navbar from "./components/Navbar";
 import Register from './pages/Register';
 const socket = io("http://localhost:4000");
-
 function App() {
 
   const [username, setUsername] = useState("");
@@ -42,7 +40,6 @@ function App() {
     if (token) {
       API.getTokenData(token)
       .then(data => {
-          console.log(data);
           setUserId(data.id);
           setUsername(data.username);
           setToken(token);
@@ -51,43 +48,42 @@ function App() {
           console.log(err);
         });
     }
-  }, []);
+  }, );
 
-  const registerSubmit = (e) => {
+  const wait = (timeToDelay) => new Promise((resolve) => setTimeout(resolve, timeToDelay));
+
+  const registerSubmit = async (e) => {
     e.preventDefault()
     console.log("Register Submit Activated")
     API.createUser(registerInfo.username, registerInfo.password)
     .then((data)=> {
-        console.log(data)
-        // console.log(data.PromiseResult.username)
-        // console.log(data.PromiseResult.password)
-        // await delay(5000)
-        window.location.replace('/login');
+        console.log(registerInfo.username, registerInfo.password)
+        setLoginInfo({
+          username: `${registerInfo.username}`,
+          password: registerInfo.password
+        })
+        logMeIn(e, registerInfo.username, registerInfo.password)
     }).catch((err)=>{
         console.log(err)
     })
 };
 
-  const logMeIn = (e) => {
+  const logMeIn = (e, username, password) => {
     console.log("LOGGING IN!")
+    
     e.preventDefault()
     loggedIn = true;
-    console.log(loggedIn);
-
-    API.login(loginInfo.username,loginInfo.password)
+    API.login(username, password)
       .then(data => {
-        console.log(data);
         setUserId(data.user.id);
         setUsername(data.user.username);
         setToken(data.token);
         localStorage.setItem("token", data.token);
-        // window.location.replace('/');
-        // console.log("change window")
       }).catch(err=>{
         console.log(err);
       });
-  };
 
+  };
   const logMeOut = ()=>{
     console.log("Logging out")
     loggedIn = false;
@@ -97,9 +93,7 @@ function App() {
     setToken("");
     window.location.replace('/');
   }
-
   const handleInputChange = e=>{
-    console.log(e.target.name,e.target.value)
     setLoginInfo({
       ...loginInfo,
       [e.target.name]:e.target.value
@@ -107,7 +101,6 @@ function App() {
   }
 
   const handleInputChangeRegister = e=>{
-    console.log(e.target.name,e.target.value)
     setRegisterInfo({
       ...registerInfo,
       [e.target.name]:e.target.value
@@ -118,17 +111,16 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar logMeOut={logMeOut} logMeIn={logMeIn} username={username} password={password} loginInfo={loginInfo} handleInputChange={handleInputChange} registerSubmit={registerSubmit}/>
+        <Navbar username={username} logMeOut={logMeOut}/>
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login loggedIn={loggedIn} logMeOut={logMeOut} logMeIn={logMeIn} username={username} loginInfo={loginInfo}  handleInputChange={handleInputChange}/>}/>
         <Route path="/profile" element={<Profile/>}/>
-        <Route path="/play" element={<Play/>}/>
+        <Route path="/play" element={<Play username={username}/>}/>
         <Route path="/register" element={<Register username={username} password={password} registerInfo={registerInfo}  handleInputChangeRegister={handleInputChangeRegister} registerSubmit={registerSubmit}/>}/>
         </Routes>
         </Router>
     </>
   );
 };
-
 export default App;
