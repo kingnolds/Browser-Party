@@ -1,68 +1,43 @@
-import React, { useState } from 'react';
-import {useParams} from "react-router-dom"
+import React, { useEffect, useState } from 'react';
+import {useParams, useNavigate, Link} from "react-router-dom"
 import API from "../utils/api"
-
+import loggedIn from "../App"
+// const socket = io("http://localhost:4000");
 export default function Login(props) {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-
-  // const styles = {
-    
-  // }
-
-  const login = (e) => {
-    e.preventDefault();
-    API.login(username, password).then((data)=> {
-      console.log(data)
-  }).catch((err)=>{
-      console.log(err)
-  })
-  }
-
-  const params = useParams();
     return (
+        <body>
       <div>
           <div className='container'>
               <div className='card'>
-              <form className="login-form">
+              {props.loginInfo.username ? (
+                <div>
+                    <h2>You are now logged in, {props.loginInfo.username}</h2>
+                    <Link to="/">Home</Link>
+                    <button onClick={props.logMeOut}>LogOut</button>
+                    </div>
+                ) : (
+                    <form>
+                    <input value={props.loginInfo.username} onChange={props.handleInputChange} name="username" placeholder="Username"/>
+                    <input value={props.loginInfo.password} onChange={props.handleInputChange} name="password" placeholder="Password"/>
+                    <button onClick={props.logMeIn}>Login</button>
+                    </form>
+                )}
+              {/* <form className="login-form">
                     <h1>Login</h1>
                     <div className="form-group">
                         <label>Username</label>
-                        <input type="text" className="form-control" placeholder="Enter Username" />
+                        <input type="text" value={props.loginInfo.username} onChange={props.handleInputChange} name="username" className="form-control" placeholder="Enter Username" />
                     </div>
                     <div className="form-group">
                         <label>Password</label>
-                        <input type="password" className="form-control" placeholder="Enter Password" />
+                        <input type="password" value={props.loginInfo.password} onChange={props.handleInputChange} name="password" className="form-control" placeholder="Enter Password" />
                     </div>
-                    <button type="submit" className="btn btn-primary btn-block" onSubmit={login}>Submit</button>
-                </form>
+                    <button type="submit" className="btn btn-primary btn-block" onSubmit={props.logMeIn}>Login</button>
+                    <button type="submit" className="btn btn-primary btn-block" onSubmit={props.logMeOut}>Logout</button>
+                </form> */}
               </div>
           </div>
-
-
-        {/* <div>
-          {props.userEmail ? (
-          <div>
-            <h2>Welcome to the club, {props.userEmail}</h2>
-            <button onClick={props.logMeOut}>LogOut</button>
-          </div>
-        ) : (
-          <form onSubmit={props.logMeIn}>
-            <input
-              value={props.loginInfo.email}
-              onChange={props.handleInputChange}
-              name="email"
-            />
-            <input
-              value={props.loginInfo.password}
-              onChange={props.handleInputChange}
-              name="password"
-            />
-            <button>Login</button>
-            <button> Create Account</button>
-          </form>
-        )}
-        </div> */}
       </div>
+      </body>
     );
   }
