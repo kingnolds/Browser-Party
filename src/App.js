@@ -16,7 +16,7 @@ const socket = io("http://localhost:4000");
 
 function App() {
 
-  const [userName, setUsername] = useState("");
+  const [username, setUsername] = useState("");
   const [userId, setUserId] = useState(0);
   const [token, setToken] = useState("");
 
@@ -32,12 +32,8 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      fetch("http://localhost:3000/gettokendata",{
-        headers:{
-            "authorization":`Bearer ${token}`
-        }
-      // API.getTokenData(token)
-      }).then(data => {
+      API.getTokenData(token)
+      .then(data => {
           console.log(data);
           setUserId(data.id);
           setUsername(data.username);
@@ -62,6 +58,8 @@ function App() {
         setUsername(data.user.username);
         setToken(data.token);
         localStorage.setItem("token", data.token);
+        // window.location.replace('/');
+        // console.log("change window")
       }).catch(err=>{
         console.log(err);
       });
@@ -89,10 +87,10 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar logMeOut={logMeOut} logMeIn={logMeIn} userName={userName} loginInfo={loginInfo} handleInputChange={handleInputChange}/>
+        <Navbar logMeOut={logMeOut} logMeIn={logMeIn} username={username} loginInfo={loginInfo} handleInputChange={handleInputChange}/>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/login" element={<Login logMeOut={logMeOut} logMeIn={logMeIn} userName={userName} loginInfo={loginInfo}  handleInputChange={handleInputChange}/>}/>
+        <Route path="/login" element={<Login loggedIn={loggedIn} logMeOut={logMeOut} logMeIn={logMeIn} username={username} loginInfo={loginInfo}  handleInputChange={handleInputChange}/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/play" element={<Play/>}/>
         <Route path="/register" element={<Register/>}/>

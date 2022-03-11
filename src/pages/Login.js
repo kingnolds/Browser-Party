@@ -12,17 +12,16 @@ export default function Login(props) {
       <div>
           <div className='container'>
               <div className='card'>
-              {loggedIn ? (
+              {props.username ? (
                 <div>
-
                     <h2>You are now logged in, {props.loginInfo.username}</h2>
                     <Link to="/">Home</Link>
                     <button onClick={props.logMeOut}>LogOut</button>
                     </div>
                 ) : (
                     <form>
-                    <input value={props.loginInfo.username} onChange={props.handleInputChange} name="username" placeholder="Username"/>
-                    <input value={props.loginInfo.password} onChange={props.handleInputChange} name="password" placeholder="Password"/>
+                    <input type="text" value={props.loginInfo.username} onChange={props.handleInputChange} name="username" placeholder="Username"/>
+                    <input type="password" value={props.loginInfo.password} onChange={props.handleInputChange} name="password" placeholder="Password"/>
                     <button onClick={props.logMeIn}>Login</button>
                     </form>
                 )}
