@@ -4,7 +4,7 @@ import Whack from "../components/games/WhackAMole"
 import API from '../utils/api';
 import io from "socket.io-client";
 import Scoreboard from "../components/Scoreboard"
-import Memory from "../components/games/FindingManateeBoard"
+import Memory from "../components/games/MemoryBoard"
 // const socket = io("http://localhost:4000", {
 //   withCredentials: true
 // });
