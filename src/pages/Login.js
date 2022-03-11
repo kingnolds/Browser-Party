@@ -1,129 +1,47 @@
 import React, { useEffect, useState } from 'react';
-import {useParams} from "react-router-dom"
+import {useParams, useNavigate, Link} from "react-router-dom"
 import API from "../utils/api"
+import loggedIn from "../App"
+
 // const socket = io("http://localhost:4000");
 
 export default function Login(props) {
-  const [username, setUserEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [userId, setUserId] = useState(0)
-  const [token, setToken] = useState('')
 
-  const [loginInfo, setLoginInfo] = useState({
-      email:"",
-      password:""
-  })
-
-  const login = (e) => {
-    e.preventDefault();
-    API.login(username, password).then((data)=> {
-      console.log(data)
-  }).catch((err)=>{
-      console.log(err)
-  })
-  }
-
-  useEffect(()=>{
-      const token = localStorage.getItem("token")
-      if(token){
-          fetch("http://localhost:3000/gettokendata",{
-        headers:{
-            "authorization":`Bearer ${token}`
-        }
-          }).then(res=>res.json()).then(data=>{
-              console.log(data);
-              setUserId(data.id);
-              setUserEmail(data.email);
-              setToken(token);
-          }).catch(err=>{
-              console.log(err);
-          })
-      }
-  },[])
-
-  const logMeIn = (e)=>{
-      e.preventDefault()
-      fetch("http://localhost:3000/login", {
-          method:"POST",
-          body:JSON.stringify({
-              email:loginInfo.email,
-              password:loginInfo.password,
-          }),
-          headers:{
-              "Content-Type":"application/json"
-          }
-      }).then(res=>{
-          return res.json()
-      }).then(data=>{
-          console.log(data);
-          setUserId(data.user.id);
-          setUserEmail(data.user.email);
-          setToken(data.token);
-          localStorage.setItem("token", data.token);
-      }).catch(err=>{
-          console.log(err);
-      })
-  }
-
-  const logMeOut = () => {
-      localStorage.removeItem("token");
-      setUserId(0);
-      setUserEmail("");
-      setToken("");
-  }
-
-  const handleInputChange = e => {
-      setLoginInfo({
-          ...loginInfo,
-          [e.target.name]:e.target.value
-      })
-  }
-
-//   const params = useParams();
     return (
+        <body>
       <div>
           <div className='container'>
               <div className='card'>
-              <form className="login-form">
+              {loggedIn ? (
+                <div>
+
+                    <h2>You are now logged in, {props.loginInfo.username}</h2>
+                    <Link to="/">Home</Link>
+                    <button onClick={props.logMeOut}>LogOut</button>
+                    </div>
+                ) : (
+                    <form>
+                    <input value={props.loginInfo.username} onChange={props.handleInputChange} name="username" placeholder="Username"/>
+                    <input value={props.loginInfo.password} onChange={props.handleInputChange} name="password" placeholder="Password"/>
+                    <button onClick={props.logMeIn}>Login</button>
+                    </form>
+                )}
+              {/* <form className="login-form">
                     <h1>Login</h1>
                     <div className="form-group">
                         <label>Username</label>
-                        <input type="text" value= {loginInfo.email} onChange={handleInputChange} name="email" className="form-control" placeholder="Enter Email" />
+                        <input type="text" value={props.loginInfo.username} onChange={props.handleInputChange} name="username" className="form-control" placeholder="Enter Username" />
                     </div>
                     <div className="form-group">
                         <label>Password</label>
-                        <input type="password" value= {loginInfo.password} onChange={handleInputChange} name="password" className="form-control" placeholder="Enter Password" />
+                        <input type="password" value={props.loginInfo.password} onChange={props.handleInputChange} name="password" className="form-control" placeholder="Enter Password" />
                     </div>
-                    <button type="submit" className="btn btn-primary btn-block" onSubmit={logMeIn}>Login</button>
-                    <button type="submit" className="btn btn-primary btn-block" onSubmit={logMeOut}>Logout</button>
-                </form>
+                    <button type="submit" className="btn btn-primary btn-block" onSubmit={props.logMeIn}>Login</button>
+                    <button type="submit" className="btn btn-primary btn-block" onSubmit={props.logMeOut}>Logout</button>
+                </form> */}
               </div>
           </div>
-
-
-        {/* <div>
-          {props.userEmail ? (
-          <div>
-            <h2>Welcome to the club, {props.userEmail}</h2>
-            <button onClick={props.logMeOut}>LogOut</button>
-          </div>
-        ) : (
-          <form onSubmit={props.logMeIn}>
-            <input
-              value={props.loginInfo.email}
-              onChange={props.handleInputChange}
-              name="email"
-            />
-            <input
-              value={props.loginInfo.password}
-              onChange={props.handleInputChange}
-              name="password"
-            />
-            <button>Login</button>
-            <button> Create Account</button>
-          </form>
-        )}
-        </div> */}
       </div>
+      </body>
     );
   }

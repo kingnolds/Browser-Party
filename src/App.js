@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import io from "socket.io-client";
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, Link, useNavigate} from "react-router-dom";
 import API from "./utils/api"
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
@@ -16,23 +16,31 @@ const socket = io("http://localhost:4000");
 
 function App() {
 
-  const [userEmail, setUserEmail] = useState("");
+  const [userName, setUsername] = useState("");
   const [userId, setUserId] = useState(0);
   const [token, setToken] = useState("");
 
+  var loggedIn = false;
+
   const [loginInfo, setLoginInfo] = useState({
-    email:"",
+    username:"",
     password:""
   })
+
+  // let navigate = useNavigate(); 
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      API.getTokenData(token)
-        .then(data => {
+      fetch("http://localhost:3000/gettokendata",{
+        headers:{
+            "authorization":`Bearer ${token}`
+        }
+      // API.getTokenData(token)
+      }).then(data => {
           console.log(data);
           setUserId(data.id);
-          setUserEmail(data.email);
+          setUsername(data.username);
           setToken(token);
         })
         .catch(err => {
@@ -42,12 +50,16 @@ function App() {
   }, []);
 
   const logMeIn = (e) => {
+    console.log("LOGGING IN!")
     e.preventDefault()
-    API.login(loginInfo.email,loginInfo.password)
+    loggedIn = true;
+    console.log(loggedIn);
+
+    API.login(loginInfo.username,loginInfo.password)
       .then(data => {
         console.log(data);
         setUserId(data.user.id);
-        setUserEmail(data.user.email);
+        setUsername(data.user.username);
         setToken(data.token);
         localStorage.setItem("token", data.token);
       }).catch(err=>{
@@ -56,10 +68,13 @@ function App() {
   };
 
   const logMeOut = ()=>{
+    console.log("Logging out")
+    loggedIn = false;
     localStorage.removeItem("token");
     setUserId(0);
-    setUserEmail("");
+    setUsername("");
     setToken("");
+    window.location.replace('/');
   }
 
   const handleInputChange = e=>{
@@ -70,13 +85,14 @@ function App() {
     })
   }
 
+
   return (
     <>
       <Router>
-        <Navbar logMeOut={logMeOut} logMeIn={logMeIn} userEmail={userEmail} loginInfo={loginInfo} handleInputChange={handleInputChange}/>
+        <Navbar logMeOut={logMeOut} logMeIn={logMeIn} userName={userName} loginInfo={loginInfo} handleInputChange={handleInputChange}/>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/login" element={<Login/>}/>
+        <Route path="/login" element={<Login logMeOut={logMeOut} logMeIn={logMeIn} userName={userName} loginInfo={loginInfo}  handleInputChange={handleInputChange}/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/play" element={<Play/>}/>
         <Route path="/register" element={<Register/>}/>
