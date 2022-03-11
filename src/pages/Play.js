@@ -84,7 +84,6 @@ function Play() {
     socket.emit("leave-room", room, username)
   }
 
-
   return (
     <div className="Play">
       {inGame ? (

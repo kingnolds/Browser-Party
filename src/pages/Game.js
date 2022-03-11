@@ -9,14 +9,11 @@ import Memory from "../components/games/MemoryBoard"
 //   withCredentials: true
 // });
 
-
-
 function Game({room, leaveRoom, id, socket, isHost}) {
   const [players, setPlayers] = useState([])
   const [scores, setScores] = useState([{}])
   const [round, setRound] = useState(0)
   const [scoreboard, setScoreboard] = useState(false)
-
 
   console.log(id)
   console.log(socket)
@@ -56,8 +53,6 @@ function Game({room, leaveRoom, id, socket, isHost}) {
     })
     return () => { isMounted = false }; // cleanup toggles value, if unmounted
   }, [players]);                               // adjust dependencies to your needs
-
-  
 
     return (
       <div className="Game">
