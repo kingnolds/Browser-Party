@@ -2,7 +2,7 @@ const BASEURL="http://localhost:3001"
 
 const API = {
     getTokenData: (token)=>{
-        return fetch(`${BASEURL}/api/users/gettokendata`, {
+        return fetch(`${BASEURL}/gettokendata`, {
             headers: {
               authorization: `Bearer ${token}`
             }

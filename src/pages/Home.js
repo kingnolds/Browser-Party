@@ -39,7 +39,7 @@ export default function Home(props) {
 
     return (
       <div>
-        <Navbar/>
+        {/* <Navbar/> */}
           {/* {props.userEmail ? (
           <div>
             <h2>Welcome to the club, {props.userEmail}</h2>
