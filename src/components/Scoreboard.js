@@ -1,27 +1,62 @@
 import React, { useState } from 'react';
 
-export default function Scoreboard({room, id, players}) {
+export default function Scoreboard({room, id, players, endGame}) {
     
+    console.log(players);
+
     function compare(a,b) {
         if (a.score < b.score)
-           return -1;
+           return 1;
         if (a.score > b.score)
-          return 1;
+          return -1;
         return 0;
       }
       
     const rankedScores = players.sort(compare); 
+    const numOfPlayers = rankedScores.length;
+
+    const playAgain = () => {
+        window.location = '/play'
+    }
     
     return (
         <div>
-            <h1>Scoreboard for room: {room}</h1>
-            <ul className="list-group">
-                {rankedScores.map(player => (
-                    <li className="list-group-player" key={player.id} style={(player.id == id) ? {color:"blue"}:{}}>
-                        {player.username}: {player.score} points
-                    </li>
-                ))}
-            </ul>
+            {endGame ? (
+                <div>
+                    <h1>Game Over!</h1>
+                    <h3>{rankedScores[0].username} is the winner!</h3>
+                    <h5>Final Standings:</h5>
+                    <ol className="list-group">
+                    {rankedScores.map(player => (
+                        <li className="list-group-player" key={player.id} style={(player.id == id) ? {color:"blue"}:{}}>
+                            {player.username}: {player.score} points
+                        </li>
+                    ))}
+                    </ol>
+                    {numOfPlayers > 1 ? (
+                        <h4>{rankedScores[numOfPlayers-1].username} seems about as sharp as a marble...</h4>
+
+                    ) : null}
+
+                    <button onClick={playAgain}>Play Again!</button>
+                </div>
+            ) : (
+                <div>
+
+                <h1>Scoreboard for room: {room}</h1>
+                <ol className="list-group">
+                    {rankedScores.map(player => (
+                        <li className="list-group-player" key={player.id} style={(player.id == id) ? {color:"blue"}:{}}>
+                            {player.username}: {player.score} points
+                        </li>
+                    ))}
+                </ol>
+                <h3>Next Round: </h3>
+                <h5>Instructions: </h5>
+                </div>
+
+
+            )}
         </div>
     )
 }

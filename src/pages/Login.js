@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import {useParams, useNavigate, Link} from "react-router-dom"
 import API from "../utils/api"
-import loggedIn from "../App"
 // const socket = io("http://localhost:4000");
 export default function Login(props) {
-    return (
+    
+  return (
 
       <div>
           <div className='container'>
               <div className='card'>
-              {props.userName ? (
+              {props.username ? (
                 <div>
                     <h2>You are now logged in, {props.loginInfo.username}</h2>
                     <Link to="/">Home</Link>

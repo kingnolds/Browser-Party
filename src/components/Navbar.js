@@ -26,29 +26,15 @@ export default function Navbar(props) {
             <Link to="/register">Register</Link>
             </li>
           </ul>
-        {/* {props.userEmail ? (
+        
+        </div>
+        {props.username ? (
           <div>
-            <h2>Welcome to the club, {props.userEmail}</h2>
-            <button onClick={props.logMeOut}>LogOut</button>
+            Hi there, {props.username}
           </div>
         ) : (
-          <form onSubmit={props.logMeIn}>
-            <input
-              value={props.loginInfo.email}
-              onChange={props.handleInputChange}
-              name="email"
-            />
-            <input
-              value={props.loginInfo.password}
-              onChange={props.handleInputChange}
-              name="password"
-            />
-            <button>Login</button>
-            <button> Create Account</button>
-          </form>
-        )} */}
-        </div>
-
+          <Link to="/login">Login</Link>
+        )}
       </div>
     </div>
   );

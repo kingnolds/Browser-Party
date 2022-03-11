@@ -79,7 +79,7 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar logMeOut={logMeOut} logMeIn={logMeIn} username={username} loginInfo={loginInfo} handleInputChange={handleInputChange}/>
+        <Navbar username={username}/>
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login loggedIn={loggedIn} logMeOut={logMeOut} logMeIn={logMeIn} username={username} loginInfo={loginInfo}  handleInputChange={handleInputChange}/>}/>
