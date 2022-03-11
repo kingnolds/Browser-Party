@@ -15,16 +15,26 @@ const socket = io("http://localhost:4000");
 function App() {
 
   const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [userId, setUserId] = useState(0);
   const [token, setToken] = useState("");
 
   var loggedIn = false;
 
+  // const myTimeout = setTimeout(nextPage, 5000);
+
   const [loginInfo, setLoginInfo] = useState({
     username:"",
     password:""
   })
-  // let navigate = useNavigate();
+
+  const [registerInfo, setRegisterInfo] = useState({
+    username: "",
+    password: ""
+  })
+
+  // let navigate = useNavigate(); 
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -40,6 +50,22 @@ function App() {
         });
     }
   }, []);
+
+  const registerSubmit = (e) => {
+    e.preventDefault()
+    console.log("Register Submit Activated")
+    API.createUser(registerInfo.username, registerInfo.password)
+    .then((data)=> {
+        console.log(data)
+        // console.log(data.PromiseResult.username)
+        // console.log(data.PromiseResult.password)
+        // await delay(5000)
+        window.location.replace('/login');
+    }).catch((err)=>{
+        console.log(err)
+    })
+};
+
   const logMeIn = (e) => {
     console.log("LOGGING IN!")
     e.preventDefault()
@@ -75,6 +101,14 @@ function App() {
     })
   }
 
+  const handleInputChangeRegister = e=>{
+    console.log(e.target.name,e.target.value)
+    setRegisterInfo({
+      ...registerInfo,
+      [e.target.name]:e.target.value
+    })
+  }
+
 
   return (
     <>
@@ -85,7 +119,7 @@ function App() {
         <Route path="/login" element={<Login loggedIn={loggedIn} logMeOut={logMeOut} logMeIn={logMeIn} username={username} loginInfo={loginInfo}  handleInputChange={handleInputChange}/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/play" element={<Play/>}/>
-        <Route path="/register" element={<Register/>}/>
+        <Route path="/register" element={<Register username={username} password={password} registerInfo={registerInfo}  handleInputChangeRegister={handleInputChangeRegister} registerSubmit={registerSubmit}/>}/>
         </Routes>
         </Router>
     </>

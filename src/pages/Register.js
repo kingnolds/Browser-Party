@@ -3,9 +3,19 @@ import {useParams} from "react-router-dom"
 import API from '../utils/api';
 
 export default function Register(props) {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const params = useParams();
+    // const [username, setUsername] = useState('')
+    // const [password, setPassword] = useState('')
+    // const params = useParams();
+
+    // const submitForm = (e) => {
+    //     e.preventDefault()
+    //     API.createUser(username, password)
+    //     .then((data)=> {
+    //         console.log(data)
+    //     }).catch((err)=>{
+    //         console.log(err)
+    //     })
+    // }
 
     const styles = {
         card:
@@ -14,7 +24,7 @@ export default function Register(props) {
           borderRadius: '10px',
           background: '#EEEEEE',
           width: '300px',
-          margin: '20vh auto',
+          margin: '25vh auto',
           padding: '28px'
         },
         button:
@@ -24,31 +34,16 @@ export default function Register(props) {
         }
       }
 
-    const submitForm = (e) => {
-        e.preventDefault()
-        API.newUser(username, password).then((data)=> {
-            console.log(data)
-        }).catch((err)=>{
-            console.log(err)
-        })
-    }
-
     return (
       <div>
           <div style={styles.card} className='container'>
-              <div>
-                <form>
-                    <h1>Register</h1>
-                    <div className="form-group">
-                        <label>Username</label>
-                        <input type="username" className="form-control" placeholder="Enter username" onChange={(e)=>setUsername(e.target.value)} value={username}/>
-                    </div>
-                    <div className="form-group">
-                        <label>Password</label>
-                        <input type="password" className="form-control" placeholder="Enter Password" onChange={(e)=>setPassword(e.target.value)} value={password} />
-                    </div>
-                    <button type="submit" className="btn btn-primary btn-block" onClick={submitForm}>Submit</button>
-                </form>
+              <div className='card'>
+              <form>
+                  <h1>Register</h1>
+                <input type="text" value={props.registerInfo.username} onChange={props.handleInputChangeRegister} name="username" placeholder="Username" />
+                <input type="password" value={props.registerInfo.password} onChange={props.handleInputChangeRegister} name="password" placeholder="Password" />
+                <button onClick={props.registerSubmit}>Register</button>
+              </form>
               </div>
           </div>
 
