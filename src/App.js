@@ -40,17 +40,22 @@ function App() {
     if (token) {
       API.getTokenData(token)
       .then(data => {
-          setUserId(data.id);
-          setUsername(data.username);
-          setToken(token);
+          if (data.err) {
+            console.log(data.err)
+            localStorage.removeItem("token")
+          } else {
+            setUserId(data.id);
+            setUsername(data.username);
+            console.log(`49- ${username}`)
+            setToken(token);
+          }
         })
         .catch(err => {
+          console.log("bad token")
           console.log(err);
         });
     }
   }, );
-
-  const wait = (timeToDelay) => new Promise((resolve) => setTimeout(resolve, timeToDelay));
 
   const registerSubmit = async (e) => {
     e.preventDefault()
@@ -70,7 +75,6 @@ function App() {
 
   const logMeIn = (e, username, password) => {
     console.log("LOGGING IN!")
-    
     e.preventDefault()
     loggedIn = true;
     API.login(username, password)

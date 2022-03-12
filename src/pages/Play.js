@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 import Game from "./Game"
 import Scoreboard from "../components/Scoreboard"
 import io from "socket.io-client";
 
-const socket = io("http://localhost:4000", {
+
+// CHANGE FOR LOCAL vs DEPLOYED
+
+// DEPLOYED
+const socket = io("https://browser-party-backend.herokuapp.com/", {
+  withCredentials: true
+});
+
+// LOCAL
+const socket = io("localhost:4000", {
   withCredentials: true
 });
 
@@ -51,12 +60,12 @@ const styles = {
   }
 }
 
-function Play(props) {
+function Play({username}) {
   const [room, setRoom] = useState('');
   const [inGame, seInGame] = useState(false);
-  const [username, setUsername] = useState(props.username);
   const [isHost, setIsHost] = useState(false);
 
+  
   const joinRoom = () => {
     if (username !== "" && room !== "") {
       socket.emit("join-room", room, username)
@@ -66,7 +75,9 @@ function Play(props) {
   }
 
   const createRoom = () => {
+    console.log("create1")
     if (username !== "" && room !== "") {
+      console.log("create2")
       socket.emit("create-room", room, username)
       seInGame(true)
     }
@@ -80,41 +91,50 @@ function Play(props) {
 
   return (
     <div className="Play">
-      {inGame ? (
-        <div style={styles.gameCard}>
-          <h4 style={styles.h4}>Play - socketId: {socket.id}</h4>
-          <Game room={room} leaveRoom={leaveRoom} id={socket.id} socket={socket} isHost={isHost} />
+      {username ? (
+        <div>
+          {inGame ? (
+            <div style={styles.gameCard}>
+              <h4 style={styles.h4}>Play - socketId: {socket.id}</h4>
+              <Game room={room} leaveRoom={leaveRoom} id={socket.id} socket={socket} isHost={isHost} />
+            </div>
+          ) : (
+            <div style={styles.card}>
+              <h4 style={styles.h4}>Play - socketId: {socket.id}</h4>
+              <div className="CreateJoin">
+                <div style={styles.hostJoin}>
+                  <button style={styles.button} onClick={(event) => { setIsHost(true) }}>Host</button>
+                  <button style={styles.button} onClick={(event) => { setIsHost(false) }}>Join</button>
+                </div>
+                {isHost ? (
+                  <div style={styles.innerMiddle}>
+                    <br></br>
+                    <label>Choose Room Code:</label>
+                    <br></br>
+                    <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
+                    <br></br>
+                    <button style={styles.roomButton} onClick={createRoom}>Create Room</button>
+                  </div>
+                ) : (
+                  <div style={styles.innerMiddle}>
+                    <br></br>
+                    <label>Existing Room Code:</label>
+                    <br></br>
+                    <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
+                    <br></br>
+                    <button style={styles.roomButton} onClick={joinRoom}>Join Room</button>
+                  </div>
+                )}
+              </div>
+            </div>
+    
+          )}
         </div>
       ) : (
-        <div style={styles.card}>
-          <h4 style={styles.h4}>Play - socketId: {socket.id}</h4>
-          <div className="CreateJoin">
-            <div style={styles.hostJoin}>
-              <button style={styles.button} onClick={(event) => { setIsHost(true) }}>Host</button>
-              <button style={styles.button} onClick={(event) => { setIsHost(false) }}>Join</button>
-            </div>
-            {isHost ? (
-              <div style={styles.innerMiddle}>
-                <br></br>
-                <label>Choose Room Code:</label>
-                <br></br>
-                <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
-                <br></br>
-                <button style={styles.roomButton} onClick={createRoom}>Create Room</button>
-              </div>
-            ) : (
-              <div style={styles.innerMiddle}>
-                <br></br>
-                <label>Existing Room Code:</label>
-                <br></br>
-                <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
-                <br></br>
-                <button style={styles.roomButton} onClick={joinRoom}>Join Room</button>
-              </div>
-            )}
-          </div>
+        <div>
+          <h3>Log in first!</h3>
+          <Link to="/login">Login</Link>
         </div>
-
       )}
 
     </div>
