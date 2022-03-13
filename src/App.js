@@ -11,7 +11,6 @@ import Whack from './components/games/WhackAMole';
 import Manatee from './components/games/MemoryBoard';
 import Navbar from "./components/Navbar";
 import Register from './pages/Register';
-const socket = io("http://localhost:4000");
 function App() {
 
   const [username, setUsername] = useState("");
