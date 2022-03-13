@@ -13,9 +13,9 @@ const socket = io("https://browser-party-backend.herokuapp.com/", {
 });
 
 // LOCAL
-const socket = io("localhost:4000", {
-  withCredentials: true
-});
+// const socket = io("localhost:4000", {
+//   withCredentials: true
+// });
 
 const styles = {
   card: {
