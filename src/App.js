@@ -79,6 +79,7 @@ function App() {
     loggedIn = true;
     API.login(username, password)
       .then(data => {
+        console.log(data)
         setUserId(data.user.id);
         setUsername(data.user.username);
         setToken(data.token);
