@@ -7,7 +7,7 @@ export default function Navbar(props) {
       {/* navbar navbar-expand */}
       <div className="navigation-bar">
         {/* <div className="collapse navbar-collapse"> */}
-          <ul class="nav justify-content-center">
+          <ul className="nav justify-content-center">
             <li className="nav-item">
               <Link to="/">Home</Link>
             </li>

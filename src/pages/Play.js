@@ -1,27 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom"
 import Game from "./Game"
+import Scoreboard from "../components/Scoreboard"
 import io from "socket.io-client";
-
 
 
 // CHANGE FOR LOCAL vs DEPLOYED
 
 // DEPLOYED
-<<<<<<< HEAD
 // const socket = io("https://browser-party-backend.herokuapp.com/", {
 //   withCredentials: true
 // });
-=======
-const socket = io("https://browser-party-socket-io.herokuapp.com/", {
-  withCredentials: true
-});
->>>>>>> dev
 
 // LOCAL
-// const socket = io("localhost:4000", {
-//   withCredentials: true
-// });
+const socket = io("localhost:4000", {
+  withCredentials: true
+});
 
 const styles = {
   logo: {
@@ -46,6 +40,7 @@ const styles = {
     margin: '0 60px',
   },
   form: {
+    marginTop: '15px',
     fontSize: '25px',
     marginLeft: '45px'
   },
@@ -132,10 +127,9 @@ function Play({username}) {
               </div>
               {isHost ? (
                 <div style={styles.form}>
-                  <label>Username:</label>
+                  {/* <label>Username:</label>
                   <br></br>
-                  <input style={styles.input} type="text" onChange={(event) => { setUsername(event.target.value) }}></input>
-                  <br></br>
+                  <input style={styles.input} type="text" onChange={(event) => { setUsername(event.target.value) }}></input> */}
                   <label>Choose Room Code:</label>
                   <br></br>
                   <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
@@ -144,10 +138,9 @@ function Play({username}) {
                 </div>
               ) : (
                 <div style={styles.form}>
-                  <label>Username:</label>
+                  {/* <label>Username:</label>
                   <br></br>
-                  <input style={styles.input} type="text" onChange={(event) => { setUsername(event.target.value) }}></input>
-                  <br></br>
+                  <input style={styles.input} type="text" onChange={(event) => { setUsername(event.target.value) }}></input> */}
                   <label>Existing Room Code:</label>
                   <br></br>
                   <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>

@@ -34,29 +34,7 @@ export default function Register(props) {
       marginLeft: '110px',
       fontSize: '25px'
     }
-    }
-
-  // const submitForm = (e) => {
-  //     e.preventDefault()
-  //     API.newUser(username, password).then((data)=> {
-  //         console.log(data)
-  //     }).catch((err)=>{
-  //         console.log(err)
-  //     })
-
-    // const [username, setUsername] = useState('')
-    // const [password, setPassword] = useState('')
-    // const params = useParams();
-
-    // const submitForm = (e) => {
-    //     e.preventDefault()
-    //     API.createUser(username, password)
-    //     .then((data)=> {
-    //         console.log(data)
-    //     }).catch((err)=>{
-    //         console.log(err)
-    //     })
-    // }
+  }
 
   //   return (
   //     <div>
