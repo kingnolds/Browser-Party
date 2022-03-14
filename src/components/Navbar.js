@@ -21,7 +21,6 @@ export default function Navbar(props) {
             <Link to="/register">Register</Link>
             </li>
           </ul>
-        
         </div>
         {/* {props.username ? (
           <div>
@@ -48,6 +47,6 @@ export default function Navbar(props) {
           <Link to="/login">Login</Link>
         )}
        </div> */}
-    // </div>
+    </div>
   );
 }
