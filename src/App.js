@@ -78,6 +78,7 @@ function App() {
     loggedIn = true;
     API.login(username, password)
       .then(data => {
+        console.log(data)
         setUsername(data.user.username);
         setToken(data.token);
         localStorage.setItem("token", data.token);
