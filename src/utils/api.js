@@ -14,7 +14,7 @@ const API = {
           })
             .then(res => res.json())
     },
-    
+
     login: (username,password)=>{
       return fetch(`${BASEURL}/login`, {
       method: "POST",
@@ -46,7 +46,13 @@ const API = {
     getUsers:()=>{
         return fetch(`${BASEURL}/api/users`)
         .then(res => res.json())
-    },
+      },
+
+    getSingleUser:(username) => {
+        return fetch(`${BASEURL}/api/users/${username}`)
+        .then(res => res.json())
+        
+    }
     
 }
 
