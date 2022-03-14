@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom"
 import Game from "./Game"
-import Scoreboard from "../components/Scoreboard"
 import io from "socket.io-client";
 
 
@@ -13,9 +12,9 @@ const socket = io("https://browser-party-backend.herokuapp.com/", {
 });
 
 // LOCAL
-const socket = io("localhost:4000", {
-  withCredentials: true
-});
+// const socket = io("localhost:4000", {
+//   withCredentials: true
+// });
 
 const styles = {
   card: {

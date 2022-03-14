@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 export default function Scoreboard({room, id, players, endGame, round}) {
     
-    console.log(players);
 
     function compare(a,b) {
         if (a.score < b.score)
