@@ -1,26 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import io from "socket.io-client";
-import {BrowserRouter as Router, Routes, Route, Link, useNavigate} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import API from "./utils/api"
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Play from "./pages/Play";
 import Login from "./pages/Login";
-import Scoreboard from "./components/Scoreboard"
-import Whack from './components/games/WhackAMole';
-import Manatee from './components/games/MemoryBoard';
 import Navbar from "./components/Navbar";
 import Register from './pages/Register';
 function App() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [userId, setUserId] = useState(0);
   const [token, setToken] = useState("");
 
   var loggedIn = false;
-
-  // const myTimeout = setTimeout(nextPage, 5000);
 
   const [loginInfo, setLoginInfo] = useState({
     username:"",
@@ -32,8 +26,6 @@ function App() {
     password: ""
   })
 
-  // let navigate = useNavigate(); 
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -43,7 +35,6 @@ function App() {
             console.log(data.err)
             localStorage.removeItem("token")
           } else {
-            setUserId(data.id);
             setUsername(data.username);
             console.log(`49- ${username}`)
             setToken(token);
@@ -91,7 +82,6 @@ function App() {
     console.log("Logging out")
     loggedIn = false;
     localStorage.removeItem("token");
-    setUserId(0);
     setUsername("");
     setToken("");
     window.location.replace('/');

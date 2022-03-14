@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 
 export default function Scoreboard({room, id, players, endGame, round}) {
     
-    console.log(players);
-
     function compare(a,b) {
         if (a.score < b.score)
            return 1;
@@ -61,18 +59,3 @@ export default function Scoreboard({room, id, players, endGame, round}) {
     )
 }
 
-
-// function Scoreboard() {
-//     const params = useParams();
-//     return (
-//         <div className="card" style={{ width: "500px", margin: "20px" }}>
-//             <div className="card-body">
-//                 <h2>Score: </h2>
-//                 <h2>Rank: </h2>
-//                 <h2>Top game: </h2>
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default Scoreboard;
