@@ -16,8 +16,13 @@ function Game({room, leaveRoom, id, socket, isHost}) {
   const [endGame, setEndGame] = useState(false)
 
   const styles = {
+    card: {
+        background: '#9E8FB2',
+    },
     button: {
-        margin: '20px'
+        margin: '20px',
+        fontSize: '25px',
+        backgroundColor: '#668586',
     }
   }
 
@@ -55,7 +60,7 @@ function Game({room, leaveRoom, id, socket, isHost}) {
   }, [players]);                               // adjust dependencies to your needs
 
     return (
-      <div className="Game">
+      <div style={styles.card} className="Game">
         {scoreboard ? (
             <Scoreboard room={room} id={id} players={players} endGame={endGame} round={round}/>
         ) : (
@@ -73,7 +78,7 @@ function Game({room, leaveRoom, id, socket, isHost}) {
                         </ul>
                         
                         {isHost ? (
-                            <button style={styles.button} onClick={()=>startGame()}>Start Game!</button>
+                            <button style={styles.button} className="btn" onClick={()=>startGame()}>Start Game!</button>
                         ):null}
                     </div>
                 ):null}
@@ -105,7 +110,7 @@ function Game({room, leaveRoom, id, socket, isHost}) {
 
             </div>
         )}
-        <button style={styles.button} onClick={leaveRoom}>Leave Room</button>
+        <button style={styles.button} className="btn" onClick={leaveRoom}>Leave Room</button>
       </div>
     );
   };

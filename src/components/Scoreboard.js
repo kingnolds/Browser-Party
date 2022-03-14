@@ -60,7 +60,6 @@ export default function Scoreboard({room, id, players, endGame, round}) {
     )
 }
 
-
 // function Scoreboard() {
 //     const params = useParams();
 //     return (

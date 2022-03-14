@@ -9,7 +9,8 @@ export default function Profile() {
     {
       borderStyle: 'none',
       borderRadius: '10px',
-      background: '#EEEEEE',
+      background: '#9E8FB2',
+      filter: 'drop-shadow(5px 5px 5px #D3C3AD)',
       width: '500px',
       margin: '12vh auto',
       padding: '28px'
