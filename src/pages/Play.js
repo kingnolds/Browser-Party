@@ -8,14 +8,14 @@ import io from "socket.io-client";
 // CHANGE FOR LOCAL vs DEPLOYED
 
 // DEPLOYED
-const socket = io("https://browser-party-socket-io.herokuapp.com/", {
-  withCredentials: true
-});
-
-// LOCAL
-// const socket = io("localhost:4000", {
+// const socket = io("https://browser-party-socket-io.herokuapp.com/", {
 //   withCredentials: true
 // });
+
+// LOCAL
+const socket = io("localhost:4000", {
+  withCredentials: true
+});
 
 const styles = {
   card: {
@@ -60,7 +60,7 @@ const styles = {
   }
 }
 
-function Play({username}) {
+export default function Play({username}) {
   const [room, setRoom] = useState('');
   const [inGame, seInGame] = useState(false);
   const [isHost, setIsHost] = useState(false);
@@ -68,18 +68,30 @@ function Play({username}) {
   
   const joinRoom = () => {
     if (username !== "" && room !== "") {
-      socket.emit("join-room", room, username)
-      console.log(`${socket.username} is joining room ${room}`)
-      seInGame(true)
+      socket.emit("join-room", room, username, (response) => {
+        if (response.status === "ok") {
+          console.log(`${socket.username} is joining room ${room}`)
+          seInGame(true)
+        } else {
+          alert("That room doesn't exist, either create the room or double check your room code")
+        }
+      })
     }
   }
 
   const createRoom = () => {
-    console.log("create1")
     if (username !== "" && room !== "") {
-      console.log("create2")
-      socket.emit("create-room", room, username)
-      seInGame(true)
+      console.log("create")
+      socket.emit("create-room", room, username, (repsonse) => {
+        console.log(repsonse)
+        if (repsonse.status === "ok") {
+          console.log("if")
+          seInGame(true)
+        } else {
+          console.log("else")
+          alert("Room already exists, pick a unique room code")
+        }
+      })
     }
   }
 
@@ -141,4 +153,3 @@ function Play({username}) {
   );
 };
 
-export default Play;
