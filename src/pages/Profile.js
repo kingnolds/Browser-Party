@@ -18,7 +18,6 @@ export default function Profile({username}) {
     },
   }
 
-  // const params = useParams();
   return (
     <div>
       {username ? (
