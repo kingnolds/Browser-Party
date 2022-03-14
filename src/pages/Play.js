@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom"
-import Lobby from "./Lobby"
+import { Link } from "react-router-dom"
 import Game from "./Game"
 import Scoreboard from "../components/Scoreboard"
 import io from "socket.io-client";
 
-const socket = io("http://localhost:4000", {
+
+// CHANGE FOR LOCAL vs DEPLOYED
+
+// DEPLOYED
+// const socket = io("https://browser-party-backend.herokuapp.com/", {
+//   withCredentials: true
+// });
+
+// LOCAL
+const socket = io("localhost:4000", {
   withCredentials: true
 });
 
@@ -70,16 +78,12 @@ const styles = {
   }
 }
 
-function Play() {
+function Play({username}) {
   const [room, setRoom] = useState('');
   const [inGame, seInGame] = useState(false);
-  const [username, setUsername] = useState('');
   const [isHost, setIsHost] = useState(false);
-  const [showScoreboard, setShowScoreboard] = useState(false);
-  const [round, setRound] = useState(0);
-  const [players, setPlayers] = useState([])
 
-  const id = socket.id
+  
   const joinRoom = () => {
     if (username !== "" && room !== "") {
       socket.emit("join-room", room, username)
@@ -89,9 +93,10 @@ function Play() {
   }
 
   const createRoom = () => {
+    console.log("create1")
     if (username !== "" && room !== "") {
+      console.log("create2")
       socket.emit("create-room", room, username)
-      console.log(socket.isHost)
       seInGame(true)
     }
   }

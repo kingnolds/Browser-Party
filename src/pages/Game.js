@@ -11,13 +11,9 @@ import Memory from "../components/games/MemoryBoard"
 
 function Game({room, leaveRoom, id, socket, isHost}) {
   const [players, setPlayers] = useState([])
-  const [scores, setScores] = useState([{}])
   const [round, setRound] = useState(0)
   const [scoreboard, setScoreboard] = useState(false)
-
-  console.log(id)
-  console.log(socket)
-  console.log(room)
+  const [endGame, setEndGame] = useState(false)
 
   const styles = {
     card: {
@@ -44,7 +40,11 @@ function Game({room, leaveRoom, id, socket, isHost}) {
 
   socket.on(`increment-round`, () => {
       setRound(round+1)
+  })
 
+  socket.on(`end-game`, () => {
+      setEndGame(true)
+      setScoreboard(true)
   })
 
   const startGame = () => {
@@ -62,7 +62,7 @@ function Game({room, leaveRoom, id, socket, isHost}) {
     return (
       <div style={styles.card} className="Game">
         {scoreboard ? (
-            <Scoreboard room={room} id={id} players={players}/>
+            <Scoreboard room={room} id={id} players={players} endGame={endGame} round={round}/>
         ) : (
             <div>
                 {round == 0 ? (

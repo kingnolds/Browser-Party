@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from "react-router-dom"
-import API from "../utils/api"
-import loggedIn from "../App"
-
-// const socket = io("http://localhost:4000");
+import { Link} from "react-router-dom"
 
 const styles = {
   logo: {
@@ -36,8 +32,13 @@ const styles = {
 
 export default function Login(props) {
 
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
   return (
-    // <body>
+
       <div>
         <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
         <div style={styles.component} className="component">
@@ -59,24 +60,15 @@ export default function Login(props) {
                   <input style={styles.input} type="password" value={props.loginInfo.password} onChange={props.handleInputChange} name="password"/>
                   <button style={styles.button} className="button" onClick={props.logMeIn}>Login</button>
                 </div>
+                  {/* <h1>Login</h1>
+                <input type="text" value={props.loginInfo.username} onChange={props.handleInputChange} name="username" placeholder="Username" />
+                <input type="password" value={props.loginInfo.password} onChange={props.handleInputChange} name="password" placeholder="Password" />
+                <button onClick={(e) => {props.logMeIn(e, props.loginInfo.username, props.loginInfo.password)}}>Login</button> */}
               </form>
             )}
-            {/* <form className="login-form">
-                    <h1>Login</h1>
-                    <div className="form-group">
-                        <label>Username</label>
-                        <input type="text" value={props.loginInfo.username} onChange={props.handleInputChange} name="username" className="form-control" placeholder="Enter Username" />
-                    </div>
-                    <div className="form-group">
-                        <label>Password</label>
-                        <input type="password" value={props.loginInfo.password} onChange={props.handleInputChange} name="password" className="form-control" placeholder="Enter Password" />
-                    </div>
-                    <button type="submit" className="btn btn-primary btn-block" onSubmit={props.logMeIn}>Login</button>
-                    <button type="submit" className="btn btn-primary btn-block" onSubmit={props.logMeOut}>Logout</button>
-                </form> */}
+              </div>
           </div>
-        </div>
       </div>
-    // </body>
-  );
-}
+      
+    );
+  }

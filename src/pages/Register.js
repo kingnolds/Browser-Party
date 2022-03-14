@@ -36,14 +36,44 @@ export default function Register(props) {
     }
     }
 
-  const submitForm = (e) => {
-      e.preventDefault()
-      API.newUser(username, password).then((data)=> {
-          console.log(data)
-      }).catch((err)=>{
-          console.log(err)
-      })
-  }
+  // const submitForm = (e) => {
+  //     e.preventDefault()
+  //     API.newUser(username, password).then((data)=> {
+  //         console.log(data)
+  //     }).catch((err)=>{
+  //         console.log(err)
+  //     })
+
+    // const [username, setUsername] = useState('')
+    // const [password, setPassword] = useState('')
+    // const params = useParams();
+
+    // const submitForm = (e) => {
+    //     e.preventDefault()
+    //     API.createUser(username, password)
+    //     .then((data)=> {
+    //         console.log(data)
+    //     }).catch((err)=>{
+    //         console.log(err)
+    //     })
+    // }
+
+  //   return (
+  //     <div>
+  //         <div style={styles.card} className='container'>
+  //             <div className='card'>
+  //             <form>
+  //                 <h1>Register</h1>
+  //               <input type="text" value={props.registerInfo.username} onChange={props.handleInputChangeRegister} name="username" placeholder="Username" />
+  //               <input type="password" value={props.registerInfo.password} onChange={props.handleInputChangeRegister} name="password" placeholder="Password" />
+  //               <button onClick={props.registerSubmit}>Register</button>
+  //             </form>
+  //             </div>
+  //         </div>
+
+  //     </div>
+  //   );
+  // }
 
   return (
     <div>
@@ -53,13 +83,13 @@ export default function Register(props) {
               <form>
                   <div style={styles.form} className="form-group">
                       <label>Username</label>
-                      <input style={styles.input} type="username" onChange={(e)=>setUsername(e.target.value)} value={username}/>
+                      <input style={styles.input} type="username" onChange={props.handleInputChangeRegister} value={props.registerInfo.username}/>
                   </div>
                   <div style={styles.form} className="form-group">
                       <label>Password</label>
-                      <input style={styles.input} type="password" onChange={(e)=>setPassword(e.target.value)} value={password} />
+                      <input style={styles.input} type="password" onChange={props.handleInputChangeRegister} value={props.registerInfo.password} />
                   </div>
-                  <button style={styles.button} className="button" type="submit" onClick={submitForm}>Register</button>
+                  <button style={styles.button} className="button" type="submit" onClick={props.registerSubmit}>Register</button>
               </form>
             </div>
         </div>
