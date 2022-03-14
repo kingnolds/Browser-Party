@@ -36,7 +36,6 @@ function App() {
             localStorage.removeItem("token")
           } else {
             setUsername(data.username);
-            console.log(`49- ${username}`)
             setToken(token);
           }
         })
