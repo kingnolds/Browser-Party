@@ -1,4 +1,8 @@
-const BASEURL="http://localhost:3001"
+// LOCAL
+// const BASEURL="http://localhost:3001" 
+
+//DEPLOYED
+const BASEURL="https://browser-party-backend.herokuapp.com" 
 
 const API = {
     getTokenData: (token)=>{

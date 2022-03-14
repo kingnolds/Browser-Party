@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {BrowserRouter as Router, Routes, Route, Link, useNavigate} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import API from "./utils/api"
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
@@ -50,7 +50,6 @@ function App() {
     console.log("Register Submit Activated")
     API.createUser(registerInfo.username, registerInfo.password)
     .then((data)=> {
-        console.log(registerInfo.username, registerInfo.password)
         setLoginInfo({
           username: `${registerInfo.username}`,
           password: registerInfo.password
