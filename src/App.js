@@ -55,6 +55,7 @@ function App() {
           password: registerInfo.password
         })
         logMeIn(e, registerInfo.username, registerInfo.password)
+        window.location.replace('/login');
     }).catch((err)=>{
         console.log(err)
     })

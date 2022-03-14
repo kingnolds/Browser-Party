@@ -61,11 +61,11 @@ export default function Register(props) {
               <form>
                   <div style={styles.form} className="form-group">
                       <label>Username</label>
-                      <input style={styles.input} type="username" onChange={props.handleInputChangeRegister} value={props.registerInfo.username}/>
+                      <input style={styles.input} type="username" onChange={props.handleInputChangeRegister} value={props.registerInfo.username} name="username"/>
                   </div>
                   <div style={styles.form} className="form-group">
                       <label>Password</label>
-                      <input style={styles.input} type="password" onChange={props.handleInputChangeRegister} value={props.registerInfo.password} />
+                      <input style={styles.input} type="password" onChange={props.handleInputChangeRegister} value={props.registerInfo.password} name="password"/>
                   </div>
                   <button style={styles.button} className="button" type="submit" onClick={props.registerSubmit}>Register</button>
               </form>
