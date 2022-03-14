@@ -85,7 +85,7 @@ function App() {
 
 
   return (
-    <>
+    <div>
       <Router>
         <Navbar logMeOut={logMeOut} logMeIn={logMeIn} username={username} loginInfo={loginInfo} handleInputChange={handleInputChange}/>
       <Routes>
@@ -96,7 +96,7 @@ function App() {
         <Route path="/register" element={<Register/>}/>
         </Routes>
         </Router>
-    </>
+    </div>
   );
 };
 

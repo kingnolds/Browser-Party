@@ -10,41 +10,59 @@ const socket = io("http://localhost:4000", {
 });
 
 const styles = {
-  card: {
-    borderStyle: 'none',
-    borderRadius: '10px',
-    background: '#EEEEEE',
-    width: '400px',
-    margin: '18vh auto',
+  logo: {
+    margin: '10vh auto 0px auto',
+  },
+  component: {
+    width: '440px',
+    margin: '0 auto',
     padding: '25px',
-    fontSize: '20px'
+    fontSize: '25px',
   },
   h4: {
-    fontSize: '24px',
-    fontWeight: '600',
+    textAlign: 'center',
+    fontSize: '20px',
+    fontWeight: '600'
     // marginTop: '20px'
   },
   hostJoin: {
-    margin: '0 100px'
+    margin: '0 113px'
   },
   innerMiddle: {
     margin: '0 60px',
   },
-  input: {
-    marginBottom: '10px'
+  form: {
+    fontSize: '25px',
+    marginLeft: '45px'
+  },
+  hostButton: {
+    marginRight: '10px'
+  },
+  input:
+  {
+    fontSize: '25px',
+    marginBottom: '15px',
+    border: '1px solid black',
   },
   button: {
+    fontSize: '25px',
     margin: '10px'
   },
-  roomButton: {
+  joinButton: {
+    marginLeft: '70px',
+    marginRight: '48px',
+    marginTop: '10px',
+  },
+  createButton: {
     marginLeft: '50px',
     marginRight: '48px',
-    marginTop: '10px'
+    marginTop: '10px',
   },
   gameCard: {
     borderStyle: 'none',
     borderRadius: '10px',
-    background: '#EEEEEE',
+    background: '#9E8FB2',
+    filter: 'drop-shadow(5px 5px 5px #D3C3AD)',
     width: '1000px',
     margin: '18vh auto',
     padding: '25px',
@@ -85,58 +103,61 @@ function Play() {
   }
 
   return (
-    <div className="Play">
-      {inGame ? (
-        <div style={styles.gameCard}>
-          <h4 style={styles.h4}>Play - socketId: {socket.id}</h4>
-          <Game room={room} leaveRoom={leaveRoom} id={socket.id} socket={socket} isHost={isHost} />
-        </div>
-      ) : (
-        <div style={styles.card}>
-          <h4 style={styles.h4}>Play - socketId: {socket.id}</h4>
-          <div className="CreateJoin">
-            <div style={styles.hostJoin}>
-              <button style={styles.button} onClick={(event) => { setIsHost(true) }}>Host</button>
-              <button style={styles.button} onClick={(event) => { setIsHost(false) }}>Join</button>
-            </div>
-            {isHost ? (
-              <div style={styles.innerMiddle}>
-                <label>Username:</label>
-                <br></br>
-                <input style={styles.input} type="text" onChange={(event) => { setUsername(event.target.value) }}></input>
-                <br></br>
-                <label>Choose Room Code:</label>
-                <br></br>
-                <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
-                <br></br>
-                <button style={styles.roomButton} onClick={createRoom}>Create Room</button>
-              </div>
-            ) : (
-              <div style={styles.innerMiddle}>
-                <label>Username:</label>
-                <br></br>
-                <input style={styles.input} type="text" onChange={(event) => { setUsername(event.target.value) }}></input>
-                <br></br>
-                <label>Existing Room Code:</label>
-                <br></br>
-                <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
-                <br></br>
-                <button style={styles.roomButton} onClick={joinRoom}>Join Room</button>
-              </div>
-              // <div>
-              //   <label>Username:</label>
-              //   <input type="text" onChange={(event) => {setUsername(event.target.value)}}></input>
-              //   <label>Existing Room Code:</label>
-              //   <input type="text" onChange={(event) => {setRoom(event.target.value)}}></input>
-
-              //   <button onClick={joinRoom}>Join Room</button>
-              // </div>
-            )}
+    <div>
+      <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
+      <div>
+        {inGame ? (
+          <div style={styles.gameCard} className="component">
+            <h4 style={styles.h4}>Socket Id: {socket.id}</h4>
+            <Game room={room} leaveRoom={leaveRoom} id={socket.id} socket={socket} isHost={isHost} />
           </div>
-        </div>
+        ) : (
+          <div style={styles.component} className="component">
+            <h4 style={styles.h4}>Socket Id: {socket.id}</h4>
+            <div>
+              <div style={styles.hostJoin}>
+                <button style={styles.hostButton} className="button" onClick={(event) => { setIsHost(true) }}>Host</button>
+                <button className="button" onClick={(event) => { setIsHost(false) }}>Join</button>
+              </div>
+              {isHost ? (
+                <div style={styles.form}>
+                  <label>Username:</label>
+                  <br></br>
+                  <input style={styles.input} type="text" onChange={(event) => { setUsername(event.target.value) }}></input>
+                  <br></br>
+                  <label>Choose Room Code:</label>
+                  <br></br>
+                  <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
+                  <br></br>
+                  <button style={styles.createButton} className="button" onClick={createRoom}>Create Room</button>
+                </div>
+              ) : (
+                <div style={styles.form}>
+                  <label>Username:</label>
+                  <br></br>
+                  <input style={styles.input} type="text" onChange={(event) => { setUsername(event.target.value) }}></input>
+                  <br></br>
+                  <label>Existing Room Code:</label>
+                  <br></br>
+                  <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
+                  <br></br>
+                  <button style={styles.joinButton} className="button" onClick={joinRoom}>Join Room</button>
+                </div>
+                // <div>
+                //   <label>Username:</label>
+                //   <input type="text" onChange={(event) => {setUsername(event.target.value)}}></input>
+                //   <label>Existing Room Code:</label>
+                //   <input type="text" onChange={(event) => {setRoom(event.target.value)}}></input>
 
-      )}
+                //   <button onClick={joinRoom}>Join Room</button>
+                // </div>
+              )}
+            </div>
+          </div>
 
+        )}
+
+      </div>
     </div>
   );
 };

@@ -33,6 +33,7 @@ function Board({ socket, room }) {
     const [inGame, setInGame] = useState(false);
     const [score, setScore] = useState(0);
     const [turn, setTurn] = useState(0);
+    // const [cardsPressed, setCardsPressed] = useState(0);
 
     const checkCard = (current) => {
         if (cards[current].id == cards[previous].id) {
@@ -58,9 +59,9 @@ function Board({ socket, room }) {
 
     const handleClick = (id) => {
         if (previous === -1) {
+            setPrevious(id);
             cards[id].status = "active";
             setCards([...cards]);
-            setPrevious(id);
         } else {
             checkCard(id);
         }

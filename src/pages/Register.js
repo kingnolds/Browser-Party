@@ -3,55 +3,67 @@ import {useParams} from "react-router-dom"
 import API from '../utils/api';
 
 export default function Register(props) {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const params = useParams();
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const params = useParams();
 
-    const styles = {
-        card:
-        {
-          borderStyle: 'none',
-          borderRadius: '10px',
-          background: '#EEEEEE',
-          width: '300px',
-          margin: '20vh auto',
-          padding: '28px'
-        },
-        button:
-        {
-          marginTop: '25px',
-          fontSize: '20px'
-        }
-      }
-
-    const submitForm = (e) => {
-        e.preventDefault()
-        API.newUser(username, password).then((data)=> {
-            console.log(data)
-        }).catch((err)=>{
-            console.log(err)
-        })
+  const styles = {
+    logo: {
+      margin: '20vh auto 0px auto',
+    },
+    component:
+    {
+      width: '400px',
+      margin: '0 auto',
+      padding: '28px',
+  
+    },
+    form: {
+      fontSize: '25px',
+      marginLeft: '12px'
+    },
+    input:
+    {
+      fontSize: '25px',
+      marginBottom: '15px',
+      border: '1px solid black',
+    },
+    button:
+    {
+      marginTop: '8px',
+      marginLeft: '110px',
+      fontSize: '25px'
+    }
     }
 
-    return (
-      <div>
-          <div style={styles.card} className='container'>
-              <div>
-                <form>
-                    <h1>Register</h1>
-                    <div className="form-group">
-                        <label>Username</label>
-                        <input type="username" className="form-control" placeholder="Enter username" onChange={(e)=>setUsername(e.target.value)} value={username}/>
-                    </div>
-                    <div className="form-group">
-                        <label>Password</label>
-                        <input type="password" className="form-control" placeholder="Enter Password" onChange={(e)=>setPassword(e.target.value)} value={password} />
-                    </div>
-                    <button type="submit" className="btn btn-primary btn-block" onClick={submitForm}>Submit</button>
-                </form>
-              </div>
-          </div>
-
-      </div>
-    );
+  const submitForm = (e) => {
+      e.preventDefault()
+      API.newUser(username, password).then((data)=> {
+          console.log(data)
+      }).catch((err)=>{
+          console.log(err)
+      })
   }
+
+  return (
+    <div>
+      <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
+        <div style={styles.component} className="component">
+            <div>
+              <form>
+                  <div style={styles.form} className="form-group">
+                      <label>Username</label>
+                      <input style={styles.input} type="username" onChange={(e)=>setUsername(e.target.value)} value={username}/>
+                  </div>
+                  <div style={styles.form} className="form-group">
+                      <label>Password</label>
+                      <input style={styles.input} type="password" onChange={(e)=>setPassword(e.target.value)} value={password} />
+                  </div>
+                  <button style={styles.button} className="button" type="submit" onClick={submitForm}>Register</button>
+              </form>
+            </div>
+        </div>
+
+    </div>
+  );
+}

@@ -9,11 +9,11 @@ import { Link } from "react-router-dom";
 export default function Navbar(props) {
   return (
     <div>
-      <div className="navbar navbar-expand navbar-light bg-light">
-        <a className="navbar-brand"><h4>Browser Party</h4></a>
-        <div className="collapse navbar-collapse">
-          <ul className="navbar-nav">
-            <li className="nav-item active">
+      {/* navbar navbar-expand */}
+      <div className="navigation-bar">
+        {/* <div className="collapse navbar-collapse"> */}
+          <ul class="nav justify-content-center">
+            <li className="nav-item">
               <Link to="/">Home</Link>
             </li>
             <li className="nav-item">
@@ -47,8 +47,7 @@ export default function Navbar(props) {
             <button> Create Account</button>
           </form>
         )} */}
-        </div>
-
+        {/* </div> */}
       </div>
     </div>
   );

@@ -26,7 +26,6 @@ export default function Scoreboard({room, id, players}) {
     )
 }
 
-
 // function Scoreboard() {
 //     const params = useParams();
 //     return (
