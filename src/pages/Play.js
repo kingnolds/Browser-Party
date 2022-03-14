@@ -8,7 +8,7 @@ import io from "socket.io-client";
 // CHANGE FOR LOCAL vs DEPLOYED
 
 // DEPLOYED
-// const socket = io("https://browser-party-backend.herokuapp.com/", {
+// const socket = io("https://browser-party-socket-io.herokuapp.com/", {
 //   withCredentials: true
 // });
 
@@ -79,7 +79,7 @@ const styles = {
   }
 }
 
-function Play({username}) {
+export default function Play({username}) {
   const [room, setRoom] = useState('');
   const [inGame, seInGame] = useState(false);
   const [isHost, setIsHost] = useState(false);
@@ -87,18 +87,30 @@ function Play({username}) {
   
   const joinRoom = () => {
     if (username !== "" && room !== "") {
-      socket.emit("join-room", room, username)
-      console.log(`${socket.username} is joining room ${room}`)
-      seInGame(true)
+      socket.emit("join-room", room, username, (response) => {
+        if (response.status === "ok") {
+          console.log(`${socket.username} is joining room ${room}`)
+          seInGame(true)
+        } else {
+          alert("That room doesn't exist, either create the room or double check your room code")
+        }
+      })
     }
   }
 
   const createRoom = () => {
-    console.log("create1")
     if (username !== "" && room !== "") {
-      console.log("create2")
-      socket.emit("create-room", room, username)
-      seInGame(true)
+      console.log("create")
+      socket.emit("create-room", room, username, (repsonse) => {
+        console.log(repsonse)
+        if (repsonse.status === "ok") {
+          console.log("if")
+          seInGame(true)
+        } else {
+          console.log("else")
+          alert("Room already exists, pick a unique room code")
+        }
+      })
     }
   }
 
@@ -110,60 +122,55 @@ function Play({username}) {
 
   return (
     <div>
-      <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
-      <div>
-        {inGame ? (
-          <div style={styles.gameCard} className="component">
-            <h4 style={styles.h4}>Socket Id: {socket.id}</h4>
-            <Game room={room} leaveRoom={leaveRoom} id={socket.id} socket={socket} isHost={isHost} />
-          </div>
-        ) : (
-          <div style={styles.component} className="component">
-            <h4 style={styles.h4}>Socket Id: {socket.id}</h4>
-            <div>
-              <div style={styles.hostJoin}>
-                <button style={styles.hostButton} className="button" onClick={(event) => { setIsHost(true) }}>Host</button>
-                <button className="button" onClick={(event) => { setIsHost(false) }}>Join</button>
+      {username ? (
+        <div>
+          <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
+          <div>
+            {inGame ? (
+              <div style={styles.gameCard} className="component">
+                <h4 style={styles.h4}>Socket Id: {socket.id}</h4>
+                <Game room={room} leaveRoom={leaveRoom} id={socket.id} socket={socket} isHost={isHost} />
               </div>
-              {isHost ? (
-                <div style={styles.form}>
-                  {/* <label>Username:</label>
-                  <br></br>
-                  <input style={styles.input} type="text" onChange={(event) => { setUsername(event.target.value) }}></input> */}
-                  <label>Choose Room Code:</label>
-                  <br></br>
-                  <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
-                  <br></br>
-                  <button style={styles.createButton} className="button" onClick={createRoom}>Create Room</button>
+            ) : (
+              <div style={styles.component} className="component">
+                <h4 style={styles.h4}>Socket Id: {socket.id}</h4>
+                <div>
+                  <div style={styles.hostJoin}>
+                    <button style={styles.hostButton} className="button" onClick={(event) => { setIsHost(true) }}>Host</button>
+                    <button className="button" onClick={(event) => { setIsHost(false) }}>Join</button>
+                  </div>
+                  {isHost ? (
+                    <div style={styles.form}>
+                      <label>Choose Room Code:</label>
+                      <br></br>
+                      <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
+                      <br></br>
+                      <button style={styles.createButton} className="button" onClick={createRoom}>Create Room</button>
+                    </div>
+                  ) : (
+                    <div style={styles.form}>
+                      <label>Existing Room Code:</label>
+                      <br></br>
+                      <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
+                      <br></br>
+                      <button style={styles.joinButton} className="button" onClick={joinRoom}>Join Room</button>
+                    </div>
+                  
+                  )}
                 </div>
-              ) : (
-                <div style={styles.form}>
-                  {/* <label>Username:</label>
-                  <br></br>
-                  <input style={styles.input} type="text" onChange={(event) => { setUsername(event.target.value) }}></input> */}
-                  <label>Existing Room Code:</label>
-                  <br></br>
-                  <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
-                  <br></br>
-                  <button style={styles.joinButton} className="button" onClick={joinRoom}>Join Room</button>
-                </div>
-                // <div>
-                //   <label>Username:</label>
-                //   <input type="text" onChange={(event) => {setUsername(event.target.value)}}></input>
-                //   <label>Existing Room Code:</label>
-                //   <input type="text" onChange={(event) => {setRoom(event.target.value)}}></input>
+              </div>
 
-                //   <button onClick={joinRoom}>Join Room</button>
-                // </div>
-              )}
-            </div>
+            )}
+
           </div>
-
-        )}
-
-      </div>
+        </div>
+      ) : (
+        <div>
+          You must login first!
+          <Link to="/login">Login</Link>
+        </div>
+      )}
     </div>
   );
 };
 
-export default Play;

@@ -11,42 +11,37 @@ export default function Navbar(props) {
             <li className="nav-item">
               <Link to="/">Home</Link>
             </li>
-            <li className="nav-item">
-            <Link to="/play">Play</Link>
-            </li>
-            <li className="nav-item">
-            <Link to="/profile">Profile</Link>
-            </li>
-            <li className="nav-item">
-            <Link to="/register">Register</Link>
-            </li>
+            {props.username ? (
+              <div>
+                <li className="nav-item">
+                  <Link to="/play">Play</Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/profile">Profile</Link>
+                </li>
+              </div>
+            ) : (
+              <div>
+                <div>
+                  <li className="nav-item">
+                    <Link to="/register">Register</Link>
+                  </li>
+                </div>
+                <div>
+                  <li className="nav-item">
+                    <Link to="/login">Login</Link>
+                  </li>
+                </div>
+              </div>
+            )}
           </ul>
-        </div>
-        {/* {props.username ? (
+        {props.username ? (
           <div>
-            Hi there, {props.username}
+            <p className="nav-item">Hi there, {props.username}</p>
             <button onClick={props.logMeOut}>Logout</button>
           </div>
-        ) : (
-          <form onSubmit={props.logMeIn}>
-            <input
-              value={props.loginInfo.email}
-              onChange={props.handleInputChange}
-              name="email"
-            />
-            <input
-              value={props.loginInfo.password}
-              onChange={props.handleInputChange}
-              name="password"
-            />
-            <button>Login</button>
-            <button> Create Account</button>
-          </form>
-        )} 
-        // </div> 
-          <Link to="/login">Login</Link>
-        )}
-       </div> */}
+        ) : (null)}
+        </div>
     </div>
   );
 }
