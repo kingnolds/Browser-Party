@@ -1,6 +1,5 @@
 import React from 'react';
 // import { useParams } from "react-router-dom";
-import Scoreboard from "../components/Scoreboard";
 
 export default function Profile({username}) {
 
