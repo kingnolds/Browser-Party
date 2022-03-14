@@ -68,7 +68,6 @@ function Board({ socket, room }) {
     }
 
     const endGame = () => {
-        console.log("endgame", score);
         socket.emit("send-score", score);
         resetCards();
         setScore(0);

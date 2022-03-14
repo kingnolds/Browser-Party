@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom"
 import Game from "./Game"
-import Scoreboard from "../components/Scoreboard"
 import io from "socket.io-client";
+
 
 
 // CHANGE FOR LOCAL vs DEPLOYED
 
 // DEPLOYED
+<<<<<<< HEAD
 // const socket = io("https://browser-party-backend.herokuapp.com/", {
 //   withCredentials: true
 // });
-
-// LOCAL
-const socket = io("localhost:4000", {
+=======
+const socket = io("https://browser-party-socket-io.herokuapp.com/", {
   withCredentials: true
 });
+>>>>>>> dev
+
+// LOCAL
+// const socket = io("localhost:4000", {
+//   withCredentials: true
+// });
 
 const styles = {
   logo: {
