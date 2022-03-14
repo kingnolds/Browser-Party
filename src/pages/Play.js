@@ -4,10 +4,11 @@ import Game from "./Game"
 import io from "socket.io-client";
 
 
+
 // CHANGE FOR LOCAL vs DEPLOYED
 
 // DEPLOYED
-const socket = io("https://browser-party-backend.herokuapp.com/", {
+const socket = io("https://browser-party-socket-io.herokuapp.com/", {
   withCredentials: true
 });
 
