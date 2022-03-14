@@ -4,7 +4,7 @@
 
 .navigation-bar {
   background-color: #2CA6A4;
-  width: 500px;
+  width: 600px;
   margin: 25px auto 0;
   height: 55px;
   padding-top: 8px;
@@ -42,6 +42,10 @@
   border-block-end: 5px solid #776e8d;
   outline: 2px solid black;
   filter: drop-shadow(12px 12px 1px #D3C3AD);
+}
+
+.button-selected {
+  background-color: #a4bdb9;
 }
 
 .button {

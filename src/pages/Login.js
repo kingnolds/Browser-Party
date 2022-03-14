@@ -22,11 +22,20 @@ const styles = {
     marginBottom: '15px',
     border: '1px solid black',
   },
+  h3: {
+    display: 'inline',
+    marginLeft: '70px'
+  },
   button:
   {
     marginTop: '8px',
     marginLeft: '120px',
     fontSize: '25px'
+  },
+  logout:
+  {
+    display: 'inline',
+    marginLeft: '10px'
   }
 }
 
@@ -38,16 +47,15 @@ export default function Login(props) {
     const handleShow = () => setShow(true);
 
   return (
-
       <div>
         <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
         <div style={styles.component} className="component">
           <div>
             {props.username ? (
               <div>
-                <h2>You are now logged in, {props.loginInfo.username}</h2>
-                <Link to="/">Home</Link>
-                <button style={styles.button} className="button" onClick={props.logMeOut}>LogOut</button>
+                <h5>You are now logged in, {props.loginInfo.username}</h5>
+                <Link to="/"><h3 style={styles.h3}>Home</h3></Link>
+                <button style={styles.logout} className="button" onClick={props.logMeOut}>LogOut</button>
               </div>
             ) : (
               <form>

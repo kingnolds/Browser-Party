@@ -2,31 +2,25 @@ import React from 'react';
 // import { useParams } from "react-router-dom";
 import Scoreboard from "../components/Scoreboard";
 
-export default function Profile() {
+export default function Profile(loginInfo) {
 
   const styles = {
-    card:
-    {
-      borderStyle: 'none',
-      borderRadius: '10px',
-      background: '#9E8FB2',
-      filter: 'drop-shadow(5px 5px 5px #D3C3AD)',
-      width: '500px',
-      margin: '12vh auto',
-      padding: '28px'
+    logo: {
+      margin: '10vh auto 0px auto',
     },
+    component: {
+      width: '500px',
+      margin: '0 auto',
+      padding: '28px'
+    }
   }
 
   // const params = useParams();
   return (
-    <div style={styles.card}>
-      <h1>Profile</h1>
-      <div>
-        <div className="card-body">
-          <h2>Username</h2>
-          <a href="">Edit Username</a>
-        </div>
-      </div>
+    <div>
+     <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
+    <div style={styles.component} className="component">
+      <h1>{loginInfo.username}</h1>
       {/* <Scoreboard/> */}
       <div>
         <div className="card-body">
@@ -44,6 +38,7 @@ export default function Profile() {
           </ul>
         </div>
       </div>
+    </div>
     </div>
   );
 }
