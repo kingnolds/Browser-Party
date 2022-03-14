@@ -16,31 +16,25 @@ export default function Home(props) {
   }
 
   const styles = {
-    card:
+    logo: {
+      margin: '20vh auto 5px auto',
+    },
+    component:
     {
-      borderStyle: 'none',
-      borderRadius: '10px',
-      background: '#EEEEEE',
-      width: '300px',
-      margin: '25vh auto',
-      padding: '28px'
+      width: '370px',
+      margin: '0 auto',
+      padding: '5px 35px 35px 35px',
     },
     h1:
     {
-      color: 'black',
-      fontSize: '25px',
+      fontSize: '24px',
       fontWeight: '600',
       lineHeight: '0.8'
-      // marginTop: '20px'
     },
     button:
     {
-      marginTop: '25px',
-      fontSize: '20px'
-    },
-    container:
-    {
-      // background: 'black',
+      marginTop: '28px',
+      padding: '5px 17px'
     },
   }
 
@@ -66,18 +60,19 @@ export default function Home(props) {
 
           </form>
         )} */}
-
-      <div style={styles.card}className="card">
+      {/* <div style={styles.logo}> */}
+        <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
+      {/* </div> */}
+      <div style={styles.component} className="component">
         <div className='text-center'>
           <div className="row">
             <div className="col">
-              <div style={styles.h1}>Home</div>
+              {/* <div style={styles.h1}>Home</div> */}
               <div>
-                <button style={styles.button} type="submit" className="btn btn-primary btn-block" onClick={loginChange}>Login</button>
+                <button style={styles.button} className="button" type="submit" onClick={loginChange}>Login</button>
               </div>
-              {/* <br></br> */}
               <div>
-                <button style={styles.button} type="submit" className="btn btn-primary btn-block" onClick={registerChange}>Create Account</button>
+                <button style={styles.button} className="button" type="submit" onClick={registerChange}>Create Account</button>
               </div>
             </div>
           </div>

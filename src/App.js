@@ -55,6 +55,7 @@ function App() {
           password: registerInfo.password
         })
         logMeIn(e, registerInfo.username, registerInfo.password)
+        window.location.replace('/login');
     }).catch((err)=>{
         console.log(err)
     })
@@ -98,7 +99,7 @@ function App() {
 
 
   return (
-    <>
+    <div>
       <Router>
         <Navbar username={username} logMeOut={logMeOut}/>
       <Routes>
@@ -109,7 +110,7 @@ function App() {
         <Route path="/register" element={<Register username={username} password={password} registerInfo={registerInfo}  handleInputChangeRegister={handleInputChangeRegister} registerSubmit={registerSubmit}/>}/>
         </Routes>
         </Router>
-    </>
+    </div>
   );
 };
 export default App;
