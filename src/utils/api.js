@@ -14,6 +14,7 @@ const API = {
           })
             .then(res => res.json())
     },
+    
     login: (username,password)=>{
       return fetch(`${BASEURL}/login`, {
       method: "POST",
@@ -39,10 +40,8 @@ const API = {
        "Content-Type": "application/json"
      }
    })
-     .then(res => {
-      console.log(res.json())
-     }
-     )},
+     .then(res => res.json())
+    },
      
     getUsers:()=>{
         return fetch(`${BASEURL}/api/users`)
