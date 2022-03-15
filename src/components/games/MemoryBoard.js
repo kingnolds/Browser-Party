@@ -33,6 +33,7 @@ function Board({ socket, room }) {
     const [inGame, setInGame] = useState(false);
     const [score, setScore] = useState(0);
     const [turn, setTurn] = useState(0);
+    const [time, setTime] = useState(0);
     // const [cardsPressed, setCardsPressed] = useState(0);
 
     const checkCard = (current) => {
@@ -74,8 +75,9 @@ function Board({ socket, room }) {
         setInGame(false);
     }
 
-    socket.on(`start-memory${room}`, () => {
+    socket.on(`start-memory-${room}`, (time) => {
         resetCards();
+        setTime(time)
         setInGame(true);
     })
 
@@ -83,7 +85,7 @@ function Board({ socket, room }) {
         <div>
             {inGame ? (
                 <div>
-                    <Timer time={30000} onEnd={endGame}/>
+                    <Timer time={time} onEnd={endGame}/>
                     <h2>Score: {score}, Turn: {turn}</h2>
                     <div className="memory-board">
                         {cards.map((card, index) => (

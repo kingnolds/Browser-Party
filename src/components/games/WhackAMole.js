@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 // import Timer from '../Timer'
 
 const MOLE_NUMBER = 6
-const TIME_LIMIT = 30000
+let TIME_LIMIT = 30000
 const Timer = ({ time, interval = 1000, onEnd }) => {
     const [internalTime, setInternalTime] = useState(time)
     const timerRef = useRef(time)
@@ -52,7 +52,8 @@ const Whack = function ({socket, room}) {
         } else { setScore((score) => score - 1) }
     };
 
-    socket.on(`start-whack${room}`, () => {
+    socket.on(`start-whack-${room}`, (time) => {
+        TIME_LIMIT = (time)
         startGame()
     })
 
