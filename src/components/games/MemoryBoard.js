@@ -2,6 +2,7 @@ import '../../css/game.css';
 import { useState } from 'react';
 import Card from './MemoryCard';
 import Timer from '../Timer'
+import GameOver from '../GameOver'
 
 function Board({ socket, room }) {
     const cardsArray = [
@@ -33,6 +34,8 @@ function Board({ socket, room }) {
     const [inGame, setInGame] = useState(false);
     const [score, setScore] = useState(0);
     const [turn, setTurn] = useState(0);
+    // const [cardsPressed, setCardsPressed] = useState(0);
+    const [modal, setModal] = useState(false)
     const [time, setTime] = useState(30000);
 
     const checkCard = (current) => {
@@ -101,6 +104,7 @@ function Board({ socket, room }) {
 
     const endGame = () => {
         socket.emit("send-score", score);
+        setModal(true)
         resetCards();
         setScore(0);
         setInGame(false);
@@ -129,6 +133,7 @@ function Board({ socket, room }) {
                     <h3>Get Ready!</h3>
                 </div>
             )}
+            <GameOver modal={modal} />
         </div>
     );
 }

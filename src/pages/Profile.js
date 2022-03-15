@@ -1,5 +1,19 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+// import { useParams } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import API from '../utils/api';
+
+
+export default function Profile({username}) {
+  const [ friends, setFriends] = useState([])
+  
+  useEffect(()=>{
+      API.getSingleUser(username).then(data=>{
+        console.log(data)
+        setFriends(data.user.friends)
+      })
+  })
 
 export default function Profile(loginInfo) {
   const styles = {
@@ -28,6 +42,16 @@ export default function Profile(loginInfo) {
                 </ul>
               </div>
             </div>
+            <div>
+              <div className="card-body">
+                <h2>Friends:</h2>
+                <ul>
+                  {friends.map(friend=>(
+                    <li>{friend}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         ) : (
           <div>
@@ -37,4 +61,4 @@ export default function Profile(loginInfo) {
       </div>
     </div>
   );
-}
+}}
