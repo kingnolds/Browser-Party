@@ -103,8 +103,8 @@ export default function Play({ username }) {
 
   const createRoom = () => {
     if (username !== "" && room !== "") {
-      socket.emit("create-room", room, username, (repsonse) => {
-        if (repsonse.status === "ok") {
+      socket.emit("create-room", room, username, (response) => {
+        if (response.status === "ok") {
           seInGame(true)
         } else {
           alert("Room already exists, pick a unique room code")
@@ -128,7 +128,7 @@ export default function Play({ username }) {
             {inGame ? (
               <div style={styles.gameCard} className="component">
                 <h4 style={styles.h4}>Socket Id: {socket.id}</h4>
-                <Game room={room} leaveRoom={leaveRoom} id={socket.id} socket={socket} isHost={isHost} />
+                <Game room={room} leaveRoom={leaveRoom} username={username} socket={socket} isHost={isHost} />
               </div>
             ) : (
               <div style={styles.component} className="component">

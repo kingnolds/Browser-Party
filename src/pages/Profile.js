@@ -15,7 +15,6 @@ export default function Profile({username}) {
       })
   })
 
-export default function Profile(loginInfo) {
   const styles = {
     logo: {
       margin: '10vh auto 0px auto',
@@ -31,9 +30,9 @@ export default function Profile(loginInfo) {
     <div>
       <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
       <div style={styles.component} className="component">
-        {loginInfo ? (
+        {username ? (
           <div>
-            <h1>{loginInfo.username}</h1>
+            <h1>{username}</h1>
             <div>
               <div className="card-body">
                 <h2>Game history: </h2>
@@ -61,4 +60,4 @@ export default function Profile(loginInfo) {
       </div>
     </div>
   );
-}}
+}

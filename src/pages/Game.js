@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import Timer from "../components/Timer"
 import Scoreboard from "../components/Scoreboard"
 import Whack from "../components/games/WhackAMole"
 import Memory from "../components/games/MemoryBoard"
 import Trivia from "../components/games/Trivia"
 
-function Game({room, leaveRoom, id, socket, isHost}) {
+function Game({room, leaveRoom, username, socket, isHost}) {
   const [players, setPlayers] = useState([])
   const [round, setRound] = useState(0)
   const [scoreboard, setScoreboard] = useState(false)
   const [endGame, setEndGame] = useState(false)
-
+  const [includeTrivia, setIncludeTrivia] = useState(false)
+  const [includeWhack, setIncludeWhack] = useState(false)
+  const [includeMemory, setIncludeMemory] = useState(false)
+  const [includeSnake, setIncludeSnake] = useState(false)
+  
   const styles = {
     card: {
         background: '#9E8FB2',
@@ -43,8 +46,36 @@ function Game({room, leaveRoom, id, socket, isHost}) {
       setScoreboard(true)
   })
 
-  const startGame = () => {
-      socket.emit("start-game", room)
+  const checkbox = (game) => {
+    if (game === "Trivia") {
+        console.log(!includeTrivia)
+        setIncludeTrivia(!includeTrivia)
+        console.log(includeTrivia)
+    }
+    if (game === "Whack") {
+        console.log(!includeWhack)
+        setIncludeWhack(!includeWhack)
+        console.log(includeWhack)
+    }
+    if (game === "Memory") {
+        console.log(!includeMemory)
+        setIncludeMemory(!includeMemory)
+        console.log(includeMemory)
+    }
+    if (game === "Snake") {
+        const boolean = !includeSnake
+        console.log(boolean)
+        setIncludeSnake(boolean)
+        console.log(includeSnake)
+    }
+  }
+
+  const startGame = (includeTrivia, includeWhack, includeMemory, includeSnake) => {
+    if (includeTrivia === false && includeWhack === false && includeMemory === false && includeSnake === false) {
+        alert("You must choose at least game")
+    } else {
+        socket.emit("start-game", room, includeTrivia, includeWhack, includeMemory, includeSnake)
+    }
   }
 
   useEffect(() => {
@@ -58,47 +89,62 @@ function Game({room, leaveRoom, id, socket, isHost}) {
     return (
       <div className="Game">
         {scoreboard ? (
-            <Scoreboard room={room} id={id} players={players} endGame={endGame} round={round}/>
+            <Scoreboard room={room} username={username} players={players} endGame={endGame} round={round}/>
         ) : (
             <div>
-                {round == 0 ? (
+                {round === 0 ? (
                     <div>
                         <h1>Game: {room}</h1>
                         <h3>Players:</h3>
                         <ul className="list-group">
                             {players.map(player => (
-                                <li className="list-group-player" key={player.id} style={(player.id == id) ? {color:"blue"}:{}}>
-                                    {player.username} (id: {player.id}, score: {player.score})
+                                <li className="list-group-player" key={player.username} style={(player.username == username) ? {color:"blue"}:{}}>
+                                    {player.username} (score: {player.score})
                                 </li>
                             ))}
                         </ul>
                         
                         {isHost ? (
-                            <button style={styles.button} className="btn" onClick={()=>startGame()}>Start Game!</button>
+                            <div>
+                                <form>
+                                    <input type="checkbox" key="triviaCheck" name="triviaCheck" onChange={() => {checkbox("Trivia")}}/>
+                                    <label htmlFor="triviaCheck"> Trivia</label><br/>
+                                    <input type="checkbox" key="whackCheck" name="whackCheck" onChange={() => {checkbox("Whack")}}/>
+                                    <label htmlFor="whackCheck"> Whack-A-Mole</label><br/>
+                                    <input type="checkbox" key="memoryCheck" name="memoryCheck" onChange={() => {checkbox("Memory")}}/>
+                                    <label htmlFor="memoryCheck"> Memory Cards</label><br/>
+                                    <input type="checkbox" key="snakeCheck" name="snakeCheck" onChange={() => {checkbox("Snake")}}/>
+                                    <label htmlFor="snakeCheck"> Snake</label>
+                                    <br/>
+                                </form>
+                                    <br/>
+                                <button style={styles.button} className="btn" onClick={()=>startGame()}>Start Game!</button>
+                            </div>
+                            
                         ):null}
                     </div>
                 ):null}
-                {round == 1 ? (
+                {round === 1 ? (
                     <div>
                         <Trivia socket={socket} room={room}/>
                     </div>
                 ) :null}
-                {round == 2 ? (
+                {round === 2 ? (
                     <div>
                         <Whack socket={socket} room={room}/>
                     </div>
                 ) :null}
-                {round == 3 ? (
+                {round === 3 ? (
                     <div>
                         <Memory socket={socket} room={room}/>
                     </div>
                 ) :null}
-                {round == 4 ? (
+                {round === 4 ? (
                     <div>
                         {/* Some game */}
                     </div>
                 ) :null}
-                {round == 5 ? (
+                {round === 5 ? (
                     <div>
                         {/* Some game */}
                     </div>
