@@ -15,6 +15,10 @@
   animation-name: nav-slidein; */
 }
 
+.hi-there {
+  width: 300px;
+}
+
 /* @keyframes nav-slidein {
   from {
     margin-left: 100%;
