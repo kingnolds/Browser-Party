@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom"
 import Game from "./Game"
-import Scoreboard from "../components/Scoreboard"
 import io from "socket.io-client";
+import { useNavigate } from "react-router-dom";
 
 
 // CHANGE FOR LOCAL vs DEPLOYED
@@ -31,7 +31,6 @@ const styles = {
     textAlign: 'center',
     fontSize: '20px',
     fontWeight: '600'
-    // marginTop: '20px'
   },
   hostJoin: {
     margin: '0 113px'
@@ -39,15 +38,8 @@ const styles = {
   innerMiddle: {
     margin: '0 60px',
   },
-  hostButtonSelected: {
-    marginRight: '10px',
-    border: '1px solid white',
-  },
   hostButton: {
     marginRight: '10px'
-  },
-  joinButtonSelected: {
-    border: '1px solid white',
   },
   form: {
     marginTop: '15px',
@@ -58,7 +50,6 @@ const styles = {
   {
     fontSize: '25px',
     marginBottom: '15px',
-    border: '1px solid black',
   },
   button: {
     fontSize: '25px',
@@ -74,12 +65,6 @@ const styles = {
     marginRight: '48px',
     marginTop: '10px',
   },
-  gameCard: {
-    width: '1000px',
-    margin: '0 auto',
-    padding: '25px',
-    fontSize: '20px'
-  }
 }
 
 export default function Play({ username }) {
@@ -87,6 +72,12 @@ export default function Play({ username }) {
   const [inGame, seInGame] = useState(false);
   const [isHost, setIsHost] = useState(false);
 
+  let navigate = useNavigate();
+
+  const loginChange = () => {
+    let path = `/login`;
+    navigate(path);
+  }
 
   const joinRoom = () => {
     if (username !== "" && room !== "") {
@@ -103,10 +94,14 @@ export default function Play({ username }) {
 
   const createRoom = () => {
     if (username !== "" && room !== "") {
-      socket.emit("create-room", room, username, (response) => {
-        if (response.status === "ok") {
+      console.log("create")
+      socket.emit("create-room", room, username, (repsonse) => {
+        console.log(repsonse)
+        if (repsonse.status === "ok") {
+          console.log("if")
           seInGame(true)
         } else {
+          console.log("else")
           alert("Room already exists, pick a unique room code")
         }
       })
@@ -126,19 +121,19 @@ export default function Play({ username }) {
           <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
           <div>
             {inGame ? (
-              <div style={styles.gameCard} className="component">
-                <h4 style={styles.h4}>Socket Id: {socket.id}</h4>
-                <Game room={room} leaveRoom={leaveRoom} username={username} socket={socket} isHost={isHost} />
+              <div className="game-card">
+                {/* <h4 style={styles.h4}>Socket Id: {socket.id}</h4> */}
+                <Game room={room} leaveRoom={leaveRoom} id={socket.id} socket={socket} isHost={isHost} />
               </div>
             ) : (
               <div style={styles.component} className="component">
-                <h4 style={styles.h4}>Socket Id: {socket.id}</h4>
+                {/* <h4 style={styles.h4}>Socket Id: {socket.id}</h4> */}
                 <div>
                   {isHost ? (
                     <div>
                       <div style={styles.hostJoin}>
-                        <button style={styles.hostButton} className="button-selected" onClick={(event) => { setIsHost(true) }}>Host</button>
-                        <button className="button" onClick={(event) => { setIsHost(false) }}>Join</button>
+                        <button style={styles.hostButton} className="button" onClick={(event) => { setIsHost(true) }}>Host</button>
+                        <button className="button-unpressed" onClick={(event) => { setIsHost(false) }}>Join</button>
                       </div>
                       <div style={styles.form}>
                         {/* <label>Username:</label>
@@ -146,7 +141,7 @@ export default function Play({ username }) {
                     <input style={styles.input} type="text" onChange={(event) => { setUsername(event.target.value) }}></input> */}
                         <label>Choose Room Code:</label>
                         <br></br>
-                        <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
+                        <input style={styles.input} className="input" type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
                         <br></br>
                         <button style={styles.createButton} className="button" onClick={createRoom}>Create Room</button>
                       </div>
@@ -154,8 +149,8 @@ export default function Play({ username }) {
                   ) : (
                     <div>
                       <div style={styles.hostJoin}>
-                        <button style={styles.hostButton} className="button" onClick={(event) => { setIsHost(true) }}>Host</button>
-                        <button className="button-selected" onClick={(event) => { setIsHost(false) }}>Join</button>
+                        <button style={styles.hostButton} className="button-unpressed" onClick={(event) => { setIsHost(true) }}>Host</button>
+                        <button className="button" onClick={(event) => { setIsHost(false) }}>Join</button>
                       </div>
                       <div style={styles.form}>
                         {/* <label>Username:</label>
@@ -163,10 +158,18 @@ export default function Play({ username }) {
                   <input style={styles.input} type="text" onChange={(event) => { setUsername(event.target.value) }}></input> */}
                         <label>Existing Room Code:</label>
                         <br></br>
-                        <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
+                        <input style={styles.input} className="input" type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
                         <br></br>
                         <button style={styles.joinButton} className="button" onClick={joinRoom}>Join Room</button>
                       </div>
+                      {/* // <div>
+                //   <label>Username:</label>
+                //   <input type="text" onChange={(event) => {setUsername(event.target.value)}}></input>
+                //   <label>Existing Room Code:</label>
+                //   <input type="text" onChange={(event) => {setRoom(event.target.value)}}></input>
+
+                //   <button onClick={joinRoom}>Join Room</button>
+                // </div> */}
                     </div>
                   )}
                 </div>
@@ -178,8 +181,11 @@ export default function Play({ username }) {
         </div>
       ) : (
         <div>
-          You must login first!
-          <Link to="/login">Login</Link>
+          <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
+          <div style={styles.component} className="component">
+            You must login first!
+            <button style={{marginLeft: '40px'}} className="button" type="submit" onClick={loginChange}>Login</button>
+          </div>
         </div>
       )}
     </div>

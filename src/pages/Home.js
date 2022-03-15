@@ -65,8 +65,8 @@ export default function Home(props) {
       {/* </div> */}
       <div style={styles.component} className="component">
         {props.username ? (
-          <div>
-            <h4>What are you waiting for?! Press play!</h4>
+          <div style={{paddingTop: '30px'}}>
+            <h4>Your friends are waiting for you! Press play up top!</h4>
           </div>
         ) : (
           <div className='text-center'>

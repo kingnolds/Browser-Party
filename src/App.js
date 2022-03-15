@@ -131,7 +131,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home username={username}/>}/>
         <Route path="/login" element={<Login loggedIn={loggedIn} logMeOut={logMeOut} logMeIn={logMeIn} username={username} loginInfo={loginInfo}  handleInputChange={handleInputChange}/>}/>
-        <Route path="/profile" element={<Profile loginInfo={loginInfo} username={username}/>}/>
+        <Route path="/profile" element={<Profile username={username}/>}/>
         <Route path="/play" element={<Play username={username}/>}/>
         <Route path="/register" element={<Register username={username} password={password} registerInfo={registerInfo}  handleInputChangeRegister={handleInputChangeRegister} registerSubmit={registerSubmit}/>}/>
         <Route path="/about" element={<About/>}/>
