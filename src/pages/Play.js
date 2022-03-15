@@ -13,7 +13,7 @@ import io from "socket.io-client";
 // });
 
 // LOCAL
-const socket = io("localhost:4000", {
+const socket = io("http://localhost:4000", {
   withCredentials: true
 });
 

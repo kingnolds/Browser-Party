@@ -5,9 +5,9 @@ import API from '../utils/api';
 import io from "socket.io-client";
 import Scoreboard from "../components/Scoreboard"
 import Memory from "../components/games/MemoryBoard"
-// const socket = io("http://localhost:4000", {
-//   withCredentials: true
-// });
+const socket = io("http://localhost:4000", {
+  withCredentials: true
+});
 
 function Game({room, leaveRoom, id, socket, isHost}) {
   const [players, setPlayers] = useState([])
