@@ -1,36 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const styles = {
-  hiThere: {
-    marginLeft: 'auto', 
-    display: 'flex',
-  },
-  logoutButton: {
-    float: 'right',
-    fontSize: '13px',
-    display: 'flex',
-    margin: '4px 6px 0 8px',
-    height: '26px',
-    width: '65px',
-    padding: '0 0 4px 9px'
-  }
-}
-
 export default function Navbar(props) {
   return (
     <div>
-      {props.username ? (
-        <div style={styles.hiThere} className="hi-there">
-          <p>Hi there, {props.username}</p>
-          <button style={styles.logoutButton} className="button" onClick={props.logMeOut}>Logout</button>
-        </div>
-      ) : (
-      // this keeps the positioning of the nav bar the same
-      <div style={styles.hiThere} className="hi-there"></div>
-      )}
+      <div className="navigation-bar">
         {props.username ? (
-          <div className="navigation-bar-medium">
+          <div>
             <ul className="nav justify-content-center">
               <li className="nav-item">
                 <Link to="/">Home</Link>
@@ -47,7 +23,7 @@ export default function Navbar(props) {
             </ul>
           </div>
         ) : (
-          <div className="navigation-bar-wide">
+          <div>
             <ul className="nav justify-content-center">
               <li className="nav-item">
                 <Link to="/">Home</Link>
@@ -71,5 +47,12 @@ export default function Navbar(props) {
           </div>
         )}
       </div>
+      {props.username ? (
+        <div style={{margin: '0 auto', display: 'flex'}} className="hi-there">
+          <h4>Hi there, {props.username}</h4>
+          <button style={{display: 'inline-block', marginLeft: '20px'}} onClick={props.logMeOut}>Logout</button>
+        </div>
+      ) : (null)}
+    </div>
   );
 }
