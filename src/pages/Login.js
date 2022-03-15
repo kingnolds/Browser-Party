@@ -8,7 +8,7 @@ const styles = {
   component:
   {
     width: '400px',
-    margin: '0 auto',
+    margin: '0 auto auto auto',
     padding: '28px',
 
   },

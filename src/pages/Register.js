@@ -9,14 +9,13 @@ export default function Register(props) {
 
   const styles = {
     logo: {
-      margin: '20vh auto 0px auto',
+      margin: '10% auto 0px auto',
     },
     component:
     {
       width: '400px',
-      margin: '0 auto',
+      margin: '0 auto auto auto',
       padding: '28px',
-  
     },
     form: {
       fontSize: '25px',
@@ -27,6 +26,7 @@ export default function Register(props) {
       fontSize: '25px',
       marginBottom: '15px',
       border: '1px solid black',
+      borderBottom: '2px solid black',
     },
     button:
     {
