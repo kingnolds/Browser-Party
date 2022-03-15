@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { useParams } from "react-router-dom"
+import React from 'react';
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar"
 
 export default function Home(props) {
 
@@ -40,7 +38,7 @@ export default function Home(props) {
 
   return (
     <div>
-    <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
+        <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
       <div style={styles.component} className="component">
         {props.username ? (
           <div style={{paddingTop: '30px'}}>
