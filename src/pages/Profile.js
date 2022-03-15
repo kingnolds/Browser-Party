@@ -3,10 +3,11 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import API from '../utils/api';
 import Button from 'react-bootstrap/Button'
+import { useNavigate } from "react-router-dom";
 
 export default function Profile({ loginInfo, username }) {
-  const [ friends, setFriends] = useState([])
-  const [ wins, setWins] = useState(0)
+  const [friends, setFriends] = useState([])
+  const [wins, setWins] = useState(0)
   const [friendSearch, setFriendSearch] = useState('')
   useEffect(()=>{
 
@@ -15,6 +16,13 @@ export default function Profile({ loginInfo, username }) {
         setWins(data.user?.wins)
       })
   })
+
+  let navigate = useNavigate();
+
+  const loginChange = () => {
+    let path = `/login`;
+    navigate(path);
+  }
 
   const handleFriendSearch = function(e) {
     setFriendSearch(e.target.value)
@@ -26,11 +34,11 @@ export default function Profile({ loginInfo, username }) {
     })
   }
 
-  const handleRemoveFriend = async function(e) {
+  const handleRemoveFriend = async function (e) {
     const name = e.target.getAttribute("name")
     console.log(name)
     // setFriends(friends.filter(friend => friend !== name));
-    await API.removeFriend(username, name).then(data=>{
+    await API.removeFriend(username, name).then(data => {
       console.log(data)
       // friends.filter((friend) => friend !== name)
     })
@@ -38,22 +46,35 @@ export default function Profile({ loginInfo, username }) {
 
   const styles = {
     logo: {
-      margin: '10vh auto 0px auto',
+      margin: '10vh auto 5px auto',
     },
     component: {
       width: '500px',
       margin: '0 auto',
       padding: '28px'
+    },
+    username: {
+      fontWeight: 'bolder',
+      color: 'white',
+      textAlign: 'center',
+      textShadow: '2px 2px #685f80',
+      marginBottom: '20px'
+    },
+    friends: {
+      border: '1px solid black',
+      borderRadius: '4px',
+      padding: '4px',
+      background: 'white'
     }
   }
 
   return (
     <div>
       <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
-      <div style={styles.component} className="component">
         {username ? (
+          <div style={styles.component} className="component">
           <div>
-            <h1>{username}</h1>
+            <h1 style={styles.username}>{username}</h1>
             <div>
               <div className="card-body">
                 <h2>History: </h2>
@@ -62,25 +83,28 @@ export default function Profile({ loginInfo, username }) {
                 </ul>
               </div>
             </div>
-            <div>
+            <div style={styles.friends}>
               <div className="card-body">
                 <h2>Friends:</h2>
                 <ul>
-                  {friends?.map((friend, index)=>(
+                  {friends?.map((friend, index) => (
                     <li key={index}>{friend}  <Button name={friend} variant="outline-danger" onClick={handleRemoveFriend}>Remove Friend</Button></li>
                   ))}
                 </ul>
                 <label>Add a Friend</label>
-                <input type="text" value={friendSearch} onChange={handleFriendSearch} name="username"/><Button value={friendSearch} onClick={handleAddFriend}>Add Friend</Button>
+                <input type="text" value={friendSearch} onChange={handleFriendSearch} name="username" /><Button value={friendSearch} onClick={handleAddFriend}>Add Friend</Button>
               </div>
             </div>
           </div>
+          </div>
         ) : (
           <div>
-            You must login first!
-            <Link to="/login">Login</Link>
-          </div>)}
-      </div>
+            <div style={{ width: '440px', height: '100px', margin: '0 auto', padding: '20px', fontSize: '25px' }} className="component">
+              You must login first!
+              <button style={{ marginLeft: '40px' }} className="button" type="submit" onClick={loginChange}>Login</button>
+            </div>
+          </div>
+        )}
     </div>
   );
 }

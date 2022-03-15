@@ -3,7 +3,7 @@ import { Link} from "react-router-dom"
 
 const styles = {
   logo: {
-    margin: '20vh auto 0px auto',
+    margin: '18vh auto 5px auto',
   },
   component:
   {
@@ -14,23 +14,15 @@ const styles = {
   },
   form: {
     fontSize: '25px',
-    marginLeft: '12px'
+    marginLeft: '20px'
   },
   input:
   {
-    fontSize: '25px',
-    marginBottom: '15px',
     border: '1px solid black',
   },
   h3: {
     display: 'inline',
     marginLeft: '70px'
-  },
-  button:
-  {
-    marginTop: '8px',
-    marginLeft: '120px',
-    fontSize: '25px'
   },
   logout:
   {
@@ -56,12 +48,12 @@ export default function Login(props) {
               <form>
                 <div style={styles.form} className="form-group">
                   <label>Username</label>
-                  <input style={styles.input} type="text" value={props.loginInfo.username} onChange={props.handleInputChange} name="username"/>
+                  <input style={styles.input} className="input" type="text" value={props.loginInfo.username} onChange={props.handleInputChange} name="username"/>
                 </div>
                 <div  style={styles.form} className="form-group">
                   <label>Password</label>
-                  <input style={styles.input} type="password" value={props.loginInfo.password} onChange={props.handleInputChange} name="password"/>
-                  <button style={styles.button} className="button" onClick={props.logMeIn}>Login</button>
+                  <input style={styles.input} className="input" type="password" value={props.loginInfo.password} onChange={props.handleInputChange} name="password"/>
+                  <button style={{marginTop: '14px', marginLeft: '105px', fontSize: '25px'}} className="button" onClick={props.logMeIn}>Login</button>
                 </div>
               </form>
             )}
