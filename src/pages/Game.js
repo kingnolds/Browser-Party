@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Timer from "../components/Timer"
-import Whack from "../components/games/WhackAMole"
-import API from '../utils/api';
-import io from "socket.io-client";
 import Scoreboard from "../components/Scoreboard"
+import Whack from "../components/games/WhackAMole"
 import Memory from "../components/games/MemoryBoard"
-// const socket = io("http://localhost:4000", {
-//   withCredentials: true
-// });
+import Trivia from "../components/games/Trivia"
 
 function Game({room, leaveRoom, id, socket, isHost}) {
   const [players, setPlayers] = useState([])
@@ -84,17 +80,17 @@ function Game({room, leaveRoom, id, socket, isHost}) {
                 ):null}
                 {round == 1 ? (
                     <div>
-                        <Whack socket={socket} room={room}/>
+                        <Trivia socket={socket} room={room} category="geography"/>
                     </div>
                 ) :null}
                 {round == 2 ? (
                     <div>
-                        <Memory socket={socket} room={room}/>
+                        <Whack socket={socket} room={room}/>
                     </div>
                 ) :null}
                 {round == 3 ? (
                     <div>
-                        {/* Some game */}
+                        <Memory socket={socket} room={room}/>
                     </div>
                 ) :null}
                 {round == 4 ? (

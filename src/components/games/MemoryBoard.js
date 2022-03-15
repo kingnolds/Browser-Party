@@ -34,7 +34,6 @@ function Board({ socket, room }) {
     const [score, setScore] = useState(0);
     const [turn, setTurn] = useState(0);
 
-
     const checkCard = (current) => {
         if(cards[current].id == cards[previous].id) {
             cards[current].status = "correct";
@@ -106,8 +105,9 @@ function Board({ socket, room }) {
         setInGame(false);
     }
 
-    socket.on(`start-memory${room}`, () => {
+    socket.on(`start-memory-${room}`, (time) => {
         resetCards();
+        setTime(time)
         setInGame(true);
     })
 
@@ -115,7 +115,7 @@ function Board({ socket, room }) {
         <div>
             {inGame ? (
                 <div>
-                    <Timer time={30000} onEnd={endGame}/>
+                    <Timer time={time} onEnd={endGame}/>
                     <h2>Score: {score}, Turn: {turn}</h2>
                     <div className="memory-board">
                         {cards.map((card, index) => (
