@@ -19,7 +19,7 @@ export default function Profile({ loginInfo, username }) {
       setFriends(data.user?.friends)
       setWins(data.user?.wins)
     })
-  }, [])
+  })
 
   let navigate = useNavigate();
 
