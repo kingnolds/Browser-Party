@@ -1,37 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import Timer from "../Timer"
-import GameOver from "../GameOver"
+import RoundOver from "../RoundOver"
 
 
 
 function Trivia({socket, room}) {
-    const [modal, setModal] = useState(false);
+    const [endRound, setEndRound] = useState(false);
     const [question, setQuestion] = useState("");
     const [correct, setCorrect] = useState("");
     const [answers, setAnswers] = useState([]);
     const [time, setTime] = useState(20000)
     const [selection, setSelection] = useState("")
-    const [isCorrect, setIsCorrect] = useState(false);
+    const [score, setScore] = useState(0);
     
-    let score = 0;
+    let points = 0;
 
     socket.on(`start-trivia-${room}`, (triviaObj, time) => {
-        console.log("starting trivia!")
         setTime(time)
         startGame(triviaObj)
     })
 
     const startGame = (triviaObj) => {
-        console.log(triviaObj)
         setQuestion(decodeURI(triviaObj.question));
         setCorrect(decodeURI(triviaObj.correct_answer));
         const ans = triviaObj.incorrect_answers;
-        ans.push(triviaObj.correct_answer)
+        if (ans.length === 3){
+            ans.push(triviaObj.correct_answer)
+        }
         ans.map(an => {
             return decodeURI(an)
         })
-        console.log(ans)
         const shuffle = function shuffle(a) {
             for (let i = a.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -40,28 +39,29 @@ function Trivia({socket, room}) {
             return a;
         }
         setAnswers(shuffle(ans))
-        console.log(answers)
     }
 
     const endGame = () => {
-        console.log("end game")
-        console.log(correct, selection)
         if (selection === correct) {
-            setIsCorrect(true)
-            score = 10;
+            setScore(10)
+            points = 10;
         }
-        socket.emit("send-score", score)
-        setModal(true)
+        socket.emit("send-score", points)
+        setEndRound(true)
     }
 
     const selectAnswer = (choice) => {
         setSelection(choice)
-        console.log(selection)
     }
 
 
     return (
         <div>
+                {endRound ? (
+                <div>
+                    <RoundOver modal={endRound} points={score} isCorrect={(score === 10)}/>
+                </div>
+                ) : (
                 <div>
                     <Timer time={time} onEnd={endGame}/>
                 
@@ -76,9 +76,9 @@ function Trivia({socket, room}) {
                     </ul>
                     <p>Your selection: {selection}</p>
                 </div>
-                <div>
-                    <GameOver modal={modal}/>
-                </div>
+
+                )}
+                
 
         </div>
     )

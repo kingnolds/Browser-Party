@@ -1,18 +1,31 @@
 import React, { useState } from 'react';
 import API from "../utils/api"
 
-export default function Scoreboard({room, username, players, endGame, round}) {
+export default function Scoreboard({room, username, players, endGame, nextRound}) {
     
-    const games = ["Trivia", "WhackAMole", "Memory", "MemoryCards", "Trivia"]
-    
-    const gameInstructions = {
-       WhackAMole: "Tap on the moles as they appear! +1 for whacking a mole, and -1 for missing.",
-       Snake: "Classic Snake! Use the arrow keys or the on-screen buttons to change directions and earn points by eating the target squares. Game ends when you crash into yourself or a wall.",
-       Trivia: "All or nothing. Players with the correct answer will earn 10 points while all other players earn zero. But don't worry, there will be multiple rounds of trivia!",
-       MemoryCards: "Try to memorize as many cards as you can before they disappear and then earn points by finding as many matches as possible before the time runs out."
-    }
-
-    let game = games[round]
+    const games = [
+        {
+            game: "Trivia",
+            instructions: "All or nothing. Players with the correct answer will earn 10 points while all other players earn zero. But don't worry, there will be multiple rounds of trivia!",
+        },
+        {
+            game: "Whack-A-Mole",
+            instructions: "Tap on the moles as they appear! +1 for whacking a mole, and -1 for missing.",
+        },
+        {
+            game: "Memory Cards",
+            instructions: "Try to memorize as many cards as you can before they disappear and then earn points by finding as many matches as possible before the time runs out.",
+        },
+        {
+            game: "Snake",
+            instructions: "Classic Snake! Use the arrow keys or the on-screen buttons to change directions and earn points by eating the target squares. Game ends when you crash into yourself or a wall."
+        },
+        {
+            game: "Trivia",
+            instructions: "All or nothing. Players with the correct answer will earn 10 points while all other players earn zero. But don't worry, there will be multiple rounds of trivia!",
+        },
+        
+    ]
 
     function compare(a,b) {
         if (a.score < b.score)
@@ -33,7 +46,6 @@ export default function Scoreboard({room, username, players, endGame, round}) {
         if (endGame) {
             if (rankedScores[0].username === username) {
                 const response = await API.incrementWins(username)
-                console.log(response)
             }
         } else {
             return;
@@ -74,8 +86,8 @@ export default function Scoreboard({room, username, players, endGame, round}) {
                         </li>
                     ))}
                 </ol>
-                <h3>Next Round: {games[round]}</h3>
-                <h5>Instructions: {gameInstructions.games[round]}</h5>
+                <h3>Next Round: {games[nextRound-1].game}</h3>
+                <h5>Instructions: {games[nextRound-1].instructions}</h5>
                 </div>
 
 

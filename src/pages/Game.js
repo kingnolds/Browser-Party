@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Scoreboard from "../components/Scoreboard"
 import Whack from "../components/games/WhackAMole"
 import Memory from "../components/games/MemoryBoard"
-import Trivia from "../components/games/Trivia"
+import Trivia from "../components/games/Trivia1"
 
 function Game({room, leaveRoom, username, socket, isHost}) {
   const [players, setPlayers] = useState([])
@@ -37,8 +37,23 @@ function Game({room, leaveRoom, username, socket, isHost}) {
     setPlayers(sockets)
   })
 
-  socket.on(`increment-round`, () => {
-      setRound(round+1)
+  socket.on(`set-round`, (round) => {
+    console.log("set round", round)
+    if (round === "trivia1") {
+        setRound(1)
+    } 
+    if (round === "whack") {
+        setRound(2)
+    } 
+    if (round === "memory") {
+        setRound(3)
+    } 
+    if (round === "snake") {
+        setRound(4)
+    } 
+    if (round === "trivia2") {
+        setRound(5)
+    } 
   })
 
   socket.on(`end-game`, () => {
@@ -48,29 +63,21 @@ function Game({room, leaveRoom, username, socket, isHost}) {
 
   const checkbox = (game) => {
     if (game === "Trivia") {
-        console.log(!includeTrivia)
         setIncludeTrivia(!includeTrivia)
-        console.log(includeTrivia)
     }
     if (game === "Whack") {
-        console.log(!includeWhack)
         setIncludeWhack(!includeWhack)
-        console.log(includeWhack)
     }
     if (game === "Memory") {
-        console.log(!includeMemory)
         setIncludeMemory(!includeMemory)
-        console.log(includeMemory)
     }
-    if (game === "Snake") {
-        const boolean = !includeSnake
-        console.log(boolean)
-        setIncludeSnake(boolean)
-        console.log(includeSnake)
+    if (game === "Snake") {        
+        setIncludeSnake(!includeSnake)   
     }
   }
 
-  const startGame = (includeTrivia, includeWhack, includeMemory, includeSnake) => {
+  const startGame = () => {
+    console.log(includeTrivia, includeWhack, includeMemory, includeSnake)
     if (includeTrivia === false && includeWhack === false && includeMemory === false && includeSnake === false) {
         alert("You must choose at least game")
     } else {
@@ -89,7 +96,7 @@ function Game({room, leaveRoom, username, socket, isHost}) {
     return (
       <div className="Game">
         {scoreboard ? (
-            <Scoreboard room={room} username={username} players={players} endGame={endGame} round={round}/>
+            <Scoreboard room={room} username={username} players={players} endGame={endGame} nextRound={round}/>
         ) : (
             <div>
                 {round === 0 ? (
@@ -113,8 +120,8 @@ function Game({room, leaveRoom, username, socket, isHost}) {
                                     <label htmlFor="whackCheck"> Whack-A-Mole</label><br/>
                                     <input type="checkbox" key="memoryCheck" name="memoryCheck" onChange={() => {checkbox("Memory")}}/>
                                     <label htmlFor="memoryCheck"> Memory Cards</label><br/>
-                                    <input type="checkbox" key="snakeCheck" name="snakeCheck" onChange={() => {checkbox("Snake")}}/>
-                                    <label htmlFor="snakeCheck"> Snake</label>
+                                    <input type="checkbox" key="snakeCheck" name="snakeCheck" disabled readOnly/>
+                                    <label htmlFor="snakeCheck"> Snake (in development)</label>
                                     <br/>
                                 </form>
                                     <br/>
@@ -141,12 +148,12 @@ function Game({room, leaveRoom, username, socket, isHost}) {
                 ) :null}
                 {round === 4 ? (
                     <div>
-                        {/* Some game */}
+                        <Whack socket={socket} room={room}/>
                     </div>
                 ) :null}
                 {round === 5 ? (
                     <div>
-                        {/* Some game */}
+                        <Trivia socket={socket} room={room}/>
                     </div>
                 ) :null}
 

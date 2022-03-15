@@ -167,14 +167,6 @@ export default function Play({ username }) {
                         <br></br>
                         <button style={styles.joinButton} className="button" onClick={joinRoom}>Join Room</button>
                       </div>
-                      {/* // <div>
-                //   <label>Username:</label>
-                //   <input type="text" onChange={(event) => {setUsername(event.target.value)}}></input>
-                //   <label>Existing Room Code:</label>
-                //   <input type="text" onChange={(event) => {setRoom(event.target.value)}}></input>
-
-                //   <button onClick={joinRoom}>Join Room</button>
-                // </div> */}
                     </div>
                   )}
                 </div>
