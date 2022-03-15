@@ -21,7 +21,6 @@ function Game({room, leaveRoom, username, socket, isHost}) {
     button: {
         margin: '20px',
         fontSize: '25px',
-        backgroundColor: '#668586',
     }
   }
 
@@ -125,7 +124,7 @@ function Game({room, leaveRoom, username, socket, isHost}) {
                                     <br/>
                                 </form>
                                     <br/>
-                                <button style={styles.button} className="btn" onClick={()=>startGame()}>Start Game!</button>
+                                <button style={styles.button} className="button" onClick={()=>startGame()}>Start Game!</button>
                             </div>
                             
                         ):null}
@@ -159,7 +158,7 @@ function Game({room, leaveRoom, username, socket, isHost}) {
 
             </div>
         )}
-        <button style={styles.button} className="btn" onClick={leaveRoom}>Leave Room</button>
+        <button style={styles.button} className="button" onClick={leaveRoom}>Leave Room</button>
       </div>
     );
   };
