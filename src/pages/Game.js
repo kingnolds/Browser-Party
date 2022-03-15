@@ -56,7 +56,7 @@ function Game({room, leaveRoom, id, socket, isHost}) {
   }, [players]);                               // adjust dependencies to your needs
 
     return (
-      <div style={styles.card} className="Game">
+      <div className="Game">
         {scoreboard ? (
             <Scoreboard room={room} id={id} players={players} endGame={endGame} round={round}/>
         ) : (
