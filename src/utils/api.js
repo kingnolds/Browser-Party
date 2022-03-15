@@ -66,6 +66,16 @@ const API = {
     })
       .then(res => res.json())
   },
+  removeFriend: (username, friend) => {
+    return fetch(`${BASEURL}/api/users/${username}/friends/${friend}`, {
+      method: "DELETE",
+      // body: JSON.stringify({ ok: true }),
+      // headers: {
+      //   "Content-Type": "application/json"
+      // }
+    })
+      .then(res => res.json())
+  },
 }
 
 export default API;

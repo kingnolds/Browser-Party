@@ -4,7 +4,7 @@
 
 .navigation-bar {
   background-color: #2CA6A4;
-  width: 600px;
+  width: 650px;
   margin: 25px auto 0;
   height: 55px;
   padding-top: 8px;
@@ -51,6 +51,11 @@
   font-family: 'Fredoka', sans-serif;
   color: rgb(255, 255, 255);
   text-decoration: none;
+}
+
+.nav-item a:hover {
+  color: #ffd64f;
+  text-shadow: 2px 2px #9b7a3d;
 }
 
 .component-logo {
@@ -100,3 +105,7 @@
   border-block-end: 3px solid #142e2a;
   outline: 1px solid black;
 }
+
+/* .button-hover {
+  background-color: red;
+} */
