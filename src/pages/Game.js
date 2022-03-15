@@ -80,7 +80,7 @@ function Game({room, leaveRoom, id, socket, isHost}) {
                 ):null}
                 {round == 1 ? (
                     <div>
-                        <Trivia socket={socket} room={room} category="geography"/>
+                        <Trivia socket={socket} room={room}/>
                     </div>
                 ) :null}
                 {round == 2 ? (

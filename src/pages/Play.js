@@ -100,14 +100,10 @@ export default function Play({username}) {
 
   const createRoom = () => {
     if (username !== "" && room !== "") {
-      console.log("create")
       socket.emit("create-room", room, username, (repsonse) => {
-        console.log(repsonse)
         if (repsonse.status === "ok") {
-          console.log("if")
           seInGame(true)
         } else {
-          console.log("else")
           alert("Room already exists, pick a unique room code")
         }
       })
