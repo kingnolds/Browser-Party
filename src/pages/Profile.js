@@ -29,9 +29,9 @@ export default function Profile(props) {
     <div>
       <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
       <div style={styles.component} className="component">
-        {loginInfo ? (
+        {props.username ? (
           <div>
-            <h1>{loginInfo.username}</h1>
+            <h1>{props.username}</h1>
             <div>
               <div className="card-body">
                 <h2>Game history: </h2>
