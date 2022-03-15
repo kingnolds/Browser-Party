@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 
-import ReactDOM from "react-dom";
-import Modal from "react-bootstrap/Modal";
-import ModalBody from "react-bootstrap/ModalBody";
-import ModalHeader from "react-bootstrap/ModalHeader";
-import ModalFooter from "react-bootstrap/ModalFooter";
-import ModalTitle from "react-bootstrap/ModalTitle";
-
-
-function GameOver(props) {
+// import ReactDOM from "react-dom";
+// import Modal from "react-bootstrap/Modal";
+// import ModalBody from "react-bootstrap/ModalBody";
+// import ModalHeader from "react-bootstrap/ModalHeader";
+// import ModalFooter from "react-bootstrap/ModalFooter";
+// import ModalTitle from "react-bootstrap/ModalTitle";
 
 
-    const [show, setShow] = useState(true);
+function RoundOver(props) {
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
-    if (!props.modal) {
-        return <div></div>
-    }
+    // const [show, setShow] = useState(true);
+
+    // const handleClose = () => setShow(false);
+    // const handleShow = () => setShow(true);
+
+    // if (!props.modal) {
+    //     return <div></div>
+    // }
 
     return (
         <>
@@ -27,11 +27,13 @@ function GameOver(props) {
                 Launch modal
             </Button> */}
 
-            <Modal
+            {/* <Modal
+                fullscreen={true}
                 show={show}
                 onHide={handleClose}
                 backdrop="static"
                 keyboard={false}
+                centered={true}
             >
                 <ModalHeader>
                     <ModalTitle>Round Over!</ModalTitle>
@@ -45,9 +47,11 @@ function GameOver(props) {
                     </Button>
                     <Button variant="primary">Understood</Button>
                 </ModalFooter>
-            </Modal>
+            </Modal> */}
+            <h3>Round Over</h3>
+            <p>You scored {props.points} that round!</p>
         </>
     );
 }
 
-export default GameOver;
+export default RoundOver;

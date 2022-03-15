@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 // import Timer from '../Timer'
-import GameOver from '../GameOver';
+import GameOver from '../RoundOver';
 
 const MOLE_NUMBER = 6
 let TIME_LIMIT = 30000
@@ -30,6 +30,7 @@ const Whack = function ({socket, room}) {
     const [score, setScore] = useState(0);
     const [refresh, setTimer] = useState();
     const [modal, setModal] = useState(false)
+    const [isPlaying, setIsPlaying] = useState(true)
 
     const generateIndex = () => {
         // let molesUp = Math.floor(Math.random() * 6)
@@ -43,10 +44,11 @@ const Whack = function ({socket, room}) {
     };
     const endGame = () => {
         setModal(true)
+        setIsPlaying(false)
         clearInterval(refresh);
         socket.emit("send-score", score)
-        setScore(0);
-        setIndex(0);
+        // setScore(0);
+        // setIndex(0);
     };
     const onClick = (n) => {
         if (index.includes(n)) {
@@ -90,6 +92,8 @@ const Whack = function ({socket, room}) {
         }
       `}
             </style>
+            {isPlaying ? (
+                <>
             <p>score: {score}</p>
             <Timer
                 time={TIME_LIMIT}
@@ -118,7 +122,13 @@ const Whack = function ({socket, room}) {
                         }
                     })}
             </div>
-            <GameOver modal={modal} />
+            </>
+            ) : (
+                <div>
+                <GameOver points={score} />
+                </div>
+            )}
+            
         </div>
     );
 }
