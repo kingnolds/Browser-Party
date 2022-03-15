@@ -8,78 +8,108 @@ import io from "socket.io-client";
 // CHANGE FOR LOCAL vs DEPLOYED
 
 // DEPLOYED
-const socket = io("https://browser-party-backend.herokuapp.com/", {
+const socket = io("https://browser-party-socket-io.herokuapp.com/", {
   withCredentials: true
 });
 
 // LOCAL
-const socket = io("localhost:4000", {
-  withCredentials: true
-});
+// const socket = io("http://localhost:4000", {
+//   withCredentials: true
+// });
 
 const styles = {
-  card: {
-    borderStyle: 'none',
-    borderRadius: '10px',
-    background: '#EEEEEE',
-    width: '400px',
-    margin: '18vh auto',
+  logo: {
+    margin: '10vh auto 0px auto',
+  },
+  component: {
+    width: '440px',
+    margin: '0 auto',
     padding: '25px',
-    fontSize: '20px'
+    fontSize: '25px',
   },
   h4: {
-    fontSize: '24px',
-    fontWeight: '600',
+    textAlign: 'center',
+    fontSize: '20px',
+    fontWeight: '600'
     // marginTop: '20px'
   },
   hostJoin: {
-    margin: '0 100px'
+    margin: '0 113px'
   },
   innerMiddle: {
     margin: '0 60px',
   },
-  input: {
-    marginBottom: '10px'
+  hostButtonSelected: {
+    marginRight: '10px',
+    border: '1px solid white',
+  },
+  hostButton: {
+    marginRight: '10px'
+  },
+  joinButtonSelected: {
+    border: '1px solid white',
+  },
+  form: {
+    marginTop: '15px',
+    fontSize: '25px',
+    marginLeft: '45px'
+  },
+  input:
+  {
+    fontSize: '25px',
+    marginBottom: '15px',
+    border: '1px solid black',
   },
   button: {
+    fontSize: '25px',
     margin: '10px'
   },
-  roomButton: {
+  joinButton: {
+    marginLeft: '70px',
+    marginRight: '48px',
+    marginTop: '10px',
+  },
+  createButton: {
     marginLeft: '50px',
     marginRight: '48px',
-    marginTop: '10px'
+    marginTop: '10px',
   },
   gameCard: {
-    borderStyle: 'none',
-    borderRadius: '10px',
-    background: '#EEEEEE',
     width: '1000px',
-    margin: '18vh auto',
+    margin: '0 auto',
     padding: '25px',
     fontSize: '20px'
   }
 }
 
-function Play({username}) {
+export default function Play({ username }) {
   const [room, setRoom] = useState('');
   const [inGame, seInGame] = useState(false);
   const [isHost, setIsHost] = useState(false);
 
-  
+
   const joinRoom = () => {
     if (username !== "" && room !== "") {
-      socket.emit("join-room", room, username)
-      console.log(`${socket.username} is joining room ${room}`)
-      seInGame(true)
+      socket.emit("join-room", room, username, (response) => {
+        if (response.status === "ok") {
+          console.log(`${socket.username} is joining room ${room}`)
+          seInGame(true)
+        } else {
+          alert("That room doesn't exist, either create the room or double check your room code")
+        }
+      })
     }
   }
 
   const createRoom = () => {
-    console.log("create1")
     if (username !== "" && room !== "") {
-      console.log("create2")
-      socket.emit("create-room", room, username)
-      seInGame(true)
+      socket.emit("create-room", room, username, (response) => {
+        if (response.status === "ok") {
+          seInGame(true)
+        } else {
+          alert("Room already exists, pick a unique room code")
+        }
+      })
     }
   }
 
@@ -90,55 +120,69 @@ function Play({username}) {
   }
 
   return (
-    <div className="Play">
+    <div>
       {username ? (
         <div>
-          {inGame ? (
-            <div style={styles.gameCard}>
-              <h4 style={styles.h4}>Play - socketId: {socket.id}</h4>
-              <Game room={room} leaveRoom={leaveRoom} id={socket.id} socket={socket} isHost={isHost} />
-            </div>
-          ) : (
-            <div style={styles.card}>
-              <h4 style={styles.h4}>Play - socketId: {socket.id}</h4>
-              <div className="CreateJoin">
-                <div style={styles.hostJoin}>
-                  <button style={styles.button} onClick={(event) => { setIsHost(true) }}>Host</button>
-                  <button style={styles.button} onClick={(event) => { setIsHost(false) }}>Join</button>
-                </div>
-                {isHost ? (
-                  <div style={styles.innerMiddle}>
-                    <br></br>
-                    <label>Choose Room Code:</label>
-                    <br></br>
-                    <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
-                    <br></br>
-                    <button style={styles.roomButton} onClick={createRoom}>Create Room</button>
-                  </div>
-                ) : (
-                  <div style={styles.innerMiddle}>
-                    <br></br>
-                    <label>Existing Room Code:</label>
-                    <br></br>
-                    <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
-                    <br></br>
-                    <button style={styles.roomButton} onClick={joinRoom}>Join Room</button>
-                  </div>
-                )}
+          <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
+          <div>
+            {inGame ? (
+              <div style={styles.gameCard} className="component">
+                <h4 style={styles.h4}>Socket Id: {socket.id}</h4>
+                <Game room={room} leaveRoom={leaveRoom} username={username} socket={socket} isHost={isHost} />
               </div>
-            </div>
-    
-          )}
+            ) : (
+              <div style={styles.component} className="component">
+                <h4 style={styles.h4}>Socket Id: {socket.id}</h4>
+                <div>
+                  {isHost ? (
+                    <div>
+                      <div style={styles.hostJoin}>
+                        <button style={styles.hostButton} className="button-selected" onClick={(event) => { setIsHost(true) }}>Host</button>
+                        <button className="button" onClick={(event) => { setIsHost(false) }}>Join</button>
+                      </div>
+                      <div style={styles.form}>
+                        {/* <label>Username:</label>
+                    <br></br>
+                    <input style={styles.input} type="text" onChange={(event) => { setUsername(event.target.value) }}></input> */}
+                        <label>Choose Room Code:</label>
+                        <br></br>
+                        <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
+                        <br></br>
+                        <button style={styles.createButton} className="button" onClick={createRoom}>Create Room</button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <div style={styles.hostJoin}>
+                        <button style={styles.hostButton} className="button" onClick={(event) => { setIsHost(true) }}>Host</button>
+                        <button className="button-selected" onClick={(event) => { setIsHost(false) }}>Join</button>
+                      </div>
+                      <div style={styles.form}>
+                        {/* <label>Username:</label>
+                  <br></br>
+                  <input style={styles.input} type="text" onChange={(event) => { setUsername(event.target.value) }}></input> */}
+                        <label>Existing Room Code:</label>
+                        <br></br>
+                        <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
+                        <br></br>
+                        <button style={styles.joinButton} className="button" onClick={joinRoom}>Join Room</button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+            )}
+
+          </div>
         </div>
       ) : (
         <div>
-          <h3>Log in first!</h3>
+          You must login first!
           <Link to="/login">Login</Link>
         </div>
       )}
-
     </div>
   );
 };
 
-export default Play;

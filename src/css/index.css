@@ -1,11 +1,111 @@
-.navbar-brand {
-  margin-left: 5px;
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+.navigation-bar {
+  background-color: #2CA6A4;
+  width: 650px;
+  margin: 25px auto 0;
+  height: 55px;
+  padding-top: 8px;
+  border-radius: 10px;
+  border: 4px solid white;
+  /* border-bottom: 2px solid #655d77; */
+  /* animation-duration: 0.7s;
+  animation-name: nav-slidein; */
+}
+
+.hi-there {
+  width: 300px;
+}
+
+/* @keyframes nav-slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+} */
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .nav-item {
-  margin: 0 10px;
+  margin: 0 25px;
+  font-size: 20px;
+  text-shadow: 2px 2px #228f8d;
+  /* filter: drop-shadow(4px 4px 1px #dfcfb9); */
 }
 
 .nav-item a {
+  font-family: 'Fredoka', sans-serif;
+  color: rgb(255, 255, 255);
   text-decoration: none;
 }
+
+.nav-item a:hover {
+  color: #ffd64f;
+  text-shadow: 2px 2px #9b7a3d;
+}
+
+.component-logo {
+  display: block;
+  /* max-height: 25%; */
+  max-width: 340px;
+  animation-duration: .7s;
+  animation-name: fadein;
+}
+
+.component {
+  border: 2px solid black;
+  border-radius: 10px;
+  background: #A79BC2;
+  border-block-start: 5px solid #b6b1c4;
+  border-inline-start: 5px solid #b4a5d8;
+  border-inline-end: 5px solid #8579a1;
+  border-block-end: 5px solid #776e8d;
+  outline: 2px solid black;
+  filter: drop-shadow(12px 12px 1px #D3C3AD);
+  animation-duration: 0.8s;
+  animation-name: comp-slidein;
+}
+
+@keyframes comp-slidein {
+  from {
+    margin-top: 50px;
+  }
+  to {
+    margin-top: 0px;
+  }
+}
+
+.button-selected {
+  background-color: #a4bdb9;
+}
+
+.button {
+  border-radius: 5px;
+  font-size: 25px;
+  color: white;
+  background-color: #41857B;
+  /* border: 1px solid black; */
+  border-block-start: 3px solid #a4bdb9;
+  border-inline-start: 3px solid #5fb1a4;
+  border-inline-end: 3px solid #256358;
+  border-block-end: 3px solid #142e2a;
+  outline: 1px solid black;
+}
+
+/* .button-hover {
+  background-color: red;
+} */

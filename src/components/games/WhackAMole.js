@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
-import { Socket } from 'socket.io-client';
 // import Timer from '../Timer'
+import RoundOver from '../RoundOver';
 
 const MOLE_NUMBER = 6
-const TIME_LIMIT = 30000
+let TIME_LIMIT = 30000
 const Timer = ({ time, interval = 1000, onEnd }) => {
     const [internalTime, setInternalTime] = useState(time)
     const timerRef = useRef(time)
@@ -29,6 +29,8 @@ const Whack = function ({socket, room}) {
     const [index, setIndex] = useState([]);
     const [score, setScore] = useState(0);
     const [refresh, setTimer] = useState();
+    const [modal, setModal] = useState(false)
+    const [isPlaying, setIsPlaying] = useState(true)
 
     const generateIndex = () => {
         // let molesUp = Math.floor(Math.random() * 6)
@@ -41,11 +43,12 @@ const Whack = function ({socket, room}) {
         setTimer(refresh);
     };
     const endGame = () => {
+        setModal(true)
+        setIsPlaying(false)
         clearInterval(refresh);
-        console.log("endgame", score)
         socket.emit("send-score", score)
-        setScore(0);
-        setIndex(0);
+        // setScore(0);
+        // setIndex(0);
     };
     const onClick = (n) => {
         if (index.includes(n)) {
@@ -54,7 +57,8 @@ const Whack = function ({socket, room}) {
         } else { setScore((score) => score - 1) }
     };
 
-    socket.on(`start-whack${room}`, () => {
+    socket.on(`start-whack-${room}`, (time) => {
+        TIME_LIMIT = (time)
         startGame()
     })
 
@@ -88,6 +92,8 @@ const Whack = function ({socket, room}) {
         }
       `}
             </style>
+            {isPlaying ? (
+                <>
             <p>score: {score}</p>
             <Timer
                 time={TIME_LIMIT}
@@ -116,6 +122,13 @@ const Whack = function ({socket, room}) {
                         }
                     })}
             </div>
+            </>
+            ) : (
+                <div>
+                <RoundOver points={score} />
+                </div>
+            )}
+            
         </div>
     );
 }
