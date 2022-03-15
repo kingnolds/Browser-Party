@@ -53,9 +53,9 @@ export default function Login(props) {
           <div>
             {props.username ? (
               <div>
-                <h5>You are now logged in, {props.loginInfo.username}</h5>
-                <Link to="/"><h3 style={styles.h3}>Home</h3></Link>
-                <button style={styles.logout} className="button" onClick={props.logMeOut}>LogOut</button>
+                <h2>You are now logged in, {props.username}</h2>
+                <Link to="/">Home</Link>
+                <button style={styles.button} className="button" onClick={props.logMeOut}>LogOut</button>
               </div>
             ) : (
               <form>
@@ -68,10 +68,6 @@ export default function Login(props) {
                   <input style={styles.input} type="password" value={props.loginInfo.password} onChange={props.handleInputChange} name="password"/>
                   <button style={styles.button} className="button" onClick={props.logMeIn}>Login</button>
                 </div>
-                  {/* <h1>Login</h1>
-                <input type="text" value={props.loginInfo.username} onChange={props.handleInputChange} name="username" placeholder="Username" />
-                <input type="password" value={props.loginInfo.password} onChange={props.handleInputChange} name="password" placeholder="Password" />
-                <button onClick={(e) => {props.logMeIn(e, props.loginInfo.username, props.loginInfo.password)}}>Login</button> */}
               </form>
             )}
               </div>

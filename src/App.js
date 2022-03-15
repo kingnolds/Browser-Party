@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, Link, useNavigate} from "react-router-dom";
 import API from "./utils/api"
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
@@ -26,7 +26,7 @@ function App() {
     username: "",
     password: ""
   })
-
+  
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -50,32 +50,52 @@ function App() {
   const registerSubmit = async (e) => {
     e.preventDefault()
     console.log("Register Submit Activated")
-    API.createUser(registerInfo.username, registerInfo.password)
-    .then((data)=> {
-        setLoginInfo({
-          username: `${registerInfo.username}`,
-          password: registerInfo.password
-        })
-        logMeIn(e, registerInfo.username, registerInfo.password)
-        window.location.replace('/login');
-    }).catch((err)=>{
+    try {
+      const response = await API.createUser(registerInfo.username, registerInfo.password)
+        if (response.code === 11000) {
+          alert("That username is already taken")
+          setRegisterInfo({
+            username: "",
+            password: ""
+          })
+          setLoginInfo({
+            username: "",
+            password: ""
+          })
+        } else {
+          console.log(registerInfo)
+          console.log(loginInfo)
+          logMeIn(e)
+        }
+    }
+    catch (err) {
         console.log(err)
-    })
+    }
 };
 
-  const logMeIn = (e) => {
-    console.log("LOGGING IN!")
+  const logMeIn = async (e) => {
+    console.log("LOGGING IN!", loginInfo)
     e.preventDefault()
-    loggedIn = true;
-    API.login(loginInfo.username, loginInfo.password)
-      .then(data => {
+    try {
+      const data = await API.login(loginInfo.username, loginInfo.password)
+      console.log(data)
+      if (data.token) {
+        loggedIn = true;
         setUsername(data.user.username);
         setToken(data.token);
         localStorage.setItem("token", data.token);
-      }).catch(err=>{
-        console.log(err);
-      });
+        window.location.replace("/")
+      } else {
+        alert("Invalid Login Credentials")
+        setLoginInfo({
+          username: "",
+          password: ""
+        })
+      }
 
+    } catch (err) {
+      console.log(err);
+    };
   };
   const logMeOut = ()=>{
     console.log("Logging out")
@@ -95,6 +115,10 @@ function App() {
   const handleInputChangeRegister = e=>{
     setRegisterInfo({
       ...registerInfo,
+      [e.target.name]:e.target.value
+    })
+    setLoginInfo({
+      ...loginInfo,
       [e.target.name]:e.target.value
     })
   }

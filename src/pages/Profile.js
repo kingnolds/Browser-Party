@@ -1,6 +1,5 @@
 import React from 'react';
 // import { useParams } from "react-router-dom";
-import Scoreboard from "../components/Scoreboard";
 
 export default function Profile(loginInfo) {
 
@@ -15,7 +14,6 @@ export default function Profile(loginInfo) {
     }
   }
 
-  // const params = useParams();
   return (
     <div>
      <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
@@ -29,16 +27,13 @@ export default function Profile(loginInfo) {
             <li>insert game here</li>
           </ul>
         </div>
-      </div>
-      <div>
-        <div className="card-body">
-          <h2>Friends:</h2>
-          <ul>
-            <li>insert friend here</li>
-          </ul>
+        ): (
+        <div>
+          You must login first!
+          <Link to="/login">Login</Link>
         </div>
-      </div>
     </div>
     </div>
+  </div>
   );
 }
