@@ -129,7 +129,7 @@ function App() {
       <Router>
         <Navbar username={username} logMeOut={logMeOut}/>
       <Routes>
-        <Route path="/" element={<Home/>}/>
+        <Route path="/" element={<Home username={username}/>}/>
         <Route path="/login" element={<Login loggedIn={loggedIn} logMeOut={logMeOut} logMeIn={logMeIn} username={username} loginInfo={loginInfo}  handleInputChange={handleInputChange}/>}/>
         <Route path="/profile" element={<Profile login={loginInfo}/>}/>
         <Route path="/play" element={<Play username={username}/>}/>

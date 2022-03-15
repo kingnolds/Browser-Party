@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import API from '../utils/api';
 
 export default function Profile(loginInfo) {
   const styles = {
