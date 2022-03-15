@@ -3,13 +3,7 @@ import Timer from "../components/Timer"
 import Scoreboard from "../components/Scoreboard"
 import Whack from "../components/games/WhackAMole"
 import Memory from "../components/games/MemoryBoard"
-<<<<<<< HEAD
-const socket = io("http://localhost:4000", {
-  withCredentials: true
-});
-=======
 import Trivia from "../components/games/Trivia"
->>>>>>> dev
 
 function Game({room, leaveRoom, id, socket, isHost}) {
   const [players, setPlayers] = useState([])

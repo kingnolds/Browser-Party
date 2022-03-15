@@ -1,5 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
 // import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -15,9 +14,6 @@ export default function Profile({username}) {
         setFriends(data.user.friends)
       })
   })
-=======
-import { Link } from "react-router-dom";
->>>>>>> dev
 
 export default function Profile(loginInfo) {
   const styles = {
@@ -46,7 +42,6 @@ export default function Profile(loginInfo) {
                 </ul>
               </div>
             </div>
-<<<<<<< HEAD
             <div>
               <div className="card-body">
                 <h2>Friends:</h2>
@@ -57,8 +52,6 @@ export default function Profile(loginInfo) {
                 </ul>
               </div>
             </div>
-=======
->>>>>>> dev
           </div>
         ) : (
           <div>
@@ -68,4 +61,4 @@ export default function Profile(loginInfo) {
       </div>
     </div>
   );
-}
+}}

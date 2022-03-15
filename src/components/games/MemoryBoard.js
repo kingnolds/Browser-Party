@@ -34,12 +34,9 @@ function Board({ socket, room }) {
     const [inGame, setInGame] = useState(false);
     const [score, setScore] = useState(0);
     const [turn, setTurn] = useState(0);
-<<<<<<< HEAD
     // const [cardsPressed, setCardsPressed] = useState(0);
     const [modal, setModal] = useState(false)
-=======
     const [time, setTime] = useState(30000);
->>>>>>> dev
 
     const checkCard = (current) => {
         if(cards[current].id == cards[previous].id) {
