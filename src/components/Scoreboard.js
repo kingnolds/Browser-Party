@@ -24,7 +24,6 @@ export default function Scoreboard({room, username, players, endGame, nextRound}
             game: "Trivia",
             instructions: "All or nothing. Players with the correct answer will earn 10 points while all other players earn zero. But don't worry, there will be multiple rounds of trivia!",
         },
-        
     ]
 
     function compare(a,b) {
