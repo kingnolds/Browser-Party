@@ -8,14 +8,14 @@ import { useNavigate } from "react-router-dom";
 // CHANGE FOR LOCAL vs DEPLOYED
 
 // DEPLOYED
-// const socket = io("https://browser-party-socket-io.herokuapp.com/", {
-//   withCredentials: true
-// });
-
-// LOCAL
-const socket = io("http://localhost:4000", {
+const socket = io("https://browser-party-socket-io.herokuapp.com/", {
   withCredentials: true
 });
+
+// LOCAL
+// const socket = io("http://localhost:4000", {
+//   withCredentials: true
+// });
 
 const styles = {
   logo: {
