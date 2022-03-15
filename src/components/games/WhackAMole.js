@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 // import Timer from '../Timer'
-import GameOver from '../RoundOver';
+import RoundOver from '../RoundOver';
 
 const MOLE_NUMBER = 6
 let TIME_LIMIT = 30000
@@ -125,7 +125,7 @@ const Whack = function ({socket, room}) {
             </>
             ) : (
                 <div>
-                <GameOver points={score} />
+                <RoundOver points={score} />
                 </div>
             )}
             

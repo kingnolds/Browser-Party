@@ -103,14 +103,10 @@ export default function Play({ username }) {
 
   const createRoom = () => {
     if (username !== "" && room !== "") {
-      console.log("create")
-      socket.emit("create-room", room, username, (repsonse) => {
-        console.log(repsonse)
-        if (repsonse.status === "ok") {
-          console.log("if")
+      socket.emit("create-room", room, username, (response) => {
+        if (response.status === "ok") {
           seInGame(true)
         } else {
-          console.log("else")
           alert("Room already exists, pick a unique room code")
         }
       })
@@ -132,7 +128,7 @@ export default function Play({ username }) {
             {inGame ? (
               <div style={styles.gameCard} className="component">
                 <h4 style={styles.h4}>Socket Id: {socket.id}</h4>
-                <Game room={room} leaveRoom={leaveRoom} id={socket.id} socket={socket} isHost={isHost} />
+                <Game room={room} leaveRoom={leaveRoom} username={username} socket={socket} isHost={isHost} />
               </div>
             ) : (
               <div style={styles.component} className="component">
@@ -171,14 +167,6 @@ export default function Play({ username }) {
                         <br></br>
                         <button style={styles.joinButton} className="button" onClick={joinRoom}>Join Room</button>
                       </div>
-                      {/* // <div>
-                //   <label>Username:</label>
-                //   <input type="text" onChange={(event) => {setUsername(event.target.value)}}></input>
-                //   <label>Existing Room Code:</label>
-                //   <input type="text" onChange={(event) => {setRoom(event.target.value)}}></input>
-
-                //   <button onClick={joinRoom}>Join Room</button>
-                // </div> */}
                     </div>
                   )}
                 </div>
