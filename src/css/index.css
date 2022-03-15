@@ -2,34 +2,36 @@
   font-family: 'Inter', sans-serif;
 }
 
-.navigation-bar {
+.navigation-bar-wide, .navigation-bar-medium {
   background-color: #2CA6A4;
   width: 650px;
-  margin: 25px auto 0;
+  margin: 0 auto;
   height: 55px;
   padding-top: 8px;
   border-radius: 10px;
   border: 4px solid white;
-  /* border-bottom: 2px solid #655d77; */
-  /* animation-duration: 0.7s;
-  animation-name: nav-slidein; */
+  filter: drop-shadow(4px 5px 3px rgb(225, 208, 184));
+}
+
+.navigation-bar-medium {
+  width: 500px;
 }
 
 .hi-there {
-  width: 300px;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 15px;
+  /* margin-left: auto; */
+  float: 'right';
+  width: 250px;
+  height: 30px;
+  /* text-align: end; */
 }
 
-/* @keyframes nav-slidein {
-  from {
-    margin-left: 100%;
-    width: 300%;
-  }
-
-  to {
-    margin-left: 0%;
-    width: 100%;
-  }
-} */
+.hi-there p {
+  margin-left: auto; 
+  font-family: 'Fredoka', sans-serif;
+  margin-top: 5px;
+}
 
 @keyframes fadein {
   from {
@@ -66,7 +68,7 @@
   animation-name: fadein;
 }
 
-.component {
+.component, .game-card {
   border: 2px solid black;
   border-radius: 10px;
   background: #A79BC2;
@@ -75,7 +77,7 @@
   border-inline-end: 5px solid #8579a1;
   border-block-end: 5px solid #776e8d;
   outline: 2px solid black;
-  filter: drop-shadow(12px 12px 1px #D3C3AD);
+  filter: drop-shadow(8px 10px 1px #D3C3AD);
   animation-duration: 0.8s;
   animation-name: comp-slidein;
 }
@@ -89,11 +91,7 @@
   }
 }
 
-.button-selected {
-  background-color: #a4bdb9;
-}
-
-.button {
+.button, .button-unpressed {
   border-radius: 5px;
   font-size: 25px;
   color: white;
@@ -104,6 +102,48 @@
   border-inline-end: 3px solid #256358;
   border-block-end: 3px solid #142e2a;
   outline: 1px solid black;
+}
+
+.button-unpressed {
+  color: rgb(83, 148, 139);
+  background-color: #315853;
+  border-block-start: 3px solid #48aa9d;
+  border-inline-start: 3px solid #51887f;
+  border-inline-end: 3px solid #245f52;
+  border-block-end: 3px solid #112422;
+  outline: 1px solid rgb(75, 75, 75);
+}
+
+.input {
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.game-card {
+  width: 1000px;
+  margin: 0 auto;
+  padding: 25px;
+  font-size: 20px;
+}
+
+@media screen and (max-width: 1030px) {
+  .game-card {
+    width: 600px;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .game-card {
+    width: 600px;
+  }
+  .navigation-bar-wide {
+    width: 500px;
+    padding-top: 12px;
+  }
+  .nav-item {
+    margin: 0 15px;
+    font-size: 16px;
+  }
 }
 
 /* .button-hover {

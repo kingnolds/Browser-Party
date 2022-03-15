@@ -40,39 +40,16 @@ export default function Home(props) {
 
   return (
     <div>
-      {/* {props.userEmail ? (
-          <div>
-            <h2>Welcome to the club, {props.userEmail}</h2>
-            <button onClick={props.logMeOut}>LogOut</button>
-          </div>
-        ) : (
-          <form onSubmit={props.logMeIn}>
-            <input
-              value={props.loginInfo.email}
-              onChange={props.handleInputChange}
-              name="email"
-            />
-            <input
-              value={props.loginInfo.password}
-              onChange={props.handleInputChange}
-              name="password"
-            />
-
-          </form>
-        )} */}
-      {/* <div style={styles.logo}> */}
-        <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
-      {/* </div> */}
+    <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
       <div style={styles.component} className="component">
         {props.username ? (
-          <div>
-            <h4>What are you waiting for?! Press play!</h4>
+          <div style={{paddingTop: '30px'}}>
+            <h4>Your friends are waiting for you! Press play up top!</h4>
           </div>
         ) : (
           <div className='text-center'>
           <div className="row">
             <div className="col">
-              {/* <div style={styles.h1}>Home</div> */}
               <div>
                 <button style={styles.button} className="button" type="submit" onClick={loginChange}>Login</button>
               </div>
@@ -83,8 +60,6 @@ export default function Home(props) {
           </div>
         </div>
         )}
-      
-      
       </div>
     </div>
   );

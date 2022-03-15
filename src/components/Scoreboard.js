@@ -73,7 +73,7 @@ export default function Scoreboard({room, username, players, endGame, nextRound}
 
                     ) : null}
 
-                    <button onClick={playAgain}>Play Again!</button>
+                    <button className="button" onClick={playAgain}>Play Again!</button>
                 </div>
             ) : (
                 <div>
