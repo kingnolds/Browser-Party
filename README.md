@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# Browser Party
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
+Multiplayer online games continue to rise in popularity year after year as people look for new ways to hang out with their friends virtually. However, there is a distinct lack of party games available in your browser where people can play from any location and any device. Browser Party aims to change that by:
+- Creating a persistent mobile environment with saved accounts for repeated play
+- A lobby hosting/joining system to play with your friends
+- A Mario Party-esque game loop mini games and a competitive score system
 
-## Available Scripts
+## Table of Contents
+- [Description](#Description)
+- [Tech](#Tech)
+- [Installation](#Installation)
+- [Usage](#Usage)
+- [Link](#Link)
+- [Contributions](#Contributions)
+- [License](#License)
 
-In the project directory, you can run:
+## Tech
+- Socket.io
+- React
+- Node.js
+- MongoDB
+- Heroku
 
-### `npm start`
+## Installation
+To install this application, you need to clone three githubs to your local drive: 
+- The front end application: https://github.com/kingnolds/Browser-Party
+- The back end application: https://github.com/hcweigand10/Browser-Party-Backend
+- The socket io setup: https://github.com/hcweigand10/Browser-Party-Socket-io
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Usage
+To use this application, simply follow the link found below to launch the Heroku page, and try it out! If you'd like to set up this project on your end, you need to:
+- Install the three repos listed above in the installation section
+- Open your terminal in each repo once installed, and type npm i to install all related packages
+- Start up your socket and back end repos with npm start
+- Start up your front end repo with npm start
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Link
+https://browser-party.herokuapp.com/
 
-### `npm test`
+## Contributions
+- Henry Weigand
+- Spencer Nelson
+- Ronnel Abrigo
+- Reid Flamm
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## License
+MIT License [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Copyright (c) 2022
+All rights reserved.
