@@ -35,11 +35,10 @@ function Board({ socket, room }) {
     const [score, setScore] = useState(0);
     const [turn, setTurn] = useState(0);
     // const [cardsPressed, setCardsPressed] = useState(0);
-    const [modal, setModal] = useState(false)
     const [time, setTime] = useState(30000);
 
     const checkCard = (current) => {
-        if(cards[current].id == cards[previous].id) {
+        if(cards[current].id === cards[previous].id) {
             cards[current].status = "correct";
             cards[previous].status = "correct";
             setCards([...cards]);
@@ -59,24 +58,6 @@ function Board({ socket, room }) {
                 setCardsPressed(0);
             }, 1000)
         }
-        // if (cards[current].id == cards[previous].id) {
-        //     cards[current].status = "correct";
-        //     cards[previous].status = "correct";
-        //     setCards([...cards]);
-        //     setPrevious(-1);
-        //     setScore(score + 4);
-        // } else {
-        //     cards[current].status = "incorrect";
-        //     cards[previous].status = "incorrect";
-        //     setCards([...cards]);
-        //     if (turn > 8) { setScore(score - 2) };
-        //     setTimeout(() => {
-        //         cards[current].status = "";
-        //         cards[previous].status = "";
-        //         setCards([...cards]);
-        //         setPrevious(-1);
-        //     }, 1000)
-        // }
         setTurn(turn + 1);
     }
 
@@ -104,7 +85,6 @@ function Board({ socket, room }) {
 
     const endGame = () => {
         socket.emit("send-score", score);
-        setModal(true)
         resetCards();
         // setScore(0);
         setInGame(false);
@@ -130,7 +110,6 @@ function Board({ socket, room }) {
                 </div>
             ) : (
                 <div>
-                    <h3>Get Ready!</h3>
                     <RoundOver points={score} />
                 </div>
             )}

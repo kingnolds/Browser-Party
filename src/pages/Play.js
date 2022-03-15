@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom"
 import Game from "./Game"
-import Scoreboard from "../components/Scoreboard"
 import io from "socket.io-client";
 
 
 // CHANGE FOR LOCAL vs DEPLOYED
 
 // DEPLOYED
-const socket = io("https://browser-party-socket-io.herokuapp.com/", {
-  withCredentials: true
-});
-
-// LOCAL
-// const socket = io("http://localhost:4000", {
+// const socket = io("https://browser-party-socket-io.herokuapp.com/", {
 //   withCredentials: true
 // });
+
+// LOCAL
+const socket = io("http://localhost:4000", {
+  withCredentials: true
+});
 
 const styles = {
   logo: {
@@ -127,7 +126,6 @@ export default function Play({ username }) {
           <div>
             {inGame ? (
               <div style={styles.gameCard} className="component">
-                <h4 style={styles.h4}>Socket Id: {socket.id}</h4>
                 <Game room={room} leaveRoom={leaveRoom} username={username} socket={socket} isHost={isHost} />
               </div>
             ) : (
@@ -141,9 +139,6 @@ export default function Play({ username }) {
                         <button className="button" onClick={(event) => { setIsHost(false) }}>Join</button>
                       </div>
                       <div style={styles.form}>
-                        {/* <label>Username:</label>
-                    <br></br>
-                    <input style={styles.input} type="text" onChange={(event) => { setUsername(event.target.value) }}></input> */}
                         <label>Choose Room Code:</label>
                         <br></br>
                         <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>

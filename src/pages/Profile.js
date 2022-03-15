@@ -1,5 +1,4 @@
 import React from 'react';
-// import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import API from '../utils/api';
@@ -10,22 +9,17 @@ export default function Profile({ loginInfo, username }) {
   const [ wins, setWins] = useState(0)
   const [friendSearch, setFriendSearch] = useState('')
   useEffect(()=>{
-    // console.log(loginInfo)
-    // console.log(loginInfo.username)
-    // console.log(username)
+
       API.getSingleUser(username).then(data=>{
-        // console.log(data)
         setFriends(data.user?.friends)
         setWins(data.user?.wins)
       })
   })
 
   const handleFriendSearch = function(e) {
-    const friendName = e.target.value
     setFriendSearch(e.target.value)
   }
   const handleAddFriend = function(e) {
-    const friendName = friendSearch
     API.addFriend(username, friendSearch).then((data)=>{
       console.log(data)
       setFriendSearch('')

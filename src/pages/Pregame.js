@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 
 function Pregame({socket, room, players, username, isHost, checkbox, startGame}) {
     
-    const [messages, setMessages] = useState([{}])
+    const [messages, setMessages] = useState([{
+        username: "BrowserParty",
+        content: "Use this space to say hi to your opponents! Or talk trash and throw them off their game...",
+        id: 0
+    }])
     const [newMessage, setNewMessage] = useState("")
 
     const styles = {
@@ -17,12 +21,16 @@ function Pregame({socket, room, players, username, isHost, checkbox, startGame})
         }
       }
 
-    socket.on('add-new-message', function (data) {
-        setMessages(messages.push(data));
+    socket.on('add-new-message', (data) => {
+        if(data !== messages) {
+            setMessages(data)
+        }
     });
 
-    const sendMessage = () => {
-        socket.emit('send-new-message', username, newMessage, room);
+    const sendMessage = (e) => {
+        e.preventDefault()
+        socket.emit('send-new-message', newMessage, room, (messages.length));
+        setNewMessage("")
     }
 
     const handleFormChange = (e) => {
@@ -32,31 +40,35 @@ function Pregame({socket, room, players, username, isHost, checkbox, startGame})
     return (
         <div>
             <div>
-                <h1>Game: {room}</h1>
+                <h1>Lobby: {room}</h1>
+
                 <h3>Players:</h3>
                 <ul className="list-group">
                     {players.map(player => (
-                        <li className="list-group-player" key={player.username} style={(player.username == username) ? {color:"blue"}:{}}>
+                        <li className="list-group-player" key={player.username} style={(player.username === username) ? {color:"blue"}:{}}>
                             {player.username} (score: {player.score})
                         </li>
                     ))}
                 </ul>
-                <div class="chatArea">
-                    <ul class="messages">
+
+                <h3>Chat</h3>
+                <div className="chatArea">
+                    <ul className="messages">
                         {messages.map(message => {
                             return (
-                                <li>{message.username}: {message.content}</li>
+                                <li key={message.id} style={(message.username === username) ? {color:"blue"}:{}}>{message.username}: {message.content}</li>
                             )
                         })}
                     </ul>
                 </div>
-                <form onSubmit={()=>{sendMessage()}}>
-                    <input class="inputMessage" placeholder="Type here..." onChange={handleFormChange}/>
-                    <input type="submit"/>
+                <form >
+                    <input className="inputMessage" placeholder="Type here..." onChange={handleFormChange} value={newMessage}/>
+                    <button type="submit" onClick={sendMessage}>Send</button>
                 </form>
                 
                 {isHost ? (
                     <div>
+                        <h3>Host options:</h3>
                         <form>
                             <input type="checkbox" key="triviaCheck" name="triviaCheck" onChange={() => {checkbox("Trivia")}}/>
                             <label htmlFor="triviaCheck"> Trivia</label><br/>

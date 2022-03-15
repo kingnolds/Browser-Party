@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
-import {useParams} from "react-router-dom"
-import API from '../utils/api';
+import React from 'react';
+
 
 export default function Register(props) {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const params = useParams();
 
   const styles = {
     logo: {
@@ -35,23 +31,6 @@ export default function Register(props) {
       fontSize: '25px'
     }
   }
-
-  //   return (
-  //     <div>
-  //         <div style={styles.card} className='container'>
-  //             <div className='card'>
-  //             <form>
-  //                 <h1>Register</h1>
-  //               <input type="text" value={props.registerInfo.username} onChange={props.handleInputChangeRegister} name="username" placeholder="Username" />
-  //               <input type="password" value={props.registerInfo.password} onChange={props.handleInputChangeRegister} name="password" placeholder="Password" />
-  //               <button onClick={props.registerSubmit}>Register</button>
-  //             </form>
-  //             </div>
-  //         </div>
-
-  //     </div>
-  //   );
-  // }
 
   return (
     <div>

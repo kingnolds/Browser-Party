@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Scoreboard from "../components/Scoreboard"
 import Whack from "../components/games/WhackAMole"
 import Memory from "../components/games/MemoryBoard"
-import Trivia from "../components/games/Trivia1"
+import Trivia from "../components/games/Trivia"
 import Pregame from "./Pregame"
 
 function Game({room, leaveRoom, username, socket, isHost}) {
@@ -39,7 +39,6 @@ function Game({room, leaveRoom, username, socket, isHost}) {
   })
 
   socket.on(`set-round`, (round) => {
-    console.log("set round", round)
     if (round === "trivia1") {
         setRound(1)
     } 
@@ -91,7 +90,7 @@ function Game({room, leaveRoom, username, socket, isHost}) {
       if (isMounted) setPlayers(sockets)
     })
     return () => { isMounted = false }; // cleanup toggles value, if unmounted
-  }, [players]);                               // adjust dependencies to your needs
+  }, [players, room, socket]);                               // adjust dependencies to your needs
 
     return (
       <div className="Game">

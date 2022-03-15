@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { useParams } from "react-router-dom"
+import React from 'react';
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar"
 
 export default function Home(props) {
 
@@ -40,29 +38,7 @@ export default function Home(props) {
 
   return (
     <div>
-      {/* {props.userEmail ? (
-          <div>
-            <h2>Welcome to the club, {props.userEmail}</h2>
-            <button onClick={props.logMeOut}>LogOut</button>
-          </div>
-        ) : (
-          <form onSubmit={props.logMeIn}>
-            <input
-              value={props.loginInfo.email}
-              onChange={props.handleInputChange}
-              name="email"
-            />
-            <input
-              value={props.loginInfo.password}
-              onChange={props.handleInputChange}
-              name="password"
-            />
-
-          </form>
-        )} */}
-      {/* <div style={styles.logo}> */}
         <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
-      {/* </div> */}
       <div style={styles.component} className="component">
         {props.username ? (
           <div>
@@ -72,7 +48,6 @@ export default function Home(props) {
           <div className='text-center'>
           <div className="row">
             <div className="col">
-              {/* <div style={styles.h1}>Home</div> */}
               <div>
                 <button style={styles.button} className="button" type="submit" onClick={loginChange}>Login</button>
               </div>

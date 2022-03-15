@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link} from "react-router-dom"
 
 const styles = {
@@ -40,11 +40,6 @@ const styles = {
 }
 
 export default function Login(props) {
-
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
   return (
       <div>
