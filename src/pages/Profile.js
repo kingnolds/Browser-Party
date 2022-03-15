@@ -5,16 +5,11 @@ import { Link } from 'react-router-dom';
 import API from '../utils/api';
 import Button from 'react-bootstrap/Button'
 
-<<<<<<< HEAD
 export default function Profile({ loginInfo, username }) {
-=======
-export default function Profile(props) {
->>>>>>> dev
   const [ friends, setFriends] = useState([])
   const [ wins, setWins] = useState(0)
   const [friendSearch, setFriendSearch] = useState('')
   useEffect(()=>{
-<<<<<<< HEAD
     // console.log(loginInfo)
     // console.log(loginInfo.username)
     // console.log(username)
@@ -47,14 +42,6 @@ export default function Profile(props) {
     })
   }
 
-=======
-      API.getSingleUser(props.username).then(data=>{
-        console.log(data)
-        setFriends(data.user.friends)
-      })
-  })
-
->>>>>>> dev
   const styles = {
     logo: {
       margin: '10vh auto 0px auto',
