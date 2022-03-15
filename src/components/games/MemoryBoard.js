@@ -2,7 +2,7 @@ import '../../css/game.css';
 import { useState } from 'react';
 import Card from './MemoryCard';
 import Timer from '../Timer'
-import GameOver from '../GameOver'
+import RoundOver from '../RoundOver'
 
 function Board({ socket, room }) {
     const cardsArray = [
@@ -106,7 +106,7 @@ function Board({ socket, room }) {
         socket.emit("send-score", score);
         setModal(true)
         resetCards();
-        setScore(0);
+        // setScore(0);
         setInGame(false);
     }
 
@@ -131,9 +131,10 @@ function Board({ socket, room }) {
             ) : (
                 <div>
                     <h3>Get Ready!</h3>
+                    <RoundOver points={score} />
                 </div>
             )}
-            <GameOver modal={modal} />
+            
         </div>
     );
 }

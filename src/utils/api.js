@@ -40,14 +40,22 @@ const API = {
       }
       )
   },
+
   getSingleUser: (username) => {
     return fetch(`${BASEURL}/api/users/${username}`, )
     .then(res=> res.json())
   },
+
   getUsers: () => {
     return fetch(`${BASEURL}/api/users`)
-      .then(res => res.json())
+    .then(res => res.json())
   },
+
+  incrementWins: (username) => {
+    return fetch(`${BASEURL}/api/users/${username}/win`, )
+    .then(res=> res.json())
+  },
+
   addFriend: (username, friend) => {
     return fetch(`${BASEURL}/api/users/${username}/friends/${friend}`, {
       method: "POST",
@@ -55,6 +63,16 @@ const API = {
       headers: {
         "Content-Type": "application/json"
       }
+    })
+      .then(res => res.json())
+  },
+  removeFriend: (username, friend) => {
+    return fetch(`${BASEURL}/api/users/${username}/friends/${friend}`, {
+      method: "DELETE",
+      // body: JSON.stringify({ ok: true }),
+      // headers: {
+      //   "Content-Type": "application/json"
+      // }
     })
       .then(res => res.json())
   },
