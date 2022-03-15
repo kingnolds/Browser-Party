@@ -4,18 +4,16 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import API from '../utils/api';
 
-
-export default function Profile({username}) {
+export default function Profile(props) {
   const [ friends, setFriends] = useState([])
   
   useEffect(()=>{
-      API.getSingleUser(username).then(data=>{
+      API.getSingleUser(props.username).then(data=>{
         console.log(data)
         setFriends(data.user.friends)
       })
   })
 
-export default function Profile(loginInfo) {
   const styles = {
     logo: {
       margin: '10vh auto 0px auto',
@@ -31,9 +29,9 @@ export default function Profile(loginInfo) {
     <div>
       <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
       <div style={styles.component} className="component">
-        {loginInfo ? (
+        {props.username ? (
           <div>
-            <h1>{loginInfo.username}</h1>
+            <h1>{props.username}</h1>
             <div>
               <div className="card-body">
                 <h2>Game history: </h2>
@@ -61,4 +59,4 @@ export default function Profile(loginInfo) {
       </div>
     </div>
   );
-}}
+}

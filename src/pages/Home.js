@@ -64,7 +64,12 @@ export default function Home(props) {
         <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
       {/* </div> */}
       <div style={styles.component} className="component">
-        <div className='text-center'>
+        {props.username ? (
+          <div>
+            <h4>What are you waiting for?! Press play!</h4>
+          </div>
+        ) : (
+          <div className='text-center'>
           <div className="row">
             <div className="col">
               {/* <div style={styles.h1}>Home</div> */}
@@ -77,6 +82,9 @@ export default function Home(props) {
             </div>
           </div>
         </div>
+        )}
+      
+      
       </div>
     </div>
   );
