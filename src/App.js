@@ -12,7 +12,11 @@ import Manatee from './components/games/MemoryBoard';
 
 import Navbar from "./components/Navbar";
 import Register from './pages/Register';
+<<<<<<< HEAD
 const socket = io("http://localhost:4000");
+=======
+import About from './pages/About';
+>>>>>>> dev
 
 function App() {
 
@@ -122,11 +126,18 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login loggedIn={loggedIn} logMeOut={logMeOut} logMeIn={logMeIn} username={username} loginInfo={loginInfo}  handleInputChange={handleInputChange}/>}/>
+<<<<<<< HEAD
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/play" element={<Play username={username} loginInfo={loginInfo}/>}/>
         <Route path="/register" element={<Register username={username} password={password} registerInfo={registerInfo}  handleInputChangeRegister={handleInputChangeRegister} registerSubmit={registerSubmit}/>}/>
         <Route path="/whack" element={<Whack />}/>
         
+=======
+        <Route path="/profile" element={<Profile login={loginInfo}/>}/>
+        <Route path="/play" element={<Play username={username}/>}/>
+        <Route path="/register" element={<Register username={username} password={password} registerInfo={registerInfo}  handleInputChangeRegister={handleInputChangeRegister} registerSubmit={registerSubmit}/>}/>
+        <Route path="/about" element={<About/>}/>
+>>>>>>> dev
         </Routes>
         </Router>
     </>
