@@ -13,7 +13,7 @@ import io from "socket.io-client";
 // });
 
 // LOCAL
-const socket = io("localhost:4000", {
+const socket = io("http://localhost:4000", {
   withCredentials: true
 });
 
@@ -39,13 +39,20 @@ const styles = {
   innerMiddle: {
     margin: '0 60px',
   },
+  hostButtonSelected: {
+    marginRight: '10px',
+    border: '1px solid white',
+  },
+  hostButton: {
+    marginRight: '10px'
+  },
+  joinButtonSelected: {
+    border: '1px solid white',
+  },
   form: {
     marginTop: '15px',
     fontSize: '25px',
     marginLeft: '45px'
-  },
-  hostButton: {
-    marginRight: '10px'
   },
   input:
   {
@@ -68,23 +75,19 @@ const styles = {
     marginTop: '10px',
   },
   gameCard: {
-    borderStyle: 'none',
-    borderRadius: '10px',
-    background: '#9E8FB2',
-    filter: 'drop-shadow(5px 5px 5px #D3C3AD)',
     width: '1000px',
-    margin: '18vh auto',
+    margin: '0 auto',
     padding: '25px',
     fontSize: '20px'
   }
 }
 
-export default function Play({username}) {
+export default function Play({ username }) {
   const [room, setRoom] = useState('');
   const [inGame, seInGame] = useState(false);
   const [isHost, setIsHost] = useState(false);
 
-  
+
   const joinRoom = () => {
     if (username !== "" && room !== "") {
       socket.emit("join-room", room, username, (response) => {
@@ -131,27 +134,48 @@ export default function Play({username}) {
               <div style={styles.component} className="component">
                 <h4 style={styles.h4}>Socket Id: {socket.id}</h4>
                 <div>
-                  <div style={styles.hostJoin}>
-                    <button style={styles.hostButton} className="button" onClick={(event) => { setIsHost(true) }}>Host</button>
-                    <button className="button" onClick={(event) => { setIsHost(false) }}>Join</button>
-                  </div>
                   {isHost ? (
-                    <div style={styles.form}>
-                      <label>Choose Room Code:</label>
-                      <br></br>
-                      <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
-                      <br></br>
-                      <button style={styles.createButton} className="button" onClick={createRoom}>Create Room</button>
+                    <div>
+                      <div style={styles.hostJoin}>
+                        <button style={styles.hostButton} className="button-selected" onClick={(event) => { setIsHost(true) }}>Host</button>
+                        <button className="button" onClick={(event) => { setIsHost(false) }}>Join</button>
+                      </div>
+                      <div style={styles.form}>
+                        {/* <label>Username:</label>
+                    <br></br>
+                    <input style={styles.input} type="text" onChange={(event) => { setUsername(event.target.value) }}></input> */}
+                        <label>Choose Room Code:</label>
+                        <br></br>
+                        <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
+                        <br></br>
+                        <button style={styles.createButton} className="button" onClick={createRoom}>Create Room</button>
+                      </div>
                     </div>
                   ) : (
-                    <div style={styles.form}>
-                      <label>Existing Room Code:</label>
-                      <br></br>
-                      <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
-                      <br></br>
-                      <button style={styles.joinButton} className="button" onClick={joinRoom}>Join Room</button>
+                    <div>
+                      <div style={styles.hostJoin}>
+                        <button style={styles.hostButton} className="button" onClick={(event) => { setIsHost(true) }}>Host</button>
+                        <button className="button-selected" onClick={(event) => { setIsHost(false) }}>Join</button>
+                      </div>
+                      <div style={styles.form}>
+                        {/* <label>Username:</label>
+                  <br></br>
+                  <input style={styles.input} type="text" onChange={(event) => { setUsername(event.target.value) }}></input> */}
+                        <label>Existing Room Code:</label>
+                        <br></br>
+                        <input style={styles.input} type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
+                        <br></br>
+                        <button style={styles.joinButton} className="button" onClick={joinRoom}>Join Room</button>
+                      </div>
+                      {/* // <div>
+                //   <label>Username:</label>
+                //   <input type="text" onChange={(event) => {setUsername(event.target.value)}}></input>
+                //   <label>Existing Room Code:</label>
+                //   <input type="text" onChange={(event) => {setRoom(event.target.value)}}></input>
+
+                //   <button onClick={joinRoom}>Join Room</button>
+                // </div> */}
                     </div>
-                  
                   )}
                 </div>
               </div>

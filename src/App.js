@@ -7,6 +7,8 @@ import Play from "./pages/Play";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import Register from './pages/Register';
+import About from './pages/About';
+
 function App() {
 
   const [username, setUsername] = useState("");
@@ -129,9 +131,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login loggedIn={loggedIn} logMeOut={logMeOut} logMeIn={logMeIn} username={username} loginInfo={loginInfo}  handleInputChange={handleInputChange}/>}/>
-        <Route path="/profile" element={<Profile/>}/>
+        <Route path="/profile" element={<Profile login={loginInfo}/>}/>
         <Route path="/play" element={<Play username={username}/>}/>
         <Route path="/register" element={<Register username={username} password={password} registerInfo={registerInfo}  handleInputChangeRegister={handleInputChangeRegister} registerSubmit={registerSubmit}/>}/>
+        <Route path="/about" element={<About/>}/>
         </Routes>
         </Router>
     </div>

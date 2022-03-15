@@ -4,13 +4,40 @@
 
 .navigation-bar {
   background-color: #2CA6A4;
-  width: 500px;
+  width: 600px;
   margin: 25px auto 0;
   height: 55px;
   padding-top: 8px;
   border-radius: 10px;
   border: 4px solid white;
   /* border-bottom: 2px solid #655d77; */
+  /* animation-duration: 0.7s;
+  animation-name: nav-slidein; */
+}
+
+.hi-there {
+  width: 300px;
+}
+
+/* @keyframes nav-slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+} */
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .nav-item {
@@ -30,6 +57,8 @@
   display: block;
   /* max-height: 25%; */
   max-width: 340px;
+  animation-duration: .7s;
+  animation-name: fadein;
 }
 
 .component {
@@ -42,6 +71,21 @@
   border-block-end: 5px solid #776e8d;
   outline: 2px solid black;
   filter: drop-shadow(12px 12px 1px #D3C3AD);
+  animation-duration: 0.8s;
+  animation-name: comp-slidein;
+}
+
+@keyframes comp-slidein {
+  from {
+    margin-top: 50px;
+  }
+  to {
+    margin-top: 0px;
+  }
+}
+
+.button-selected {
+  background-color: #a4bdb9;
 }
 
 .button {
