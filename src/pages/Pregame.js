@@ -14,9 +14,6 @@ function Pregame({ socket, room, players, username, isHost, checkbox, startGame 
         chatArea: {
             fontSize: '13px'
         },
-        button: {
-            marginLeft: '170px'
-        }
     }
 
     socket.on('add-new-message', (data) => {
@@ -77,7 +74,9 @@ function Pregame({ socket, room, players, username, isHost, checkbox, startGame 
                             <br />
                         </form>
                         <br />
-                        <button style={styles.button} className="button" onClick={() => startGame()}>Start Game!</button>
+                        <div style={{width: '180px', margin: '0 auto'}}>
+                            <button className="button" onClick={() => startGame()}>Start Game!</button>
+                        </div>
                     </div>
 
                 ) : null}

@@ -127,7 +127,9 @@ function Game({room, leaveRoom, username, socket, isHost}) {
 
             </div>
         )}
-        <button style={{marginLeft: '180px'}} className="button" onClick={leaveRoom}>Leave Room</button>
+        <div style={{width: '180px', margin: '0 auto'}}>
+            <button className="button" onClick={leaveRoom}>Leave Room</button>
+        </div>
       </div>
     );
   };
