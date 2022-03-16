@@ -21,14 +21,14 @@ function Trivia({socket, room}) {
     })
 
     const startGame = (triviaObj) => {
-        setQuestion(decodeURI(triviaObj.question));
-        setCorrect(decodeURI(triviaObj.correct_answer));
+        setQuestion(decode(triviaObj.question));
+        setCorrect(decode(triviaObj.correct_answer));
         const ans = triviaObj.incorrect_answers;
         if (ans.length === 3){
             ans.push(triviaObj.correct_answer)
         }
         ans.map(an => {
-            return decodeURI(an)
+            return decode(an)
         })
         const shuffle = function shuffle(a) {
             for (let i = a.length - 1; i > 0; i--) {
