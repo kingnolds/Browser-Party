@@ -35,6 +35,11 @@ export default function Login({loggedIn, logMeOut, logMeIn, username, loginInfo,
 
   return (
       <div>
+        <style>
+                {`
+        cursor: pointer
+      `}
+            </style>
         <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
         <div style={styles.component} className="component">
           <div>
@@ -55,7 +60,7 @@ export default function Login({loggedIn, logMeOut, logMeIn, username, loginInfo,
                   <label>Password</label>
                   <input style={styles.input} className="input" type="password" value={loginInfo.password} onChange={handleInputChange} name="password"/>
                 </div>
-                  <button style={{marginTop: '14px', marginLeft: '105px', fontSize: '25px', cursor:pointer}} className="button" onClick={logMeIn} onTouchStart={logMeIn}>Login</button>
+                  <button style={{marginTop: '14px', marginLeft: '105px', fontSize: '25px'}} className="button" onClick={logMeIn} onTouchStart={logMeIn}>Login</button>
               </div>
             )}
               </div>
