@@ -51,7 +51,7 @@ export default function Register({username, registerInfo, handleInputChangeRegis
                         <label>Password</label>
                         <input style={styles.input} className="input" type="password" onChange={handleInputChangeRegister} value={registerInfo.password} name="password"/>
                     </div>
-                    <button style={styles.button} className="button" type="submit" onClick={registerSubmit} onTouchStart={registerSubmit}>Register</button>
+                    <button style={styles.button} className="button" type="submit" onClick={registerSubmit}>Register</button>
               </div>
           </div>
         </div>
