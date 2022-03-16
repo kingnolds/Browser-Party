@@ -19,6 +19,18 @@ function Game({room, leaveRoom, username, socket, isHost}) {
     innerCard: {
         // marginLeft: '10px',
         marginBottom: '20px'
+<<<<<<< HEAD
+=======
+    },
+    noButton: {
+        background: 'none',
+        border: 'none',
+        float: 'right',
+        color: 'white',
+        fontSize: '22px',
+        fontWeight: 'bold',
+        textShadow: '2px 2px 1px #776e8d'
+>>>>>>> dev
     }
   }
 
@@ -120,11 +132,15 @@ function Game({room, leaveRoom, username, socket, isHost}) {
                         <Trivia socket={socket} room={room}/>
                     </div>
                 ) :null}
-
             </div>
         )}
+<<<<<<< HEAD
         <div style={{width: '180px', margin: '0 auto'}}>
             <button className="button" onClick={leaveRoom}>Leave Room</button>
+=======
+        <div style={{height: '15px', marginBottom: '5px'}}>
+            <button style={styles.noButton} onClick={leaveRoom}>Leave Room</button>
+>>>>>>> dev
         </div>
       </div>
     );

@@ -57,14 +57,14 @@ export default function Scoreboard({room, username, players, endGame, nextRound}
     return (
         <div>
             {endGame ? (
-                <div>
-                    <h1>Game Over!</h1>
+                <div style={{textAlign: 'center'}}>
+                    <h2>Game Over!</h2>
                     <h3>{rankedScores[0].username} is the winner!</h3>
                     <h5>Final Standings:</h5>
-                    <ol className="list-group">
+                    <ol style={{listStyle: 'decimal inside none', marginBottom: '10px'}} className="list-group">
                     {rankedScores.map(player => (
-                        <li className="list-group-player" key={player.username} style={(player.username === username) ? {color:"blue"}:{}}>
-                            {player.username}: {player.score} points
+                        <li className="list-group-player" key={player.username} style={(player.username === username) ? {color:"white"}:{}}>
+                             {player.username}: {player.score} points
                         </li>
                     ))}
                     </ol>
@@ -73,19 +73,19 @@ export default function Scoreboard({room, username, players, endGame, nextRound}
 
                     ) : null}
 
-                    <button className="button" onClick={playAgain}>Play Again!</button>
+                    <button style={{marginTop: '20px'}}className="button" onClick={playAgain}>Play Again!</button>
                 </div>
             ) : (
-                <div>
-
-                <h1>Scoreboard for room: {room}</h1>
-                <ol className="list-group">
+                <div style={{textAlign: 'center'}}>
+                <h2 style={{textAlign: 'center'}}>Scoreboard for room: {room}</h2>
+                <ol style={{listStyle: 'decimal inside none'}} className="list-group">
                     {rankedScores.map(player => (
-                        <li className="list-group-player" key={player.username} style={(player.username === username) ? {color:"blue"}:{}}>
+                        <li className="list-group-player" key={player.username} style={(player.username === username) ? {color:"white"}:{}}>
                             {player.username}: {player.score} points
                         </li>
                     ))}
                 </ol>
+                <br></br>
                 <h3>Next Round: {games[nextRound-1].game}</h3>
                 <h5>Instructions: {games[nextRound-1].instructions}</h5>
                 </div>
