@@ -66,7 +66,7 @@
   transform: scale(1);
 }
 
-@media screen and (max-width: 992px) {
+/* @media screen and (max-width: 992px) { */
   /* .hole {
       width: 150px;
       height: 150px;
@@ -75,11 +75,15 @@
       width: 150px;
       height: 150px;
   } */
-}
+
 
 @media screen and (max-width: 600px) {
   .memory-board {
     height: 400px;
     width: 400px;
+  }
+  .memory-card img {
+    max-width: 60px;
+    max-height: 60px;
   }
 }
