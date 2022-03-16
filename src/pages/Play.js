@@ -121,7 +121,7 @@ export default function Play({ username }) {
           <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
           <div>
             {inGame ? (
-              <div style={styles.gameCard} className="component">
+              <div className="game-card">
                 <Game room={room} leaveRoom={leaveRoom} username={username} socket={socket} isHost={isHost} />
               </div>
             ) : (
@@ -131,8 +131,8 @@ export default function Play({ username }) {
                   {isHost ? (
                     <div>
                       <div style={styles.hostJoin}>
-                        <button style={styles.hostButton} className="button" onClick={(event) => { setIsHost(true) }}>Host</button>
-                        <button className="button-unpressed" onClick={(event) => { setIsHost(false) }}>Join</button>
+                        <button style={styles.hostButton} className="button-pressed" onClick={(event) => { setIsHost(true) }}>Host</button>
+                        <button className="button" onClick={(event) => { setIsHost(false) }}>Join</button>
                       </div>
                       <div style={styles.form}>
                         <label>Choose Room Code:</label>
@@ -145,8 +145,8 @@ export default function Play({ username }) {
                   ) : (
                     <div>
                       <div style={styles.hostJoin}>
-                        <button style={styles.hostButton} className="button-unpressed" onClick={(event) => { setIsHost(true) }}>Host</button>
-                        <button className="button" onClick={(event) => { setIsHost(false) }}>Join</button>
+                        <button style={styles.hostButton} className="button" onClick={(event) => { setIsHost(true) }}>Host</button>
+                        <button className="button-pressed" onClick={(event) => { setIsHost(false) }}>Join</button>
                       </div>
                       <div style={styles.form}>
                         {/* <label>Username:</label>
@@ -158,14 +158,6 @@ export default function Play({ username }) {
                         <br></br>
                         <button style={styles.joinButton} className="button" onClick={joinRoom}>Join Room</button>
                       </div>
-                      {/* // <div>
-                //   <label>Username:</label>
-                //   <input type="text" onChange={(event) => {setUsername(event.target.value)}}></input>
-                //   <label>Existing Room Code:</label>
-                //   <input type="text" onChange={(event) => {setRoom(event.target.value)}}></input>
-
-                //   <button onClick={joinRoom}>Join Room</button>
-                // </div> */}
                     </div>
                   )}
                 </div>
