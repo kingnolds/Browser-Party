@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import RoundOver from '../RoundOver';
 
-const MOLE_NUMBER = 6
+const MOLE_NUMBER = 8
 let TIME_LIMIT = 30000
 const Timer = ({ time, interval = 1000, onEnd }) => {
     const [internalTime, setInternalTime] = useState(time)
@@ -37,7 +37,7 @@ const Whack = function ({socket, room}) {
     };
     const startGame = () => {
         generateIndex()
-        const refresh = setInterval(generateIndex, 5000);
+        const refresh = setInterval(generateIndex, 1500);
         setTimer(refresh);
     };
     const endGame = () => {
@@ -66,22 +66,49 @@ const Whack = function ({socket, room}) {
         .gameBox {
             display: flex;
             flex-wrap: wrap;
-            height: 100%
+            height: 100%;
+            align-items: center;
         }
 
         .hole {
           flex-grow: 1;
-          min-height: 90%;
-          min-width: 90%;
+          width: 22vw;
+            height: 22vw;
           border: 1px solid black;
           border-radius: 50%;
         }
+
+        .moleHole {
+          flex-grow: 1;
+          width: 22vw;
+            height: 22vw;
+          border: 1px solid black;
+          border-radius: 50%;
+          background-repeat: no-repeat;
+          background-image: url(/images/mole.png);
+          background-size: 90%;
+          background-position: 50% 50%;
+          animation: molemove 1s infinite;
+        }
+        
+        @keyframes molemove {
+            from {
+                background-position: 50% 1000%;
+            }
+            to {
+                background-position: 50% 50%;
+            }
+        }
         
         .container {
-          flex-grow: 1;
-          flex-basis: 21%;
-          flex-shrink: 0;
-          min-height: 50px;
+            flex-grow: 1;
+            flex-basis: 21%;
+            flex-shrink: 0;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 22vw;
+            height: 22vw;
         }
         
         img {
@@ -103,11 +130,7 @@ const Whack = function ({socket, room}) {
                         if (Array.from(index).includes(n)) {
                             return (
                                 <div className="container" key={n}>
-                                    <img
-                                        src="https://grid.gograph.com/happy-mole-cartoon-vector-art_gg68718247.jpg"
-                                        alt="mole"
-                                        onClick={() => onClick(n)}
-                                    />
+                                    <button className="moleHole" onClick={() => onClick(n)}></button>
                                 </div>
                             );
                         } else {
