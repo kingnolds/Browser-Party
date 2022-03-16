@@ -66,9 +66,9 @@ function Trivia({socket, room}) {
                 
                     <h3>Trivia!</h3>
                     <h4>Question: {question}</h4>
-                    <ul className="list-group">
+                    <ul style={{listStyle: 'none', margin: '10px'}} className="list-group">
                         {answers.map(answer => (
-                            <li className="list-group-player" key={answers.indexOf(answer)}>
+                            <li style={{margin: '10px 0'}} className="list-group-player" key={answers.indexOf(answer)}>
                                 <button className="button" onClick={() => selectAnswer(answer)}>{answer}</button>
                             </li>
                         ))}
