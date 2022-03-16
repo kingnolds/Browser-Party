@@ -33,6 +33,11 @@ export default function Register({username, registerInfo, handleInputChangeRegis
 
   return (
     <div>
+      <style>
+                {`
+        cursor: pointer
+      `}
+            </style>
       {!username ? (
         <div>
         <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
