@@ -19,6 +19,8 @@ function Game({room, leaveRoom, username, socket, isHost}) {
     innerCard: {
         // marginLeft: '10px',
         marginBottom: '20px'
+<<<<<<< HEAD
+=======
     },
     noButton: {
         background: 'none',
@@ -28,22 +30,19 @@ function Game({room, leaveRoom, username, socket, isHost}) {
         fontSize: '22px',
         fontWeight: 'bold',
         textShadow: '2px 2px 1px #776e8d'
+>>>>>>> dev
     }
   }
 
-  socket.on(`scoreboard${room}`, (show) => {
+  socket.on(`scoreboard-${room}`, (show) => {
     setScoreboard(show);
   })
 
-  socket.on(`new-player${room}`, (sockets) => {
+  socket.on(`update-players-${room}`, (sockets) => {
     setPlayers(sockets)
   })
 
-  socket.on(`update-players${room}`, (sockets) => {
-    setPlayers(sockets)
-  })
-
-  socket.on(`set-round`, (round) => {
+  socket.on(`set-round-${room}`, (round) => {
     if (round === "trivia1") {
         setRound(1)
     } 
@@ -135,8 +134,13 @@ function Game({room, leaveRoom, username, socket, isHost}) {
                 ) :null}
             </div>
         )}
+<<<<<<< HEAD
+        <div style={{width: '180px', margin: '0 auto'}}>
+            <button className="button" onClick={leaveRoom}>Leave Room</button>
+=======
         <div style={{height: '15px', marginBottom: '5px'}}>
             <button style={styles.noButton} onClick={leaveRoom}>Leave Room</button>
+>>>>>>> dev
         </div>
       </div>
     );
