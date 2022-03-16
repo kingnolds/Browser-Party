@@ -53,8 +53,8 @@ export default function Login(props) {
                 <div  style={styles.form} className="form-group">
                   <label>Password</label>
                   <input style={styles.input} className="input" type="password" value={props.loginInfo.password} onChange={props.handleInputChange} name="password"/>
-                  <button style={{marginTop: '14px', marginLeft: '105px', fontSize: '25px'}} className="button" onClick={props.logMeIn} onTouchStart={props.logMeIn}>Login</button>
                 </div>
+                  <button style={{marginTop: '14px', marginLeft: '105px', fontSize: '25px'}} className="button" onClick={props.logMeIn} onTouchStart={props.logMeIn}>Login</button>
               </form>
             )}
               </div>
