@@ -7,9 +7,9 @@ const styles = {
   },
   component:
   {
-    width: '120px',
+    width: '333px',
     margin: '0 auto auto auto',
-    padding: '28px',
+    padding: '26px',
 
   },
   form: {
@@ -19,6 +19,7 @@ const styles = {
   input:
   {
     border: '1px solid black',
+    marginBottom: '10px',
   },
   h3: {
     display: 'inline',
@@ -53,7 +54,7 @@ export default function Login(props) {
                 <div  style={styles.form} className="form-group">
                   <label>Password</label>
                   <input style={styles.input} className="input" type="password" value={props.loginInfo.password} onChange={props.handleInputChange} name="password"/>
-                  <button style={{marginTop: '14px', marginLeft: '125px', fontSize: '25px'}} className="button" onClick={props.logMeIn}>Login</button>
+                  <button style={{marginTop: '9px', marginLeft: '98px', fontSize: '25px'}} className="button" onClick={props.logMeIn}>Login</button>
                 </div>
               </form>
             )}
