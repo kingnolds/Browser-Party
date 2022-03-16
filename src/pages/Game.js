@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Scoreboard from "../components/Scoreboard"
 import Whack from "../components/games/WhackAMole"
 import Memory from "../components/games/MemoryBoard"
-import Trivia from "../components/games/Trivia1"
+import Trivia from "../components/games/Trivia"
+import Pregame from "./Pregame"
 
 function Game({room, leaveRoom, username, socket, isHost}) {
   const [players, setPlayers] = useState([])
@@ -21,7 +22,6 @@ function Game({room, leaveRoom, username, socket, isHost}) {
     button: {
         margin: '20px',
         fontSize: '25px',
-        backgroundColor: '#668586',
     }
   }
 
@@ -38,7 +38,6 @@ function Game({room, leaveRoom, username, socket, isHost}) {
   })
 
   socket.on(`set-round`, (round) => {
-    console.log("set round", round)
     if (round === "trivia1") {
         setRound(1)
     } 
@@ -77,7 +76,6 @@ function Game({room, leaveRoom, username, socket, isHost}) {
   }
 
   const startGame = () => {
-    console.log(includeTrivia, includeWhack, includeMemory, includeSnake)
     if (includeTrivia === false && includeWhack === false && includeMemory === false && includeSnake === false) {
         alert("You must choose at least game")
     } else {
@@ -91,7 +89,7 @@ function Game({room, leaveRoom, username, socket, isHost}) {
       if (isMounted) setPlayers(sockets)
     })
     return () => { isMounted = false }; // cleanup toggles value, if unmounted
-  }, [players]);                               // adjust dependencies to your needs
+  }, [players, room, socket]);                               // adjust dependencies to your needs
 
     return (
       <div className="Game">
@@ -101,34 +99,7 @@ function Game({room, leaveRoom, username, socket, isHost}) {
             <div>
                 {round === 0 ? (
                     <div>
-                        <h1>Game: {room}</h1>
-                        <h3>Players:</h3>
-                        <ul className="list-group">
-                            {players.map(player => (
-                                <li className="list-group-player" key={player.username} style={(player.username == username) ? {color:"blue"}:{}}>
-                                    {player.username} (score: {player.score})
-                                </li>
-                            ))}
-                        </ul>
-                        
-                        {isHost ? (
-                            <div>
-                                <form>
-                                    <input type="checkbox" key="triviaCheck" name="triviaCheck" onChange={() => {checkbox("Trivia")}}/>
-                                    <label htmlFor="triviaCheck"> Trivia</label><br/>
-                                    <input type="checkbox" key="whackCheck" name="whackCheck" onChange={() => {checkbox("Whack")}}/>
-                                    <label htmlFor="whackCheck"> Whack-A-Mole</label><br/>
-                                    <input type="checkbox" key="memoryCheck" name="memoryCheck" onChange={() => {checkbox("Memory")}}/>
-                                    <label htmlFor="memoryCheck"> Memory Cards</label><br/>
-                                    <input type="checkbox" key="snakeCheck" name="snakeCheck" disabled readOnly/>
-                                    <label htmlFor="snakeCheck"> Snake (in development)</label>
-                                    <br/>
-                                </form>
-                                    <br/>
-                                <button style={styles.button} className="btn" onClick={()=>startGame()}>Start Game!</button>
-                            </div>
-                            
-                        ):null}
+                        <Pregame socket={socket} username={username} room={room} isHost={isHost} players={players} checkbox={checkbox} startGame={startGame}/>
                     </div>
                 ):null}
                 {round === 1 ? (
@@ -159,7 +130,7 @@ function Game({room, leaveRoom, username, socket, isHost}) {
 
             </div>
         )}
-        <button style={styles.button} className="btn" onClick={leaveRoom}>Leave Room</button>
+        <button style={styles.button} className="button" onClick={leaveRoom}>Leave Room</button>
       </div>
     );
   };

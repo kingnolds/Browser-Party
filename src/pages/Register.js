@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
-import {useParams} from "react-router-dom"
-import API from '../utils/api';
+import React from 'react';
+
 
 export default function Register(props) {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const params = useParams();
 
   const styles = {
     logo: {
-      margin: '10% auto 0px auto',
+      margin: '18vh auto 0px auto',
     },
     component:
     {
@@ -19,14 +15,12 @@ export default function Register(props) {
     },
     form: {
       fontSize: '25px',
-      marginLeft: '12px'
+      marginLeft: '20px'
     },
     input:
     {
       fontSize: '25px',
       marginBottom: '15px',
-      border: '1px solid black',
-      borderBottom: '2px solid black',
     },
     button:
     {
@@ -35,23 +29,6 @@ export default function Register(props) {
       fontSize: '25px'
     }
   }
-
-  //   return (
-  //     <div>
-  //         <div style={styles.card} className='container'>
-  //             <div className='card'>
-  //             <form>
-  //                 <h1>Register</h1>
-  //               <input type="text" value={props.registerInfo.username} onChange={props.handleInputChangeRegister} name="username" placeholder="Username" />
-  //               <input type="password" value={props.registerInfo.password} onChange={props.handleInputChangeRegister} name="password" placeholder="Password" />
-  //               <button onClick={props.registerSubmit}>Register</button>
-  //             </form>
-  //             </div>
-  //         </div>
-
-  //     </div>
-  //   );
-  // }
 
   return (
     <div>
@@ -63,11 +40,11 @@ export default function Register(props) {
                 <form>
                     <div style={styles.form} className="form-group">
                         <label>Username</label>
-                        <input style={styles.input} type="username" onChange={props.handleInputChangeRegister} value={props.registerInfo.username} name="username"/>
+                        <input style={styles.input} className="input" type="username" onChange={props.handleInputChangeRegister} value={props.registerInfo.username} name="username"/>
                     </div>
                     <div style={styles.form} className="form-group">
                         <label>Password</label>
-                        <input style={styles.input} type="password" onChange={props.handleInputChangeRegister} value={props.registerInfo.password} name="password"/>
+                        <input style={styles.input} className="input" type="password" onChange={props.handleInputChangeRegister} value={props.registerInfo.password} name="password"/>
                     </div>
                     <button style={styles.button} className="button" type="submit" onClick={props.registerSubmit}>Register</button>
                 </form>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {BrowserRouter as Router, Routes, Route, Link, useNavigate} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import API from "./utils/api"
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
@@ -12,7 +12,6 @@ import About from './pages/About';
 function App() {
 
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
 
   var loggedIn = false;
@@ -133,7 +132,7 @@ function App() {
         <Route path="/login" element={<Login loggedIn={loggedIn} logMeOut={logMeOut} logMeIn={logMeIn} username={username} loginInfo={loginInfo}  handleInputChange={handleInputChange}/>}/>
         <Route path="/profile" element={<Profile loginInfo={loginInfo} username={username}/>}/>
         <Route path="/play" element={<Play username={username}/>}/>
-        <Route path="/register" element={<Register username={username} password={password} registerInfo={registerInfo}  handleInputChangeRegister={handleInputChangeRegister} registerSubmit={registerSubmit}/>}/>
+        <Route path="/register" element={<Register username={username} registerInfo={registerInfo} handleInputChangeRegister={handleInputChangeRegister} registerSubmit={registerSubmit}/>}/>
         <Route path="/about" element={<About/>}/>
         </Routes>
         </Router>
