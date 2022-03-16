@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export default function Register(props) {
+export default function Register({username, registerInfo, handleInputChangeRegister, registerSubmit}) {
 
   const styles = {
     logo: {
@@ -26,13 +26,14 @@ export default function Register(props) {
     {
       marginTop: '8px',
       marginLeft: '110px',
-      fontSize: '25px'
+      fontSize: '25px',
+      cursor:"pointer"
     }
   }
 
   return (
     <div>
-      {!props.username ? (
+      {!username ? (
         <div>
         <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
           <div style={styles.component} className="component">
@@ -40,13 +41,13 @@ export default function Register(props) {
                 <form>
                     <div style={styles.form} className="form-group">
                         <label>Username</label>
-                        <input style={styles.input} className="input" type="username" onChange={props.handleInputChangeRegister} value={props.registerInfo.username} name="username"/>
+                        <input style={styles.input} className="input" type="username" onChange={handleInputChangeRegister} value={registerInfo.username} name="username"/>
                     </div>
                     <div style={styles.form} className="form-group">
                         <label>Password</label>
-                        <input style={styles.input} className="input" type="password" onChange={props.handleInputChangeRegister} value={props.registerInfo.password} name="password"/>
+                        <input style={styles.input} className="input" type="password" onChange={handleInputChangeRegister} value={registerInfo.password} name="password"/>
                     </div>
-                    <button style={styles.button} className="button" type="submit" onClick={props.registerSubmit} onTouchStart={props.registerSubmit}>Register</button>
+                    <button style={styles.button} className="button" type="submit" onClick={registerSubmit} onTouchStart={registerSubmit}>Register</button>
                 </form>
               </div>
           </div>

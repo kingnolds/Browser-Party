@@ -31,31 +31,32 @@ const styles = {
   }
 }
 
-export default function Login(props) {
+export default function Login({loggedIn, logMeOut, logMeIn, username, loginInfo, handleInputChange}) {
 
   return (
       <div>
         <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
         <div style={styles.component} className="component">
           <div>
-            {props.username ? (
+            {username ? (
               <div>
-                <h2>You are now logged in, {props.username}</h2>
+                <h2>You are now logged in, {username}</h2>
                 <Link to="/">Home</Link>
-                <button style={styles.button} className="button" onClick={props.logMeOut}>LogOut</button>
+                <button style={styles.button} className="button" onClick={logMeOut}>LogOut</button>
               </div>
             ) : (
-              <form>
+              <div>
+
                 <div style={styles.form} className="form-group">
                   <label>Username</label>
-                  <input style={styles.input} className="input" type="text" value={props.loginInfo.username} onChange={props.handleInputChange} name="username"/>
+                  <input style={styles.input} className="input" type="text" value={loginInfo.username} onChange={handleInputChange} name="username"/>
                 </div>
                 <div  style={styles.form} className="form-group">
                   <label>Password</label>
-                  <input style={styles.input} className="input" type="password" value={props.loginInfo.password} onChange={props.handleInputChange} name="password"/>
+                  <input style={styles.input} className="input" type="password" value={loginInfo.password} onChange={handleInputChange} name="password"/>
                 </div>
-                  <button style={{marginTop: '14px', marginLeft: '105px', fontSize: '25px'}} className="button" onClick={props.logMeIn} onTouchStart={props.logMeIn}>Login</button>
-              </form>
+                  <button style={{marginTop: '14px', marginLeft: '105px', fontSize: '25px', cursor:"pointer"}} className="button" onClick={logMeIn}>Login</button>
+              </div>
             )}
               </div>
           </div>
