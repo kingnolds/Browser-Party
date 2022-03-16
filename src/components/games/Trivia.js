@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
+import React, { useState } from 'react';
 import Timer from "../Timer"
 import RoundOver from "../RoundOver"
 
@@ -75,6 +74,7 @@ function Trivia({socket, room}) {
                         ))}
                     </ul>
                     <p>Your selection: {selection}</p>
+                
                 </div>
 
                 )}

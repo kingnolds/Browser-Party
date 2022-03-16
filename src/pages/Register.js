@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
-import {useParams} from "react-router-dom"
-import API from '../utils/api';
+import React from 'react';
+
 
 export default function Register(props) {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const params = useParams();
 
   const styles = {
     logo: {

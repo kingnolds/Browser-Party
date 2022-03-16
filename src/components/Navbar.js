@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const styles = {
   hiThere: {
     marginLeft: 'auto', 
     display: 'flex',
+    marginBottom: '4px'
   },
   logoutButton: {
     float: 'right',
-    fontSize: '13px',
+    fontSize: '15px',
     display: 'flex',
-    margin: '6px 8px 0 8px',
-    height: '26px',
+    margin: '6px 10px 0 12px',
+    height: '30px',
     width: '65px',
-    padding: '0 0 4px 9px'
+    padding: '0 0 5px 6px'
   }
 }
 

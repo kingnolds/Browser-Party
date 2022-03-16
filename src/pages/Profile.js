@@ -1,5 +1,4 @@
 import React from 'react';
-// import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import API from '../utils/api';
@@ -10,15 +9,12 @@ export default function Profile({ loginInfo, username }) {
   const [friends, setFriends] = useState([])
   const [wins, setWins] = useState(0)
   const [friendSearch, setFriendSearch] = useState('')
-  useEffect(() => {
-    // console.log(loginInfo)
-    // console.log(loginInfo.username)
-    // console.log(username)
-    API.getSingleUser(username).then(data => {
-      // console.log(data)
-      setFriends(data.user?.friends)
-      setWins(data.user?.wins)
-    })
+  useEffect(()=>{
+
+      API.getSingleUser(username).then(data=>{
+        setFriends(data.user?.friends)
+        setWins(data.user?.wins)
+      })
   })
 
   let navigate = useNavigate();
@@ -28,13 +24,11 @@ export default function Profile({ loginInfo, username }) {
     navigate(path);
   }
 
-  const handleFriendSearch = function (e) {
-    const friendName = e.target.value
+  const handleFriendSearch = function(e) {
     setFriendSearch(e.target.value)
   }
-  const handleAddFriend = function (e) {
-    const friendName = friendSearch
-    API.addFriend(username, friendSearch).then((data) => {
+  const handleAddFriend = function(e) {
+    API.addFriend(username, friendSearch).then((data)=>{
       console.log(data)
       setFriendSearch('')
     })
@@ -87,10 +81,10 @@ export default function Profile({ loginInfo, username }) {
               ))}
             </ul>
             <p>Add a Friend:</p>
-            <input style={{width: '250px', color: '#3eff48', background: 'none', border: '2px solid #3eff48', borderRadius: '3px'}} type="text" value={friendSearch} onChange={handleFriendSearch} name="username" />
+            <input className="computer-input" type="text" value={friendSearch} onChange={handleFriendSearch} name="username" />
             <br></br>
             <br></br>
-            <Button style={{color: '#27262e', background: '#3eff48', border: 'none'}} value={friendSearch} onClick={handleAddFriend}>Add Friend</Button>
+            <button className="computer-button" value={friendSearch} onClick={handleAddFriend}>Add Friend</button>
           </div>
         </div>
       ) : (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom"
 import Game from "./Game"
 import io from "socket.io-client";
@@ -122,8 +122,7 @@ export default function Play({ username }) {
           <div>
             {inGame ? (
               <div className="game-card">
-                {/* <h4 style={styles.h4}>Socket Id: {socket.id}</h4> */}
-                <Game room={room} leaveRoom={leaveRoom} id={socket.id} socket={socket} isHost={isHost} />
+                <Game room={room} leaveRoom={leaveRoom} username={username} socket={socket} isHost={isHost} />
               </div>
             ) : (
               <div style={styles.component} className="component">
@@ -136,9 +135,6 @@ export default function Play({ username }) {
                         <button className="button" onClick={(event) => { setIsHost(false) }}>Join</button>
                       </div>
                       <div style={styles.form}>
-                        {/* <label>Username:</label>
-                    <br></br>
-                    <input style={styles.input} type="text" onChange={(event) => { setUsername(event.target.value) }}></input> */}
                         <label>Choose Room Code:</label>
                         <br></br>
                         <input style={styles.input} className="input" type="text" onChange={(event) => { setRoom(event.target.value) }}></input>
@@ -162,14 +158,6 @@ export default function Play({ username }) {
                         <br></br>
                         <button style={styles.joinButton} className="button" onClick={joinRoom}>Join Room</button>
                       </div>
-                      {/* // <div>
-                //   <label>Username:</label>
-                //   <input type="text" onChange={(event) => {setUsername(event.target.value)}}></input>
-                //   <label>Existing Room Code:</label>
-                //   <input type="text" onChange={(event) => {setRoom(event.target.value)}}></input>
-
-                //   <button onClick={joinRoom}>Join Room</button>
-                // </div> */}
                     </div>
                   )}
                 </div>

@@ -1,6 +1,7 @@
 // Local
 const BASEURL = "http://localhost:3001"
-//Deployed
+
+// Deployed
 // const BASEURL = "https://browser-party-backend.herokuapp.com"
 
 
@@ -39,10 +40,7 @@ const API = {
         "Content-Type": "application/json"
       }
     })
-      .then(res => {
-        console.log(res.json())
-      }
-      )
+      .then(res => res.json())
   },
 
   getSingleUser: (username) => {
