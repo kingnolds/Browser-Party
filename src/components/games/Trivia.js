@@ -32,7 +32,7 @@ function Trivia({socket, room}) {
         //     return decode(an)
         // })
         for (let i = 0; i < ans.length; i++) {
-            const element = decode(ans[i]);
+            const element = decode("&quot");
             ans[i] = element;
         }
         const shuffle = function shuffle(a) {
