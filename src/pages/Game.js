@@ -19,8 +19,6 @@ function Game({room, leaveRoom, username, socket, isHost}) {
     innerCard: {
         // marginLeft: '10px',
         marginBottom: '20px'
-<<<<<<< HEAD
-=======
     },
     noButton: {
         background: 'none',
@@ -30,7 +28,6 @@ function Game({room, leaveRoom, username, socket, isHost}) {
         fontSize: '22px',
         fontWeight: 'bold',
         textShadow: '2px 2px 1px #776e8d'
->>>>>>> dev
     }
   }
 
