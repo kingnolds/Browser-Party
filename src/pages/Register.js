@@ -60,7 +60,7 @@ export default function Register({username, registerInfo, handleInputChangeRegis
         <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
           <div style={styles.component} className="component">
               <div>
-                <h3>Can't register while already logged in.</h3>
+                <h3>Congrats! You are now logged in as {username}.</h3>
               </div>
           </div>
         </div>
