@@ -9,12 +9,12 @@ export default function Profile({ loginInfo, username }) {
   const [friends, setFriends] = useState([])
   const [wins, setWins] = useState(0)
   const [friendSearch, setFriendSearch] = useState('')
-  useEffect(()=>{
+  useEffect(() => {
 
-      API.getSingleUser(username).then(data=>{
-        setFriends(data.user?.friends)
-        setWins(data.user?.wins)
-      })
+    API.getSingleUser(username).then(data => {
+      setFriends(data.user?.friends)
+      setWins(data.user?.wins)
+    })
   })
 
   let navigate = useNavigate();
@@ -24,11 +24,11 @@ export default function Profile({ loginInfo, username }) {
     navigate(path);
   }
 
-  const handleFriendSearch = function(e) {
+  const handleFriendSearch = function (e) {
     setFriendSearch(e.target.value)
   }
-  const handleAddFriend = function(e) {
-    API.addFriend(username, friendSearch).then((data)=>{
+  const handleAddFriend = function (e) {
+    API.addFriend(username, friendSearch).then((data) => {
       console.log(data)
       setFriendSearch('')
     })
@@ -77,7 +77,7 @@ export default function Profile({ loginInfo, username }) {
             <p>Friends list:</p>
             <ul>
               {friends?.map((friend, index) => (
-                <li key={index}>{friend}  <Button style={{margin: '5px 0 12px 0'}} name={friend} variant="outline-danger" onClick={handleRemoveFriend}>Remove Friend</Button></li>
+                <li key={index}>{friend}  <Button style={{ margin: '5px 0 12px 0' }} name={friend} variant="outline-danger" onClick={handleRemoveFriend}>Remove Friend</Button></li>
               ))}
             </ul>
             <p>Add a Friend:</p>
@@ -89,9 +89,14 @@ export default function Profile({ loginInfo, username }) {
         </div>
       ) : (
         <div>
-          <div style={{ width: '440px', height: '100px', margin: '0 auto', padding: '20px', fontSize: '25px' }} className="component">
+          <div style={{
+            width: '400px',
+            margin: '0 auto',
+            padding: '20px',
+            fontSize: '25px'
+          }} className="component">
             You must login first!
-            <button style={{ marginLeft: '40px' }} className="button" type="submit" onClick={loginChange}>Login</button>
+            <button style={{ marginLeft: '22px' }} className="button" type="submit" onClick={loginChange}>Login</button>
           </div>
         </div>
       )}
