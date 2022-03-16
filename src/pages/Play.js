@@ -170,9 +170,14 @@ export default function Play({ username }) {
       ) : (
         <div>
           <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
-          <div style={styles.component} className="component">
+          <div style={{
+            width: '400px',
+            margin: '0 auto',
+            padding: '20px',
+            fontSize: '25px',
+          }} className="component">
             You must login first!
-            <button style={{marginLeft: '40px'}} className="button" type="submit" onClick={loginChange}>Login</button>
+            <button style={{ marginLeft: '22px' }} className="button" type="submit" onClick={loginChange}>Login</button>
           </div>
         </div>
       )}

@@ -9,9 +9,9 @@ export default function Register({username, registerInfo, handleInputChangeRegis
     },
     component:
     {
-      width: '400px',
+      width: '333px',
       margin: '0 auto auto auto',
-      padding: '28px',
+      padding: '26px',
     },
     form: {
       fontSize: '25px',
@@ -20,13 +20,13 @@ export default function Register({username, registerInfo, handleInputChangeRegis
     input:
     {
       fontSize: '25px',
-      marginBottom: '15px',
+      marginBottom: '10px',
     },
     button:
     {
-      marginTop: '8px',
-      marginLeft: '110px',
-      fontSize: '25px',
+      marginTop: '5px',
+      marginLeft: '77px',
+      fontSize: '25px'
     }
   }
 
