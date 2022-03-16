@@ -38,7 +38,6 @@ export default function Register({username, registerInfo, handleInputChangeRegis
         <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
           <div style={styles.component} className="component">
               <div>
-                <form>
                     <div style={styles.form} className="form-group">
                         <label>Username</label>
                         <input style={styles.input} className="input" type="username" onChange={handleInputChangeRegister} value={registerInfo.username} name="username"/>
@@ -48,7 +47,6 @@ export default function Register({username, registerInfo, handleInputChangeRegis
                         <input style={styles.input} className="input" type="password" onChange={handleInputChangeRegister} value={registerInfo.password} name="password"/>
                     </div>
                     <button style={styles.button} className="button" type="submit" onClick={registerSubmit} onTouchStart={registerSubmit}>Register</button>
-                </form>
               </div>
           </div>
         </div>
