@@ -15,7 +15,7 @@ export default function Register({username, registerInfo, handleInputChangeRegis
     },
     form: {
       fontSize: '25px',
-      marginLeft: '20px'
+      marginLeft: '-8px'
     },
     input:
     {

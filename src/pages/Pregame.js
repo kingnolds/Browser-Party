@@ -39,7 +39,8 @@ function Pregame({ socket, room, players, username, isHost, checkbox, startGame 
                 <ul className="player-list">
                     {players.map(player => (
                         <li className="player-list-item" key={player.username} style={(player.username === username) ? { color: "white" } : {}}>
-                            😎 {player.username} (score: {player.score})
+                            <img style={{maxHeight: '20px', margin: '0 5px 5px 0'}} src="/images/pawn-piece.png"/>
+                             {player.username} (score: {player.score})
                         </li>
                     ))}
                 </ul>
@@ -74,7 +75,7 @@ function Pregame({ socket, room, players, username, isHost, checkbox, startGame 
                             <br />
                         </form>
                         <br />
-                        <div style={{width: '180px', margin: '0 auto'}}>
+                        <div style={{width: '170px', margin: '0 auto'}}>
                             <button className="button" onClick={() => startGame()}>Start Game!</button>
                         </div>
                     </div>
