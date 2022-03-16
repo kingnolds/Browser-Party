@@ -46,7 +46,7 @@ export default function Register(props) {
                         <label>Password</label>
                         <input style={styles.input} className="input" type="password" onChange={props.handleInputChangeRegister} value={props.registerInfo.password} name="password"/>
                     </div>
-                    <button style={styles.button} className="button" type="submit" onClick={props.registerSubmit}>Register</button>
+                    <button style={styles.button} className="button" type="submit" onClick={props.registerSubmit} onTouchStart={props.registerSubmit}>Register</button>
                 </form>
               </div>
           </div>
