@@ -1,5 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react';
-// import Timer from '../Timer'
+import React, { useEffect, useRef, useState } from 'react';
 import RoundOver from '../RoundOver';
 
 const MOLE_NUMBER = 6
@@ -29,7 +28,6 @@ const Whack = function ({socket, room}) {
     const [index, setIndex] = useState([]);
     const [score, setScore] = useState(0);
     const [refresh, setTimer] = useState();
-    const [modal, setModal] = useState(false)
     const [isPlaying, setIsPlaying] = useState(true)
 
     const generateIndex = () => {
@@ -43,7 +41,6 @@ const Whack = function ({socket, room}) {
         setTimer(refresh);
     };
     const endGame = () => {
-        setModal(true)
         setIsPlaying(false)
         clearInterval(refresh);
         socket.emit("send-score", score)

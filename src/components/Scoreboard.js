@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import API from "../utils/api"
 
 export default function Scoreboard({room, username, players, endGame, nextRound}) {
@@ -43,7 +43,7 @@ export default function Scoreboard({room, username, players, endGame, nextRound}
 
     const init = async () => {
         if (endGame) {
-            if (rankedScores[0].username === username) {
+            if (rankedScores[0].username === username && players.length > 1) {
                 const response = await API.incrementWins(username)
             }
         } else {
@@ -62,7 +62,7 @@ export default function Scoreboard({room, username, players, endGame, nextRound}
                     <h5>Final Standings:</h5>
                     <ol className="list-group">
                     {rankedScores.map(player => (
-                        <li className="list-group-player" key={player.username} style={(player.username == username) ? {color:"blue"}:{}}>
+                        <li className="list-group-player" key={player.username} style={(player.username === username) ? {color:"blue"}:{}}>
                             {player.username}: {player.score} points
                         </li>
                     ))}
@@ -72,7 +72,7 @@ export default function Scoreboard({room, username, players, endGame, nextRound}
 
                     ) : null}
 
-                    <button onClick={playAgain}>Play Again!</button>
+                    <button className="button" onClick={playAgain}>Play Again!</button>
                 </div>
             ) : (
                 <div>
@@ -80,7 +80,7 @@ export default function Scoreboard({room, username, players, endGame, nextRound}
                 <h1>Scoreboard for room: {room}</h1>
                 <ol className="list-group">
                     {rankedScores.map(player => (
-                        <li className="list-group-player" key={player.username} style={(player.username == username) ? {color:"blue"}:{}}>
+                        <li className="list-group-player" key={player.username} style={(player.username === username) ? {color:"blue"}:{}}>
                             {player.username}: {player.score} points
                         </li>
                     ))}
