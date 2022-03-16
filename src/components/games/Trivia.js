@@ -28,9 +28,13 @@ function Trivia({socket, room}) {
         if (ans.length === 3){
             ans.push(triviaObj.correct_answer)
         }
-        ans.map(an => {
-            return decode(an)
-        })
+        // ans.map(an => {
+        //     return decode(an)
+        // })
+        for (let i = 0; i < ans.length; i++) {
+            const element = decode(ans[i]);
+            ans[i] = element;
+        }
         const shuffle = function shuffle(a) {
             for (let i = a.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
