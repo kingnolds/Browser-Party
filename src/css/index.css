@@ -19,10 +19,10 @@
 
 .hi-there {
   font-family: 'Fredoka', sans-serif;
-  font-size: 15px;
+  font-size: 18px;
   /* margin-left: auto; */
   float: 'right';
-  width: 250px;
+  width: 350px;
   height: 30px;
   /* text-align: end; */
 }
@@ -30,16 +30,7 @@
 .hi-there p {
   margin-left: auto; 
   font-family: 'Fredoka', sans-serif;
-  margin-top: 5px;
-}
-
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  margin-top: 7px; 
 }
 
 .nav-item {
@@ -64,8 +55,17 @@
   display: block;
   /* max-height: 25%; */
   max-width: 340px;
-  animation-duration: .7s;
-  animation-name: fadein;
+  animation-duration: .5s;
+  animation-name: logo-fade-in;
+}
+
+@keyframes logo-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .component, .game-card {
@@ -82,6 +82,10 @@
   animation-name: comp-slidein;
 }
 
+.game-card {
+  width: 700px;
+}
+
 @keyframes comp-slidein {
   from {
     margin-top: 50px;
@@ -91,7 +95,7 @@
   }
 }
 
-.button, .button-unpressed {
+.button, .button-pressed {
   border-radius: 5px;
   font-size: 25px;
   color: white;
@@ -104,7 +108,7 @@
   outline: 1px solid black;
 }
 
-.button-unpressed {
+.button-pressed {
   color: rgb(83, 148, 139);
   background-color: #315853;
   border-block-start: 3px solid #48aa9d;
@@ -112,6 +116,7 @@
   border-inline-end: 3px solid #245f52;
   border-block-end: 3px solid #112422;
   outline: 1px solid rgb(75, 75, 75);
+  box-shadow: 2px 2px 1px #4a3f50;
 }
 
 .input {
@@ -120,10 +125,139 @@
 }
 
 .game-card {
-  width: 1000px;
+  width: 700px;
   margin: 0 auto;
   padding: 25px;
   font-size: 20px;
+}
+
+.computer-screen {
+  color:#3eff48;
+  text-shadow: 3px 3px #203930;
+  background: #27262e;
+  outline: 2px solid black;
+  border-block-start: 8px solid #4f3767;
+  border-inline-start: 8px solid #543854;
+  border-inline-end: 8px solid #312532;
+  border-block-end: 8px solid #1e1b24;
+  border-radius: 45px;
+  padding: 4px;
+  animation-duration: 2s;
+  animation-name: screen-open;
+  overflow: hidden;
+}
+
+.computer-screen p, .computer-screen ul li, .computer-screen button, .computer-screen input {
+  font-family: 'Press Start 2P', cursive;
+  animation: text-fade-in 1s;
+  /* animation: distort 2000ms infinite; */
+}
+
+.player-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+
+.player-list-item {
+  margin-left: 8px;
+}
+
+.computer-screen .chatArea {
+  padding: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.computer-screen .chatArea .messages {
+  padding: 0;
+  list-style-type: none;
+}
+
+.computer-screen .chatArea .messages li {
+  margin-bottom: 10px;
+}
+
+.host-options {
+  margin: 40px 0 0 10px;
+}
+
+.host-options-list {
+  margin-left: 10px;
+}
+
+.host-options-list input {
+  margin-right: 5px;
+}
+
+.chat-computer-input {
+  width: 380px; 
+  color: #3eff48;
+  background: none; 
+  border: 2px solid #3eff48; 
+  border-radius: 3px;
+}
+
+.computer-input {
+  color: #3eff48;
+  background: none; 
+  border: 2px solid #3eff48; 
+  border-radius: 3px;
+  width: 270px;
+}
+
+.chat-computer-button {
+  border: none;
+  color: #27262e; 
+  background-color: #3eff48;
+  border-radius: 4px;
+  padding: 5px 12px;
+  width: 100px;
+}
+
+.computer-button {
+  border: none;
+  color: #27262e; 
+  background-color: #3eff48;
+  border-radius: 4px;
+  padding: 5px 12px;
+}
+
+@keyframes text-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* animation for distorted computer text */
+/* @keyframes distort {
+  0% {
+      text-shadow: 2px 1px #552010, -3px -3px #0b4791;
+  }
+  25% {
+      text-shadow: -2px -3px #552010, 3px 1px #0b4791;
+  }
+  50% {
+    text-shadow: 2px -1px #552010, -3px 1px #0b4791;
+  }
+  75% {
+      text-shadow: -3px -1px #552010, -3px -1px #0b4791;
+  }
+  100% {
+      text-shadow: -2px -2px #552010, 3px -1px #0b4791;
+  }
+} */
+
+@keyframes screen-open {
+  from {
+    max-height: 0px;
+  }
+  to {
+    max-height: 800px;
+  }
 }
 
 @media screen and (max-width: 1030px) {

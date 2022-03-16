@@ -16,28 +16,30 @@ function Game({room, leaveRoom, username, socket, isHost}) {
   const [includeSnake, setIncludeSnake] = useState(false)
   
   const styles = {
-    card: {
-        background: '#9E8FB2',
+    innerCard: {
+        // marginLeft: '10px',
+        marginBottom: '20px'
     },
-    button: {
-        margin: '20px',
-        fontSize: '25px',
+    noButton: {
+        background: 'none',
+        border: 'none',
+        float: 'right',
+        color: 'white',
+        fontSize: '22px',
+        fontWeight: 'bold',
+        textShadow: '2px 2px 1px #776e8d'
     }
   }
 
-  socket.on(`scoreboard${room}`, (show) => {
+  socket.on(`scoreboard-${room}`, (show) => {
     setScoreboard(show);
   })
 
-  socket.on(`new-player${room}`, (sockets) => {
+  socket.on(`update-players-${room}`, (sockets) => {
     setPlayers(sockets)
   })
 
-  socket.on(`update-players${room}`, (sockets) => {
-    setPlayers(sockets)
-  })
-
-  socket.on(`set-round`, (round) => {
+  socket.on(`set-round-${room}`, (round) => {
     if (round === "trivia1") {
         setRound(1)
     } 
@@ -96,7 +98,7 @@ function Game({room, leaveRoom, username, socket, isHost}) {
         {scoreboard ? (
             <Scoreboard room={room} username={username} players={players} endGame={endGame} nextRound={round}/>
         ) : (
-            <div>
+            <div style={styles.innerCard}>
                 {round === 0 ? (
                     <div>
                         <Pregame socket={socket} username={username} room={room} isHost={isHost} players={players} checkbox={checkbox} startGame={startGame}/>
@@ -127,10 +129,11 @@ function Game({room, leaveRoom, username, socket, isHost}) {
                         <Trivia socket={socket} room={room}/>
                     </div>
                 ) :null}
-
             </div>
         )}
-        <button style={styles.button} className="button" onClick={leaveRoom}>Leave Room</button>
+        <div style={{height: '15px', marginBottom: '5px'}}>
+            <button style={styles.noButton} onClick={leaveRoom}>Leave Room</button>
+        </div>
       </div>
     );
   };
