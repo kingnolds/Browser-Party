@@ -27,7 +27,7 @@ export default function Register({username, registerInfo, handleInputChangeRegis
       marginTop: '8px',
       marginLeft: '110px',
       fontSize: '25px',
-      cursor:"pointer"
+      cursor:pointer
     }
   }
 
