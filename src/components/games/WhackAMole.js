@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import RoundOver from '../RoundOver';
 
-const MOLE_NUMBER = 8
+const MOLE_NUMBER = 9
 let TIME_LIMIT = 30000
 const Timer = ({ time, interval = 1000, onEnd }) => {
     const [internalTime, setInternalTime] = useState(time)
@@ -24,7 +24,7 @@ const Timer = ({ time, interval = 1000, onEnd }) => {
     return <div>{`Time: ${internalTime / 1000}s`}</div>
 }
 
-const Whack = function ({socket, room}) {
+const Whack = function ({ socket, room }) {
     const [index, setIndex] = useState([]);
     const [score, setScore] = useState(0);
     const [refresh, setTimer] = useState();
@@ -68,20 +68,21 @@ const Whack = function ({socket, room}) {
             flex-wrap: wrap;
             height: 100%;
             align-items: center;
+            max-width: 800px;
         }
 
         .hole {
           flex-grow: 1;
-          width: 22vw;
-            height: 22vw;
+          width: 200px;
+          height: 200px;
           border: 1px solid black;
           border-radius: 50%;
         }
 
         .moleHole {
           flex-grow: 1;
-          width: 22vw;
-            height: 22vw;
+          width: 200px;
+          height: 200px;
           border: 1px solid black;
           border-radius: 50%;
           background-repeat: no-repeat;
@@ -102,53 +103,71 @@ const Whack = function ({socket, room}) {
         
         .container {
             flex-grow: 1;
-            flex-basis: 21%;
+            flex-basis: 30%;
             flex-shrink: 0;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 22vw;
-            height: 22vw;
+            width: 30%;
         }
         
-        img {
-         
-        }
+        @media screen and (max-width: 992px) {
+            .hole {
+                width: 150px;
+                height: 150px;
+            }
+            .moleHole {
+                width: 150px;
+                height: 150px;
+            }
+          }
+        
+        @media screen and (max-width: 600px) {
+            .hole {
+                width: 90px;
+                height: 90px;
+            }
+            .moleHole {
+                width: 90px;
+                height: 90px;
+            }
+          }
+
       `}
             </style>
             {isPlaying ? (
                 <>
-            <p>score: {score}</p>
-            <Timer
-                time={TIME_LIMIT}
-                onEnd={endGame}
-            />
-            <div className="gameBox">
-                {Array(MOLE_NUMBER)
-                    .fill()
-                    .map((_, n) => {
-                        if (Array.from(index).includes(n)) {
-                            return (
-                                <div className="container" key={n}>
-                                    <button className="moleHole" onClick={() => onClick(n)}></button>
-                                </div>
-                            );
-                        } else {
-                            return (
-                                <div className="container" key={n}>
-                                    <button className="hole" onClick={() => onClick(-1)}></button>
-                                </div>
-                            );
-                        }
-                    })}
-            </div>
-            </>
+                    <p>score: {score}</p>
+                    <Timer
+                        time={TIME_LIMIT}
+                        onEnd={endGame}
+                    />
+                    <div className="gameBox">
+                        {Array(MOLE_NUMBER)
+                            .fill()
+                            .map((_, n) => {
+                                if (Array.from(index).includes(n)) {
+                                    return (
+                                        <div className="container" key={n}>
+                                            <button className="moleHole" onClick={() => onClick(n)}></button>
+                                        </div>
+                                    );
+                                } else {
+                                    return (
+                                        <div className="container" key={n}>
+                                            <button className="hole" onClick={() => onClick(-1)}></button>
+                                        </div>
+                                    );
+                                }
+                            })}
+                    </div>
+                </>
             ) : (
                 <div>
-                <RoundOver points={score} />
+                    <RoundOver points={score} />
                 </div>
             )}
-            
+
         </div>
     );
 }
