@@ -30,16 +30,7 @@
 .hi-there p {
   margin-left: auto; 
   font-family: 'Fredoka', sans-serif;
-  margin-top: 5px;
-}
-
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  margin-top: 7px; 
 }
 
 .nav-item {
@@ -91,7 +82,7 @@
   }
 }
 
-.button, .button-unpressed {
+.button, .button-pressed {
   border-radius: 5px;
   font-size: 25px;
   color: white;
@@ -104,7 +95,7 @@
   outline: 1px solid black;
 }
 
-.button-unpressed {
+.button-pressed {
   color: rgb(83, 148, 139);
   background-color: #315853;
   border-block-start: 3px solid #48aa9d;
@@ -112,6 +103,7 @@
   border-inline-end: 3px solid #245f52;
   border-block-end: 3px solid #112422;
   outline: 1px solid rgb(75, 75, 75);
+  box-shadow: 2px 2px 1px #4a3f50;
 }
 
 .input {
@@ -120,10 +112,68 @@
 }
 
 .game-card {
-  width: 1000px;
+  width: 700px;
   margin: 0 auto;
   padding: 25px;
   font-size: 20px;
+}
+
+.computer-screen {
+  color:#3eff48;
+  text-shadow: 3px 3px #203930;
+  background: #27262e;
+  outline: 2px solid black;
+  border-block-start: 8px solid #4f3767;
+  border-inline-start: 8px solid #543854;
+  border-inline-end: 8px solid #312532;
+  border-block-end: 8px solid #1e1b24;
+  border-radius: 45px;
+  padding: 4px;
+  animation-duration: 2s;
+  animation-name: screen-open;
+  overflow: hidden;
+}
+
+.computer-screen p, .computer-screen ul li, .computer-screen button, .computer-screen input {
+  font-family: 'Press Start 2P', cursive;
+  animation: fade-in 1s;
+  /* animation: distort 2000ms infinite; */
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* @keyframes distort {
+  0% {
+      text-shadow: 2px 1px #552010, -3px -3px #0b4791;
+  }
+  25% {
+      text-shadow: -2px -3px #552010, 3px 1px #0b4791;
+  }
+  50% {
+    text-shadow: 2px -1px #552010, -3px 1px #0b4791;
+  }
+  75% {
+      text-shadow: -3px -1px #552010, -3px -1px #0b4791;
+  }
+  100% {
+      text-shadow: -2px -2px #552010, 3px -1px #0b4791;
+  }
+} */
+
+@keyframes screen-open {
+  from {
+    max-height: 0px;
+  }
+  to {
+    max-height: 800px;
+  }
 }
 
 @media screen and (max-width: 1030px) {

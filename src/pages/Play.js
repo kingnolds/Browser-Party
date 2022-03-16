@@ -132,8 +132,8 @@ export default function Play({ username }) {
                   {isHost ? (
                     <div>
                       <div style={styles.hostJoin}>
-                        <button style={styles.hostButton} className="button" onClick={(event) => { setIsHost(true) }}>Host</button>
-                        <button className="button-unpressed" onClick={(event) => { setIsHost(false) }}>Join</button>
+                        <button style={styles.hostButton} className="button-pressed" onClick={(event) => { setIsHost(true) }}>Host</button>
+                        <button className="button" onClick={(event) => { setIsHost(false) }}>Join</button>
                       </div>
                       <div style={styles.form}>
                         {/* <label>Username:</label>
@@ -149,8 +149,8 @@ export default function Play({ username }) {
                   ) : (
                     <div>
                       <div style={styles.hostJoin}>
-                        <button style={styles.hostButton} className="button-unpressed" onClick={(event) => { setIsHost(true) }}>Host</button>
-                        <button className="button" onClick={(event) => { setIsHost(false) }}>Join</button>
+                        <button style={styles.hostButton} className="button" onClick={(event) => { setIsHost(true) }}>Host</button>
+                        <button className="button-pressed" onClick={(event) => { setIsHost(false) }}>Join</button>
                       </div>
                       <div style={styles.form}>
                         {/* <label>Username:</label>

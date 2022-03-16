@@ -15,12 +15,9 @@ function Game({room, leaveRoom, username, socket, isHost}) {
   const [includeSnake, setIncludeSnake] = useState(false)
   
   const styles = {
-    card: {
-        background: '#9E8FB2',
-    },
-    button: {
-        margin: '20px',
-        fontSize: '25px',
+    innerCard: {
+        marginLeft: '125px',
+        marginBottom: '20px'
     }
   }
 
@@ -97,7 +94,7 @@ function Game({room, leaveRoom, username, socket, isHost}) {
         {scoreboard ? (
             <Scoreboard room={room} username={username} players={players} endGame={endGame} nextRound={round}/>
         ) : (
-            <div>
+            <div style={styles.innerCard}>
                 {round === 0 ? (
                     <div>
                         <h1>Game: {room}</h1>
@@ -124,7 +121,7 @@ function Game({room, leaveRoom, username, socket, isHost}) {
                                     <br/>
                                 </form>
                                     <br/>
-                                <button style={styles.button} className="button" onClick={()=>startGame()}>Start Game!</button>
+                                <button style={{borderRadius: '4px'}} onClick={()=>startGame()}>Start Game!</button>
                             </div>
                             
                         ):null}
@@ -158,7 +155,7 @@ function Game({room, leaveRoom, username, socket, isHost}) {
 
             </div>
         )}
-        <button style={styles.button} className="button" onClick={leaveRoom}>Leave Room</button>
+        <button style={{marginLeft: '230px'}} className="button" onClick={leaveRoom}>Leave Room</button>
       </div>
     );
   };

@@ -10,7 +10,7 @@ const styles = {
     float: 'right',
     fontSize: '13px',
     display: 'flex',
-    margin: '4px 6px 0 8px',
+    margin: '6px 8px 0 8px',
     height: '26px',
     width: '65px',
     padding: '0 0 4px 9px'

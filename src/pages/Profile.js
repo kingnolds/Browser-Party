@@ -66,51 +66,41 @@ export default function Profile({ loginInfo, username }) {
       textShadow: '2px 2px #685f80',
       marginBottom: '20px'
     },
-    friends: {
-      border: '1px solid black',
-      borderRadius: '4px',
-      padding: '4px',
-      background: 'white'
+    screen: {
+      padding: '30px 30px 30px 75px',
+      fontSize: '16px'
     }
   }
 
   return (
     <div>
       <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
-        {username ? (
-          <div style={styles.component} className="component">
-          <div>
-            <h1 style={styles.username}>{username}</h1>
-            <div>
-              <div className="card-body">
-                <h2>History: </h2>
-                <ul>
-                  <li key='wins'>You have {wins} Wins!</li>
-                </ul>
-              </div>
-            </div>
-            <div style={styles.friends}>
-              <div className="card-body">
-                <h2>Friends:</h2>
-                <ul>
-                  {friends?.map((friend, index) => (
-                    <li key={index}>{friend}  <Button name={friend} variant="outline-danger" onClick={handleRemoveFriend}>Remove Friend</Button></li>
-                  ))}
-                </ul>
-                <label>Add a Friend</label>
-                <input type="text" value={friendSearch} onChange={handleFriendSearch} name="username" /><Button value={friendSearch} onClick={handleAddFriend}>Add Friend</Button>
-              </div>
-            </div>
+      {username ? (
+        <div style={styles.component} className="component">
+          <div className="computer-screen" style={styles.screen}>
+            <p>Hello, {username}</p>
+            <p>You have {wins} wins.</p>
+            <p>Friends list:</p>
+            <ul>
+              {friends?.map((friend, index) => (
+                <li key={index}>{friend}  <Button style={{margin: '5px 0 12px 0'}} name={friend} variant="outline-danger" onClick={handleRemoveFriend}>Remove Friend</Button></li>
+              ))}
+            </ul>
+            <p>Add a Friend:</p>
+            <input style={{width: '250px', color: '#3eff48', background: 'none', border: '2px solid #3eff48', borderRadius: '3px'}} type="text" value={friendSearch} onChange={handleFriendSearch} name="username" />
+            <br></br>
+            <br></br>
+            <Button style={{color: '#27262e', background: '#3eff48', border: 'none'}} value={friendSearch} onClick={handleAddFriend}>Add Friend</Button>
           </div>
+        </div>
+      ) : (
+        <div>
+          <div style={{ width: '440px', height: '100px', margin: '0 auto', padding: '20px', fontSize: '25px' }} className="component">
+            You must login first!
+            <button style={{ marginLeft: '40px' }} className="button" type="submit" onClick={loginChange}>Login</button>
           </div>
-        ) : (
-          <div>
-            <div style={{ width: '440px', height: '100px', margin: '0 auto', padding: '20px', fontSize: '25px' }} className="component">
-              You must login first!
-              <button style={{ marginLeft: '40px' }} className="button" type="submit" onClick={loginChange}>Login</button>
-            </div>
-          </div>
-        )}
+        </div>
+      )}
     </div>
   );
 }
