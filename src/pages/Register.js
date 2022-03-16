@@ -21,6 +21,7 @@ export default function Register({username, registerInfo, handleInputChangeRegis
     {
       fontSize: '25px',
       marginBottom: '10px',
+      maxWidth: '90%'
     },
     button:
     {

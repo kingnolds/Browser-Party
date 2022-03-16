@@ -20,6 +20,7 @@ const styles = {
   {
     border: '1px solid black',
     marginBottom: '10px',
+    maxWidth: '90%'
   },
   h3: {
     display: 'inline',
