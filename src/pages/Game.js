@@ -25,19 +25,15 @@ function Game({room, leaveRoom, username, socket, isHost}) {
     }
   }
 
-  socket.on(`scoreboard${room}`, (show) => {
+  socket.on(`scoreboard-${room}`, (show) => {
     setScoreboard(show);
   })
 
-  socket.on(`new-player${room}`, (sockets) => {
+  socket.on(`update-players-${room}`, (sockets) => {
     setPlayers(sockets)
   })
 
-  socket.on(`update-players${room}`, (sockets) => {
-    setPlayers(sockets)
-  })
-
-  socket.on(`set-round`, (round) => {
+  socket.on(`set-round-${room}`, (round) => {
     if (round === "trivia1") {
         setRound(1)
     } 
