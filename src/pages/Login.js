@@ -7,7 +7,7 @@ const styles = {
   },
   component:
   {
-    width: '400px',
+    width: '120px',
     margin: '0 auto auto auto',
     padding: '28px',
 
