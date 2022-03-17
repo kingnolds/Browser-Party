@@ -77,7 +77,6 @@ export default function Scoreboard({room, username, players, endGame, nextRound}
                 </div>
             ) : (
                 <>
-                <Timer time={10000}/>
                     <div style={{ textAlign: 'center' }}>
                             <h2 style={{ textAlign: 'center' }}>Scoreboard for room: {room}</h2>
                             <ol style={{ listStyle: 'decimal inside none' }} className="list-group">
