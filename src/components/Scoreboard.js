@@ -75,19 +75,22 @@ export default function Scoreboard({room, username, players, endGame, nextRound}
                     <button style={{marginTop: '20px'}}className="button" onClick={playAgain}>Play Again!</button>
                 </div>
             ) : (
-                <div style={{textAlign: 'center'}}>
-                <h2 style={{textAlign: 'center'}}>Scoreboard for room: {room}</h2>
-                <ol style={{listStyle: 'decimal inside none'}} className="list-group">
-                    {rankedScores.map(player => (
-                        <li className="list-group-player" key={player.username} style={(player.username === username) ? {color:"white"}:{}}>
-                            {player.username}: {player.score} points
-                        </li>
-                    ))}
-                </ol>
-                <br></br>
-                <h3>Next Round: {games[nextRound-1].game}</h3>
-                <h5>Instructions: {games[nextRound-1].instructions}</h5>
-                </div>
+                <>
+                <Timer time={10000}/>
+
+                    <div style={{ textAlign: 'center' }}>
+                            <h2 style={{ textAlign: 'center' }}>Scoreboard for room: {room}</h2>
+                            <ol style={{ listStyle: 'decimal inside none' }} className="list-group">
+                                {rankedScores.map(player => (
+                                    <li className="list-group-player" key={player.username} style={(player.username === username) ? { color: "white" } : {}}>
+                                        {player.username}: {player.score} points
+                                    </li>
+                                ))}
+                            </ol>
+                            <br></br>
+                            <h3>Next Round: {games[nextRound - 1].game}</h3>
+                            <h5>Instructions: {games[nextRound - 1].instructions}</h5>
+                        </div></>
 
 
             )}
