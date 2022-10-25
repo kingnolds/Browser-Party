@@ -2,7 +2,7 @@
 // const BASEURL = "http://localhost:3001"
 
 // Deployed
-const BASEURL = "https://tender-ray.cyclic.app"
+const BASEURL = "https://browser-party-backend.onrender.com"
 
 
 const API = {
