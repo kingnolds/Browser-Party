@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export default function Register(props) {
+export default function Register({username, registerInfo, handleInputChangeRegister, registerSubmit}) {
 
   const styles = {
     logo: {
@@ -21,6 +21,7 @@ export default function Register(props) {
     {
       fontSize: '25px',
       marginBottom: '10px',
+      maxWidth: '90%'
     },
     button:
     {
@@ -32,22 +33,25 @@ export default function Register(props) {
 
   return (
     <div>
-      {!props.username ? (
+      <style>
+                {`
+        cursor: pointer
+      `}
+            </style>
+      {!username ? (
         <div>
         <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
           <div style={styles.component} className="component">
               <div>
-                <form>
                     <div style={styles.form} className="form-group">
                         <label>Username</label>
-                        <input style={styles.input} className="input" type="username" onChange={props.handleInputChangeRegister} value={props.registerInfo.username} name="username"/>
+                        <input style={styles.input} className="input" type="username" onChange={handleInputChangeRegister} value={registerInfo.username} name="username"/>
                     </div>
                     <div style={styles.form} className="form-group">
                         <label>Password</label>
-                        <input style={styles.input} className="input" type="password" onChange={props.handleInputChangeRegister} value={props.registerInfo.password} name="password"/>
+                        <input style={styles.input} className="input" type="password" onChange={handleInputChangeRegister} value={registerInfo.password} name="password"/>
                     </div>
-                    <button style={styles.button} className="button" type="submit" onClick={props.registerSubmit}>Register</button>
-                </form>
+                    <button style={styles.button} className="button" type="submit" onClick={registerSubmit}>Register</button>
               </div>
           </div>
         </div>
@@ -56,7 +60,7 @@ export default function Register(props) {
         <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
           <div style={styles.component} className="component">
               <div>
-                <h3>Can't register while already logged in.</h3>
+                <h3>Congrats! You are now logged in as {username}.</h3>
               </div>
           </div>
         </div>

@@ -1,8 +1,8 @@
 // Local
-const BASEURL = "http://localhost:3001"
+// const BASEURL = "http://localhost:3001"
 
 // Deployed
-// const BASEURL = "https://browser-party-backend.herokuapp.com"
+const BASEURL = "https://browser-party-backend.onrender.com"
 
 
 const API = {

@@ -1,5 +1,6 @@
 import React from 'react';
 import API from "../utils/api"
+import Timer from "./Timer"
 
 export default function Scoreboard({room, username, players, endGame, nextRound}) {
     
@@ -24,7 +25,6 @@ export default function Scoreboard({room, username, players, endGame, nextRound}
             game: "Trivia",
             instructions: "All or nothing. Players with the correct answer will earn 10 points while all other players earn zero. But don't worry, there will be multiple rounds of trivia!",
         },
-        
     ]
 
     function compare(a,b) {
@@ -76,19 +76,20 @@ export default function Scoreboard({room, username, players, endGame, nextRound}
                     <button style={{marginTop: '20px'}}className="button" onClick={playAgain}>Play Again!</button>
                 </div>
             ) : (
-                <div style={{textAlign: 'center'}}>
-                <h2 style={{textAlign: 'center'}}>Scoreboard for room: {room}</h2>
-                <ol style={{listStyle: 'decimal inside none'}} className="list-group">
-                    {rankedScores.map(player => (
-                        <li className="list-group-player" key={player.username} style={(player.username === username) ? {color:"white"}:{}}>
-                            {player.username}: {player.score} points
-                        </li>
-                    ))}
-                </ol>
-                <br></br>
-                <h3>Next Round: {games[nextRound-1].game}</h3>
-                <h5>Instructions: {games[nextRound-1].instructions}</h5>
-                </div>
+                <>
+                    <div style={{ textAlign: 'center' }}>
+                            <h2 style={{ textAlign: 'center' }}>Scoreboard for room: {room}</h2>
+                            <ol style={{ listStyle: 'decimal inside none' }} className="list-group">
+                                {rankedScores.map(player => (
+                                    <li className="list-group-player" key={player.username} style={(player.username === username) ? { color: "white" } : {}}>
+                                        {player.username}: {player.score} points
+                                    </li>
+                                ))}
+                            </ol>
+                            <br></br>
+                            <h3>Next Round: {games[nextRound - 1].game}</h3>
+                            <h5>Instructions: {games[nextRound - 1].instructions}</h5>
+                        </div></>
 
 
             )}

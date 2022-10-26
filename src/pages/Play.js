@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom"
 import Game from "./Game"
 import io from "socket.io-client";
 import { useNavigate } from "react-router-dom";
@@ -8,14 +7,14 @@ import { useNavigate } from "react-router-dom";
 // CHANGE FOR LOCAL vs DEPLOYED
 
 // DEPLOYED
-// const socket = io("https://browser-party-socket-io.herokuapp.com/", {
-//   withCredentials: true
-// });
-
-// LOCAL
-const socket = io("http://localhost:4000", {
+const socket = io("https://browser-party-socketio.onrender.com/", {
   withCredentials: true
 });
+
+// LOCAL
+// const socket = io("http://localhost:4000", {
+//   withCredentials: true
+// });
 
 const styles = {
   logo: {
@@ -83,7 +82,6 @@ export default function Play({ username }) {
     if (username !== "" && room !== "") {
       socket.emit("join-room", room, username, (response) => {
         if (response.status === "ok") {
-          console.log(`${socket.username} is joining room ${room}`)
           seInGame(true)
         } else {
           alert("That room doesn't exist, either create the room or double check your room code")
@@ -94,14 +92,10 @@ export default function Play({ username }) {
 
   const createRoom = () => {
     if (username !== "" && room !== "") {
-      console.log("create")
       socket.emit("create-room", room, username, (repsonse) => {
-        console.log(repsonse)
         if (repsonse.status === "ok") {
-          console.log("if")
           seInGame(true)
         } else {
-          console.log("else")
           alert("Room already exists, pick a unique room code")
         }
       })
