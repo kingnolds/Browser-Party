@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 // CHANGE FOR LOCAL vs DEPLOYED
 
 // DEPLOYED
-const socket = io("https://browser-party-socketio.onrender.com/", {
-  withCredentials: true
+const socket = io("https://browser-party-socketio.onrender.com", {
+  withCredentials: true,
 });
 
 // LOCAL

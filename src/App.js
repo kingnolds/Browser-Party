@@ -43,7 +43,7 @@ function App() {
                     console.log(err);
                 });
         }
-    });
+    }, []);
 
     const registerSubmit = async (e) => {
         e.preventDefault();
