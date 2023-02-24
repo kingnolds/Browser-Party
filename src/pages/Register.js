@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../images/browser-party-logo.png'
 
 
 export default function Register({username, registerInfo, handleInputChangeRegister, registerSubmit}) {
@@ -40,7 +41,7 @@ export default function Register({username, registerInfo, handleInputChangeRegis
             </style>
       {!username ? (
         <div>
-        <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
+        <img style={styles.logo} className="component-logo" alt="Browser Party logo" src={logo}></img>
           <div style={styles.component} className="component">
               <div>
                     <div style={styles.form} className="form-group">
@@ -57,7 +58,7 @@ export default function Register({username, registerInfo, handleInputChangeRegis
         </div>
       ):(
         <div>
-        <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
+        <img style={styles.logo} className="component-logo" alt="Browser Party logo" src={logo}></img>
           <div style={styles.component} className="component">
               <div>
                 <h3>Congrats! You are now logged in as {username}.</h3>

@@ -1,4 +1,9 @@
 import React from 'react';
+import logo from '../images/browser-party-logo.png'
+import pawn from '../images/pawn-piece.png'
+import ace from '../images/ace-card.png'
+import dice from '../images/dice.png'
+import spiece from '../images/s-piece.png'
 
 export default function About() {
     const styles = {
@@ -13,12 +18,12 @@ export default function About() {
     }
     return (
         <div>
-            <img style={styles.logo} className="component-logo" alt="Browser Party logo" src="/images/browser-party-logo.png"></img>
+            <img style={styles.logo} className="component-logo" alt="Browser Party logo" src={logo}></img>
             <div style={styles.component} className="component">
                 <table style={{ textAlign: 'center', width: '700px', height: '800px', margin: '20px auto 0', fontSize: '15px' }}>
                     <tr>
                         <td style={{ width: '50%', height: '50%', padding: '0 15px' }}>
-                            <img style={{ maxHeight: '180px', margin: '0 5px 5px 0' }} src="/images/pawn-piece.png" />
+                            <img style={{ maxHeight: '180px', margin: '0 5px 5px 0' }} src={pawn} />
                             <br></br>
                             <h4>Henry Weigand</h4>
                             <p style={{ textAlign: 'left' }}>
@@ -27,7 +32,7 @@ export default function About() {
                             </p>
                         </td>
                         <td style={{ padding: '0 15px' }}>
-                            <img style={{ marginTop: '10px', maxHeight: '170px', margin: '0 5px 5px 0' }} src="/images/dice.png" />
+                            <img style={{ marginTop: '10px', maxHeight: '170px', margin: '0 5px 5px 0' }} src={dice} />
                             <br></br>
                             <h4>Reid Flamm</h4>
                             <p style={{ textAlign: 'left' }}>
@@ -37,7 +42,7 @@ export default function About() {
                     </tr>
                     <tr>
                         <td style={{ padding: '0 15px' }}>
-                            <img style={{ maxHeight: '180px', margin: '0 5px 5px 0' }} src="/images/ace-card.png" />
+                            <img style={{ maxHeight: '180px', margin: '0 5px 5px 0' }} src={ace} />
                             <br></br>
                             <h4>Ronnel Abrigo</h4>
                             <p style={{ textAlign: 'left' }}>
@@ -45,7 +50,7 @@ export default function About() {
                             </p>
                         </td>
                         <td style={{ padding: '0 15px' }}>
-                            <img style={{ marginTop: '20px', maxHeight: '160px', margin: '0 5px 5px 0' }} src="/images/s-piece.png" />
+                            <img style={{ marginTop: '20px', maxHeight: '160px', margin: '0 5px 5px 0' }} src={spiece} />
                             <br></br>
                             <h4>Spencer Nelson</h4>
                             <p style={{ textAlign: 'left' }}>
